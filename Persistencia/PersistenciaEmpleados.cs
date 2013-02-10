@@ -6,34 +6,34 @@ using ExcepcionesPersonalizadas;
 
 namespace Persistencia
 {
-    public class Clientes
+    public class PersistenciaEmpleados
     {
 
 
         /// <summary>
-        /// Ingresa un nuevo cliente en el sistema
+        /// Ingresa un nuevo Empleado en el sistema
         /// </summary>
-        /// <param name="u"></param>
-        public void AltaCliente(Cliente c)
+        /// <param name="e"></param>
+        public void AltaEmpleado(Empleado e)
         {
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
             SqlCommand cmd = Conexion.GetCommand("AltaCliente", conexion, CommandType.StoredProcedure);
 
-            SqlParameter _ci = new SqlParameter("@Ci", c.CI);
-            SqlParameter _nombreusuario = new SqlParameter("@NombreUsuario", c.NOMBREUSUARIO);
-            SqlParameter _nombre = new SqlParameter("@Nombre", c.NOMBRE);
-            SqlParameter _apellido = new SqlParameter("@Apellido", c.APELLIDO);
-            SqlParameter _pass = new SqlParameter("@Pass", c.PASS);
-            SqlParameter _direccion = new SqlParameter("@Direccion", c.DIRECCION);
-            SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int);
-            _retorno.Direction = ParameterDirection.ReturnValue;
+            SqlParameter _ci = new SqlParameter("@Ci", e.CI);
+            SqlParameter _nombreusuario = new SqlParameter("@NombreUsuario", e.NOMBREUSUARIO);
+            SqlParameter _nombre = new SqlParameter("@Nombre", e.NOMBRE);
+            SqlParameter _apellido = new SqlParameter("@Apellido", e.APELLIDO);
+            SqlParameter _pass = new SqlParameter("@Pass", e.PASS);
+            SqlParameter _idSucursal = new SqlParameter("@IdSucursal", e.SUCURSAL.IDSUCURSAL);
+            SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int)
+                                        {Direction = ParameterDirection.ReturnValue};
 
             cmd.Parameters.Add(_ci);
             cmd.Parameters.Add(_nombreusuario);
             cmd.Parameters.Add(_nombre);
             cmd.Parameters.Add(_apellido);
             cmd.Parameters.Add(_pass);
-            cmd.Parameters.Add(_direccion);
+            cmd.Parameters.Add(_idSucursal);
             cmd.Parameters.Add(_retorno);
 
             try

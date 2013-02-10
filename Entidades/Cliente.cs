@@ -10,8 +10,8 @@ namespace Entidades
         private string _direccion;
         public string DIRECCION { get; set; }
 
-        private List<int> _telefonos;
-        public List<int> TELEFONOS { get; set; }
+        private List<string> _telefonos;
+        public List<string> TELEFONOS { get; set; }
 
     }
 }

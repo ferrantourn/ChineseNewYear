@@ -23,6 +23,9 @@ namespace Entidades
         private Usuario _usuario;
         public Usuario USUARIO { get; set; }
 
+        private Sucursal _sucursal;
+        public Sucursal SUCURSAL { get; set; }
+
         private string _moneda;
         public string MONEDA { get; set; }
 

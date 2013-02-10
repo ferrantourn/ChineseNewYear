@@ -55,7 +55,7 @@ namespace ExcepcionesPersonalizadas
 
     }
 
-    [Serializable]
+    //[Serializable] DESCOMENTAR CUANDO SE USE WEB SERVICE
     public class ErrorDocumentoInvalido : Exception
     {
         public ErrorDocumentoInvalido()
@@ -78,7 +78,7 @@ namespace ExcepcionesPersonalizadas
 
     }
 
-    [Serializable]
+    //[Serializable] DESCOMENTAR CUANDO SE USE WEB SERVICE
     public class ErrorUsuarioYaExiste : Exception
     {
         public ErrorUsuarioYaExiste()
@@ -101,7 +101,7 @@ namespace ExcepcionesPersonalizadas
 
     }
 
-    [Serializable]
+    //[Serializable] DESCOMENTAR CUANDO SE USE WEB SERVICE
     public class ErrorUsuarioNoExiste : Exception
     {
         public ErrorUsuarioNoExiste()
@@ -124,7 +124,7 @@ namespace ExcepcionesPersonalizadas
 
     }
 
-    [Serializable]
+    //[Serializable] DESCOMENTAR CUANDO SE USE WEB SERVICE
     public class ErrorNoHayUsuarios : Exception
     {
         public ErrorNoHayUsuarios()

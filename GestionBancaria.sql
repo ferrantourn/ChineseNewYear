@@ -56,7 +56,7 @@ create table Cotizacion(
 GO
 		     
 create table TelefonosClientes(IdCliente int, 
-							   Tel int, 
+							   Tel varchar(50), 
 							   primary key(IdCliente,Tel),
 							   foreign key(IdCliente) references Cliente(IdCliente))
 GO
@@ -123,6 +123,12 @@ as
 BEGIN
 
 begin tran --insertamos el cliente
+
+	if exists(select * from Usuario where Usuario.Ci=@Ci or Usuario.NombreUsuario = @NombreUsuario)
+	begin
+		return -3   --Usuario ya Existe
+	end
+ 
 	insert into Usuario(Ci,Nombre,Apellido,NombreUsuario,Pass)
 			values(@Ci, @Nombre, @Apellido, @NombreUsuario, @Pass)
 			
@@ -159,12 +165,18 @@ create proc AltaEmpleado
 @IdSucursal int
 as
 BEGIN
-if not exists(select * from Sucursal where Sucursal.IdSucursal=@IdSucursal)
+	if not exists(select * from Sucursal where Sucursal.IdSucursal=@IdSucursal)
 	begin
 		return -1   --Sucursal no existe
 	end
 	
-insert into Usuario(Ci,Nombre,Apellido,NombreUsuario,Pass)
+	if exists(select * from Usuario where Usuario.Ci=@Ci or Usuario.NombreUsuario = @NombreUsuario)
+	begin
+		return -3   --Usuario ya Existe
+	end
+	
+	begin tran --insertamos el Empleado
+	insert into Usuario(Ci,Nombre,Apellido,NombreUsuario,Pass)
 			values(@Ci, @Nombre, @Apellido, @NombreUsuario, @Pass)
 			
 		if @@error<>0
@@ -173,7 +185,7 @@ insert into Usuario(Ci,Nombre,Apellido,NombreUsuario,Pass)
 			return -2  --Si no se pudo insertar un Usuario--
 		end
 
-begin tran --insertamos el cliente
+	
 	insert into Empleado(IdUsuario, IdSucursal)
 			values(@Ci, @IdSucursal)
 
@@ -369,6 +381,24 @@ END
 GO
 
 
+CREATE PROC spBuscarClientePorCi
+@Ci as int
+
+as
+begin
+select Usuario.*, Cliente.Direccion from Usuario INNER JOIN Cliente ON Usuario.Ci = Cliente.IdCliente
+ where Cliente.IdCliente = @Ci
+end
+
+go 
+
+create procedure spListarClientes
+as
+begin
+select Usuario.* ,Cliente.Direccion from Usuario INNER JOIN Cliente ON Usuario.Ci = Cliente.IdCliente 
+end
+
+GO 
 --INSERTAMOS VALORES PREDETERMINADOS
 ------------------------------------
 
