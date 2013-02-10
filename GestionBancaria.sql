@@ -1,0 +1,379 @@
+use master
+GO
+
+--CHEQUEAMOS SI LA BASE DE DATOS EXISTE
+IF  EXISTS (SELECT name FROM sys.databases WHERE name = N'GestionBancaria')
+ALTER DATABASE GestionBancaria SET SINGLE_USER WITH ROLLBACK IMMEDIATE
+-- LA LINEA ANTERIOR ELIMINA TODAS LAS CONEXIONES EXISTENTES A LA BASE DE DATOS PARA PODER DROPEARLA
+GO
+
+IF  EXISTS (SELECT name FROM sys.databases WHERE name = N'GestionBancaria')
+DROP DATABASE [GestionBancaria] /* ELIMINAMOS LA BASE DE DATOS */
+GO
+
+
+create database GestionBancaria
+GO
+
+use GestionBancaria
+GO
+
+create table Usuario(Ci int primary key not null,
+					 NombreUsuario nvarchar (15) not null unique,
+				     Nombre nvarchar (20) not null,
+					 Apellido nvarchar (20) not null,
+					 Pass nvarchar (20) not null
+					 )
+GO				 
+create table Cliente(IdCliente int primary key not null, 
+				     Direccion nvarchar(20),
+				     foreign key (IdCliente) references Usuario(Ci))
+GO
+create table Sucursal(IdSucursal int identity primary key, 
+					  Nombre nvarchar(20) not null,
+					  Direccion nvarchar(50))
+GO					 				 
+create table Prestamo(IdPrestamo int not null, 
+					  NumeroSucursal int not null, 
+					  IdCliente int not null,
+					  Fecha datetime not null,
+					  Cuotas int not null, 
+					  Cancelado bit not null,
+					  Moneda nvarchar(3) not null,
+					  Monto float not null,
+					  foreign key (NumeroSucursal) references Sucursal(IdSucursal),
+					  foreign key (IdCliente) references Cliente(IdCliente),
+					  primary key (IdPrestamo, NumeroSucursal)
+					  )
+GO					  
+create table Cotizacion(
+						Fecha datetime not null,
+						PrecioVenta float not null, 
+						PrecioCompra float not null
+						primary key (Fecha))
+					  
+					
+GO
+		     
+create table TelefonosClientes(IdCliente int, 
+							   Tel int, 
+							   primary key(IdCliente,Tel),
+							   foreign key(IdCliente) references Cliente(IdCliente))
+GO
+create table Empleado(IdUsuario int primary key, 
+					  IdSucursal int not null,
+					  foreign key (IdUsuario) references Usuario(Ci),
+					  foreign key (IdSucursal) references Sucursal(IdSucursal))
+GO			  
+create table Pagos(IdRecibo int identity primary key not null,
+				   IdEmpleado int,
+				   IdPrestamo int,
+				   NumeroSucursal int,
+				   Monto float not null,
+				   Fecha datetime not null,
+				   NumeroCuota int not null,
+				   foreign key (IdEmpleado) references Empleado(IdUsuario),
+				   foreign key (IdPrestamo,NumeroSucursal) references Prestamo(IdPrestamo,NumeroSucursal))
+go
+create table Cuenta(IdCuenta int primary key identity (1,1) not null,
+					IdSucursal int not null foreign key references Sucursal(IdSucursal),
+					Moneda nvarchar(3) not null,
+					IdCliente int foreign key references Cliente(IdCliente),
+					Saldo float not null)
+					
+					
+GO					
+create table Movimiento(IdSucursal int not null references Sucursal(IdSucursal),
+						NumeroMovimiento int not null,
+						primary key (IdSucursal, NumeroMovimiento),
+						Tipo int not null,
+						Fecha datetime not null,
+						Moneda nvarchar(3) not null,
+						ViaWeb bit not null,
+						Monto float not null,
+						IdCuenta int not null references Cuenta(IdCuenta),
+						CiUsuario int not null references Usuario(Ci))
+						--Si es movimiento web el CiUsuario  se carga con CiCliente. Si es movimiento dentro entidad se carga CiEmpleado
+						-- . No es necesario establecer un campo de tipo bit para definir si es un movimiento web o dentro de entidad
+					
+GO
+
+
+
+					/*Ci int primary key not null,
+					 NombreUsuario nvarchar (15) not null unique,
+				     Nombre nvarchar (20) not null,
+					 Apellido nvarchar (20) not null,
+					 Pass nvarchar (20) not null
+					 )*/
+
+
+/*create table Cliente(IdCliente int primary key not null, 
+				     Direccion nvarchar(20),
+				     foreign key (IdCliente) references Usuario(Ci))*/
+
+create proc AltaCliente
+@Ci int,
+@NombreUsuario nvarchar(15),
+@Nombre nvarchar(20),
+@Apellido nvarchar(20),
+@Pass nvarchar(20),
+@Direccion nvarchar(20)
+as
+BEGIN
+
+begin tran --insertamos el cliente
+	insert into Usuario(Ci,Nombre,Apellido,NombreUsuario,Pass)
+			values(@Ci, @Nombre, @Apellido, @NombreUsuario, @Pass)
+			
+		if @@error<>0
+		begin
+		rollback tran
+			return -1  --Si no se pudo insertar un Usuario--
+		end
+
+	insert into Cliente(IdCliente, Direccion)
+			values(@Ci, @Direccion)
+
+		if @@error<>0
+		begin
+		rollback tran
+			return -2  --Si no se pudo insertar un Cliente--
+		end
+
+commit tran
+END
+GO
+
+/*
+create table Empleado(IdUsuario int primary key, 
+					  IdSucursal int not null,
+					  foreign key (IdUsuario) references Usuario(Ci),
+					  foreign key (IdSucursal) references Sucursal(IdSucursal))*/
+create proc AltaEmpleado
+@Ci int,
+@NombreUsuario nvarchar(15),
+@Nombre nvarchar(20),
+@Apellido nvarchar(20),
+@Pass nvarchar(20),
+@IdSucursal int
+as
+BEGIN
+if not exists(select * from Sucursal where Sucursal.IdSucursal=@IdSucursal)
+	begin
+		return -1   --Sucursal no existe
+	end
+	
+insert into Usuario(Ci,Nombre,Apellido,NombreUsuario,Pass)
+			values(@Ci, @Nombre, @Apellido, @NombreUsuario, @Pass)
+			
+		if @@error<>0
+		begin
+		rollback tran
+			return -2  --Si no se pudo insertar un Usuario--
+		end
+
+begin tran --insertamos el cliente
+	insert into Empleado(IdUsuario, IdSucursal)
+			values(@Ci, @IdSucursal)
+
+	if @@error<>0
+	begin
+    rollback tran
+		return -3  --Si no se pudo insertar un Empleado--
+	end
+
+commit tran
+END
+GO
+
+/*create table Sucursal(IdSucursal int identity primary key, 
+					  Nombre nvarchar(20) not null,
+					  Direccion nvarchar(50))*/
+					  
+create proc AltaSucursal
+@Nombre nvarchar(20),
+@Direccion nvarchar(50)
+as
+BEGIN
+if exists(select * from Sucursal where Sucursal.Direccion=@Direccion or Sucursal.Nombre=@Nombre)
+	begin
+		return -1   --Nombre/direccion de sucursal ya existe en el sistema
+	end
+
+begin tran --insertamos la sucursal
+	insert into Sucursal(IdSucursal, Nombre)
+			values(@Direccion, @Nombre)
+
+	if @@error<>0
+	begin
+    rollback tran
+		return -2  --Si no se pudo insertar sucursal--
+	end
+
+commit tran
+END
+GO
+
+/*create table Prestamo(IdPrestamo int not null, 
+					  NumeroSucursal int not null, 
+					  Fecha datetime not null,
+					  Cuotas int not null, 
+					  Cancelado bit not null,
+					  Moneda nvarchar(3) not null,
+					  Monto float not null,
+					  foreign key (NumeroSucursal) references Sucursal(IdSucursal),
+					  primary key (IdPrestamo, NumeroSucursal)
+					  )*/
+
+create proc AltaPrestamo
+@NumeroSucursal int,
+@IdCliente int,
+@Fecha datetime,
+@Cuotas int,
+@Moneda nvarchar,
+@Monto int
+as
+BEGIN
+if not exists(select * from Sucursal where Sucursal.IdSucursal=@NumeroSucursal)
+	begin
+		return -1   --sucursal no existe en el sistema
+	end
+	
+if not exists(select * from Cliente where Cliente.IdCliente=@IdCliente)
+	begin
+		return -2   --cliente no existe en el sistema
+	end
+	
+declare @cantidad int
+select @cantidad = COUNT(*) from Prestamo where Prestamo.NumeroSucursal=@NumeroSucursal
+set @cantidad = @cantidad+1 /*numero del nuevo prestamo*/
+
+insert into Prestamo(IdPrestamo, NumeroSucursal, IdCliente, Fecha, Cuotas, Moneda, Monto, Cancelado)
+			values(@cantidad, @NumeroSucursal, @IdCliente, @Fecha, @Cuotas,@Moneda,@Monto, 0)
+			
+	if @@error<>0
+	begin
+		return -3  --Si no se pudo insertar prestamo--
+	end
+
+commit tran
+END
+GO
+
+/********OPCIONAL********/
+create proc CantidadPrestamos /*Si quisiera en algun momento saber la cantidad de prestamos de una sucursal*/
+as
+begin
+	declare @cantidad int
+	select @cantidad = COUNT(*) from Prestamo
+	return @cantidad
+
+end
+GO
+/**************************/
+
+/*
+create table Movimiento(IdSucursal int not null references Sucursal(IdSucursal),
+						NumeroMovimiento int not null,
+						primary key (IdSucursal, NumeroMovimiento),
+						Tipo int not null,
+						Fecha datetime not null,
+						Moneda nvarchar(3) not null,
+						ViaWeb bit not null,
+						Monto float not null,
+						IdCuenta int not null references Cuenta(IdCuenta),
+						CiUsuario int not null references Usuario(Ci))
+						--Si es movimiento web el CiUsuario  se carga con CiCliente. Si es movimiento dentro entidad se carga CiEmpleado
+						-- . No es necesario establecer un campo de tipo bit para definir si es un movimiento web o dentro de entidad
+						*/
+
+create proc AltaMovimiento
+@IdSucursal int,
+@Tipo int,
+@Fecha datetime,
+@Moneda nvarchar(3),
+@ViaWeb bit,
+@Monto float,
+@CiUsuario int
+as
+BEGIN
+if not exists(select * from Sucursal where Sucursal.IdSucursal=@IdSucursal)
+	begin
+		return -1   --sucursal no existe en el sistema
+	end
+	
+if not exists(select * from Usuario where Usuario.Ci=@CiUsuario)
+	begin
+		return -2   --Usuario no existe en el sistema
+	end
+	
+declare @cantidad int
+select @cantidad = COUNT(*) from Movimiento where Movimiento.IdSucursal=@IdSucursal
+set @cantidad = @cantidad+1 /*numero del nuevo movimiento*/
+
+insert into Movimiento(IdSucursal,NumeroMovimiento,Tipo,Fecha,Moneda,ViaWeb,Monto)
+			values(@IdSucursal, @cantidad, @Tipo, @Fecha, @Moneda,@ViaWeb,@Monto)
+			
+	if @@error<>0
+	begin
+		return -3  --Si no se pudo insertar movimiento--
+	end
+
+commit tran
+END
+GO
+
+/*
+create table Cotizacion(
+						Fecha datetime not null,
+						PrecioVenta float not null, 
+						PrecioCompra float not null
+						primary key (Fecha))*/
+						
+create proc AltaCotizacion
+@Fecha datetime,
+@PrecioVenta float,
+@PrecioCompra float
+as
+BEGIN
+if exists(select * from Cotizacion where Cotizacion.Fecha = @Fecha)
+	begin
+		return -1   --Ya se insertó una cotización en el día @Fecha
+	end
+
+insert into Cotizacion(Fecha,PrecioCompra,PrecioVenta)
+			values(@Fecha,@PrecioCompra,@PrecioVenta)
+			
+	if @@error<>0
+	begin
+		return -3  --Si no se pudo insertar la cotización--
+	end
+
+commit tran
+END
+GO
+
+create proc CancelarPrestamo
+@IdSucursal int,
+@NumeroPrestamo int
+as
+BEGIN
+
+	update Prestamo set Cancelado=1 where Prestamo.IdPrestamo=@NumeroPrestamo and Prestamo.NumeroSucursal = @IdSucursal
+	if @@error<>0
+	begin
+		return -3  --Si no se pudo insertar la cotización--
+	end
+END
+GO
+
+
+--INSERTAMOS VALORES PREDETERMINADOS
+------------------------------------
+
+--SUCURSAL
+insert into Sucursal (Nombre,Direccion) values ('Sucursal Portones','Avda Bolivia 4507')
+
+
+
