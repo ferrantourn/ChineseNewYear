@@ -375,7 +375,7 @@ BEGIN
 	update Prestamo set Cancelado=1 where Prestamo.IdPrestamo=@NumeroPrestamo and Prestamo.NumeroSucursal = @IdSucursal
 	if @@error<>0
 	begin
-		return -3  --Si no se pudo insertar la cotización--
+		return -3  --Si no se pudo insertar el prestamo--
 	end
 END
 GO
