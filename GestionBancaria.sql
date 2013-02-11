@@ -22,7 +22,8 @@ create table Usuario(Ci int primary key not null,
 					 NombreUsuario nvarchar (15) not null unique,
 				     Nombre nvarchar (20) not null,
 					 Apellido nvarchar (20) not null,
-					 Pass nvarchar (20) not null
+					 Pass nvarchar (20) not null,
+					 Activo bit not null
 					 )
 GO				 
 create table Cliente(IdCliente int primary key not null, 
@@ -31,7 +32,8 @@ create table Cliente(IdCliente int primary key not null,
 GO
 create table Sucursal(IdSucursal int identity primary key, 
 					  Nombre nvarchar(20) not null,
-					  Direccion nvarchar(50))
+					  Direccion nvarchar(50) not null,
+					  Activa bit not null)
 GO					 				 
 create table Prestamo(IdPrestamo int not null, 
 					  NumeroSucursal int not null, 
@@ -46,8 +48,7 @@ create table Prestamo(IdPrestamo int not null,
 					  primary key (IdPrestamo, NumeroSucursal)
 					  )
 GO					  
-create table Cotizacion(
-						Fecha datetime not null,
+create table Cotizacion(Fecha datetime not null,
 						PrecioVenta float not null, 
 						PrecioCompra float not null
 						primary key (Fecha))
@@ -129,8 +130,8 @@ begin tran --insertamos el cliente
 		return -3   --Usuario ya Existe
 	end
  
-	insert into Usuario(Ci,Nombre,Apellido,NombreUsuario,Pass)
-			values(@Ci, @Nombre, @Apellido, @NombreUsuario, @Pass)
+	insert into Usuario(Ci,Nombre,Apellido,NombreUsuario,Pass, Activo)
+			values(@Ci, @Nombre, @Apellido, @NombreUsuario, @Pass, 1)
 			
 		if @@error<>0
 		begin
@@ -176,8 +177,8 @@ BEGIN
 	end
 	
 	begin tran --insertamos el Empleado
-	insert into Usuario(Ci,Nombre,Apellido,NombreUsuario,Pass)
-			values(@Ci, @Nombre, @Apellido, @NombreUsuario, @Pass)
+	insert into Usuario(Ci,Nombre,Apellido,NombreUsuario,Pass,Activo)
+			values(@Ci, @Nombre, @Apellido, @NombreUsuario, @Pass, 1)
 			
 		if @@error<>0
 		begin
@@ -262,7 +263,7 @@ select @cantidad = COUNT(*) from Prestamo where Prestamo.NumeroSucursal=@NumeroS
 set @cantidad = @cantidad+1 /*numero del nuevo prestamo*/
 
 insert into Prestamo(IdPrestamo, NumeroSucursal, IdCliente, Fecha, Cuotas, Moneda, Monto, Cancelado)
-			values(@cantidad, @NumeroSucursal, @IdCliente, @Fecha, @Cuotas,@Moneda,@Monto, 0)
+			values(@cantidad, @NumeroSucursal, @IdCliente, @Fecha, @Cuotas, @Moneda, @Monto, 0)
 			
 	if @@error<>0
 	begin
@@ -300,7 +301,7 @@ create table Movimiento(IdSucursal int not null references Sucursal(IdSucursal),
 						-- . No es necesario establecer un campo de tipo bit para definir si es un movimiento web o dentro de entidad
 						*/
 
-create proc AltaMovimiento
+create proc AltaMovimiento /*podemos controlar lo de la cotizacion fuera del script*/
 @IdSucursal int,
 @Tipo int,
 @Fecha datetime,
@@ -379,6 +380,40 @@ BEGIN
 	end
 END
 GO
+/*create table Pagos(IdRecibo int identity primary key not null,
+				   IdEmpleado int,
+				   IdPrestamo int,
+				   NumeroSucursal int,
+				   Monto float not null,
+				   Fecha datetime not null,
+				   NumeroCuota int not null,
+				   foreign key (IdEmpleado) references Empleado(IdUsuario),
+				   foreign key (IdPrestamo,NumeroSucursal) references Prestamo(IdPrestamo,NumeroSucursal))*/
+CREATE PROC AltaPago
+@IdEmpleado int,
+@IdPrestamo int,
+@NumeroSucursal int,
+@Monto float,
+@Fecha datetime
+as
+BEGIN
+	declare @NumeroCuota int
+	select @NumeroCuota = Pagos.NumeroCuota from Pagos where Pagos.IdPrestamo=@IdPrestamo
+	set @NumeroCuota = @NumeroCuota+1 /*numero de la nueva cuota a pagar*/
+
+	insert into Pagos(IdEmpleado,IdPrestamo,Fecha,Monto,NumeroCuota,NumeroSucursal)
+			values(@IdEmpleado,@IdPrestamo,@Fecha,@Monto,@NumeroCuota,@NumeroSucursal)
+		
+		if @@ERROR <> 0
+		begin
+			return -1 /*error no se pudo insertar pago*/
+		end
+		
+		return @@identity /*retorno el numero de IdRecibo*/
+
+END
+
+GO
 
 
 CREATE PROC spBuscarClientePorCi
@@ -403,7 +438,7 @@ GO
 ------------------------------------
 
 --SUCURSAL
-insert into Sucursal (Nombre,Direccion) values ('Sucursal Portones','Avda Bolivia 4507')
+insert into Sucursal (Nombre,Direccion,Activa) values ('Sucursal Portones','Avda Bolivia 4507',1)
 
 
 
