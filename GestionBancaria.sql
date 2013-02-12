@@ -415,6 +415,33 @@ END
 
 GO
 
+CREATE PROC spListarAtrasados
+@IdSucursal int,
+@FechaActual datetime
+as
+BEGIN
+
+select Prestamo.IdPrestamo from Pagos,Prestamo where 
+												(((DATEPART(day,Prestamo.Fecha) - DATEPART(day,@FechaActual)<0) 
+													and (DATEPART(month,Pagos.Fecha) - DATEPART(month,@FechaActual)=1) 
+													or ((DATEPART(month,Pagos.Fecha) - DATEPART(month,@FechaActual)<1)))
+												and (Pagos.NumeroSucursal=@IdSucursal) and (Prestamo.Cancelado=0))
+
+/*Condiciones que se deben cumplir para mostar los prestamos atrasados de pago:
+
+1-el prestamo fue pedido un dia X, por ejemplo 12, 
+y estamos a un 13 y hay UN MES de diferencia entre pago anterior y fecha actual,
+en este caso estaría atrasdo 1 día
+
+2-Si hay más de un mes de diferencia entre el último pago y el día de hoy, 
+ejemplo: ultimo pago 11 de julio, dia actual 10 de diciembre, esta muy atrasado.
+
+3-el prestamo no esta cancelado, y el prestamo es de la IdSucursal pasada por parametro
+condiciones del sp*/ 
+
+END
+GO
+
 
 CREATE PROC spBuscarClientePorCi
 @Ci as int
