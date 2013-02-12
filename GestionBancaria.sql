@@ -270,7 +270,7 @@ insert into Prestamo(IdPrestamo, NumeroSucursal, IdCliente, Fecha, Cuotas, Moned
 		return -3  --Si no se pudo insertar prestamo--
 	end
 
-commit tran
+
 END
 GO
 
@@ -397,7 +397,7 @@ CREATE PROC AltaPago
 @Fecha datetime
 as
 BEGIN
-	declare @NumeroCuota int
+	declare @NumeroCuota int=0
 	select @NumeroCuota = Pagos.NumeroCuota from Pagos where Pagos.IdPrestamo=@IdPrestamo
 	set @NumeroCuota = @NumeroCuota+1 /*numero de la nueva cuota a pagar*/
 
@@ -466,6 +466,17 @@ GO
 
 --SUCURSAL
 insert into Sucursal (Nombre,Direccion,Activa) values ('Sucursal Portones','Avda Bolivia 4507',1)
+exec AltaEmpleado @IdSucursal=1, @Ci=1234567,@NombreUsuario='ElGaucho', @Nombre='Roberto',@Apellido='Gonzales',@Pass='1234'
+exec AltaCliente @Direccion='aca', @Nombre='Amalfi', @Apellido='Marini',@Pass='jojojo', @Ci=3446586, @NombreUsuario = 'fito'
+exec AltaPrestamo @Monto=10000, @Cuotas=10, @Moneda='UYU', @Fecha='01/01/1998', @IdCliente=3446586, @NumeroSucursal = 1
+exec AltaPago @Fecha='01/02/1981', @Monto=1000, @NumeroSucursal=1, @IdEmpleado = 1234567, @IdPrestamo=1
+
+select * from Pagos
+select * from Cliente
+select * from Sucursal
+select * from Usuario
+select * from Prestamo
+
 
 
 
