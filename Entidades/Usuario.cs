@@ -19,5 +19,8 @@ namespace Entidades
         private string _pass;
         public string PASS { get; set; }
 
+        private bool _activo;
+        public bool ACTIVO { get; set; }
+
     }
 }

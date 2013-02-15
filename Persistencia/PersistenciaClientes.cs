@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using Entidades;
@@ -64,8 +65,6 @@ namespace Persistencia
 
             try
             {
-
-
                 SqlCommand cmd = Conexion.GetCommand("spBuscarClientePorCi", conexion, CommandType.StoredProcedure);
                 SqlParameter _Ci = new SqlParameter("@Ci", cliente.CI);
                 cmd.Parameters.Add(_Ci);
@@ -111,6 +110,65 @@ namespace Persistencia
 
 
         }
+
+
+        /// <summary>
+        /// LISTA LOS CLIENTES
+        /// </summary>
+        /// <returns></returns>
+        public List<Cliente> ListarClientes()
+        {
+            List<Cliente> _listaClientess = new List<Cliente>();
+
+            SqlConnection conexion = new SqlConnection(Conexion.Cnn);
+            SqlCommand cmd = Conexion.GetCommand("spListarClientes", conexion, CommandType.StoredProcedure);
+
+            SqlDataReader _Reader;
+            try
+            {
+                conexion.Open();
+                cmd.ExecuteNonQuery();
+                _Reader = cmd.ExecuteReader();
+                int _ci;
+                string _nombreUsuario, _nombre, _apellido, _pass;
+                bool _activo;
+
+                while (_Reader.Read())
+                {
+                    _ci = (int)_Reader["Ci"];
+                    _nombreUsuario = (string)_Reader["NombreUsuario"];
+                    _nombre = (string)_Reader["Nombre"];
+                    _apellido = (string)_Reader["Apellido"];
+                    _pass = (string)_Reader["Pass"];
+                    _activo = (bool)_Reader["Activo"];
+
+                    Cliente c = new Cliente
+                    {
+                        CI = _ci,
+                        NOMBREUSUARIO = _nombreUsuario,
+                        PASS = _pass,
+                        NOMBRE = _nombre,
+                        APELLIDO = _apellido,
+                        ACTIVO = _activo
+
+                    };
+
+                    _listaClientess.Add(c);
+                }
+                _Reader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Problemas con la base de datos:" + ex.Message);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+            return _listaClientess;
+        }
+
 
     }
 }

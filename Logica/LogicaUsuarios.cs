@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Entidades;
 using Persistencia;
 
@@ -29,6 +30,20 @@ namespace Logica
             }
         }
 
+        public List<Cliente> ListarClientes ()
+        {
+            try
+            {
+                PersistenciaClientes pclientes = new PersistenciaClientes();
+                return pclientes.ListarClientes();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
         public Usuario BuscarUsuarioPorCi(Usuario u)
         {
             try
@@ -43,6 +58,7 @@ namespace Logica
                     //PersistenciaEmpleados pempleados = new PersistenciaEmpleados();
                     //pempleados.AltaEmpleado((Empleado)u);
                 }
+                return null;
             }
             catch (Exception ex)
             {
@@ -50,5 +66,8 @@ namespace Logica
                 throw ex;
             }
         }
+
+
+
     }
 }

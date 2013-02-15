@@ -9,8 +9,8 @@ namespace GestionBancariaWindows
 {
     public partial class NuevoCliente : Form
     {
-        private int? ClienteId;
-        public int? CLIENTEID { get; set; }
+        private Cliente ClienteId;
+        public Cliente CLIENTE { get; set; }
 
 
         public NuevoCliente()
@@ -22,33 +22,24 @@ namespace GestionBancariaWindows
         private void NuevoCliente_Load(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(txtTelefonos, "Ingrese los telefonos separados por una coma ','");
-            if (CLIENTEID != null)
+            if (CLIENTE != null)
             {
-                //CARGAMOS LA INFORMACION DEL CLIENTE CON ESE ID
-                //-----------------------------------------------
-                LogicaUsuarios lu = new LogicaUsuarios();
 
-                Cliente c = new Cliente();
-                c.CI = Convert.ToInt32(CLIENTEID);
-
-                c = (Cliente)lu.BuscarUsuarioPorCi(c);
-                if (c != null)
+                txtApellido.Text = CLIENTE.APELLIDO;
+                txtCedula.Text = Convert.ToString(CLIENTE.CI);
+                txtDireccion.Text = CLIENTE.DIRECCION;
+                txtNombre.Text = CLIENTE.NOMBRE;
+                txtPassword.Text = CLIENTE.PASS;
+                txtReiterarPass.Text = CLIENTE.PASS;
+                string telefonos = "";
+                foreach (string s in CLIENTE.TELEFONOS)
                 {
-                    txtApellido.Text = c.APELLIDO;
-                    txtCedula.Text = Convert.ToString(c.CI);
-                    txtDireccion.Text = c.DIRECCION;
-                    txtNombre.Text = c.NOMBRE;
-                    txtPassword.Text = c.PASS;
-                    txtReiterarPass.Text = c.PASS;
-                    string telefonos = "";
-                    foreach (string s in c.TELEFONOS)
-                    {
-                        telefonos = telefonos + s + ",";
-                    }
-
-                    txtUsuario.Text = c.NOMBREUSUARIO;
-
+                    telefonos = telefonos + s + ",";
                 }
+
+                txtUsuario.Text = CLIENTE.NOMBREUSUARIO;
+                btnGuardar.Text = "Actualizar";
+
             }
         }
 
@@ -60,36 +51,48 @@ namespace GestionBancariaWindows
             {
                 if (this.ValidateChildren(ValidationConstraints.Enabled))
                 {
-                    if (CLIENTEID == null)
+                    bool editar = false;
+                    if (CLIENTE == null)
                     {
-                        //CARGAMOS INFORMACION DEL CLIENTE
-                        //--------------------------------
-                        Cliente c = new Cliente
-                                        {
-                                            CI = Convert.ToInt32(txtCedula.Text),
-                                            DIRECCION = txtDireccion.Text,
-                                            APELLIDO = txtApellido.Text,
-                                            NOMBRE = txtNombre.Text,
-                                            NOMBREUSUARIO = txtUsuario.Text,
-                                            PASS = txtPassword.Text
-                                        };
-
-                        //TELEFONOS
-                        //---------
-                        if (!String.IsNullOrEmpty(txtTelefonos.Text))
-                        {
-                            c.TELEFONOS = txtTelefonos.Text.Split(',').ToList();
-                        }
-
-                        //GUARDAMOS LA INFORMACION EN LA BASE DE DATOS
-                        LogicaUsuarios lu = new LogicaUsuarios();
-                        lu.AltaUsuario(c);
-
-                        lblInfo.Text = "Cliente ingresado correctamente";
-
-                        //LIMPIAMOS EL FORMULARIO
-                        LimpiarFormulario();
+                        CLIENTE = new Cliente();
                     }
+                    else
+                    {
+                        editar = true;
+                    }
+                    //CARGAMOS INFORMACION DEL CLIENTE
+                    //--------------------------------
+
+                    CLIENTE.CI = Convert.ToInt32(txtCedula.Text);
+                    CLIENTE.DIRECCION = txtDireccion.Text;
+                    CLIENTE.APELLIDO = txtApellido.Text;
+                    CLIENTE.NOMBRE = txtNombre.Text;
+                    CLIENTE.NOMBREUSUARIO = txtUsuario.Text;
+                    CLIENTE.PASS = txtPassword.Text;
+
+
+                    //TELEFONOS
+                    //---------
+                    if (!String.IsNullOrEmpty(txtTelefonos.Text))
+                    {
+                        CLIENTE.TELEFONOS = txtTelefonos.Text.Split(',').ToList();
+                    }
+
+                    //GUARDAMOS LA INFORMACION EN LA BASE DE DATOS
+                    LogicaUsuarios lu = new LogicaUsuarios();
+                    if (editar)
+                    {
+                        lblInfo.Text = "Cliente actualizado correctamente";
+
+                    }
+                    else
+                    {
+                        lu.AltaUsuario(CLIENTE);
+                        lblInfo.Text = "Cliente ingresado correctamente";
+                    }
+
+                    //LIMPIAMOS EL FORMULARIO
+                    LimpiarFormulario();
                 }
             }
             catch (ErrorUsuarioYaExiste uex)
