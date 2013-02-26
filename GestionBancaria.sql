@@ -130,7 +130,7 @@ begin tran --insertamos el cliente
 		return -3   --Usuario ya Existe
 	end
  
-	insert into Usuario(Ci,Nombre,Apellido,NombreUsuario,Pass, Activo)
+	insert into Usuario(Ci,Nombre,Apellido,NombreUsuario, Pass, Activo)
 			values(@Ci, @Nombre, @Apellido, @NombreUsuario, @Pass, 1)
 			
 		if @@error<>0
@@ -215,8 +215,8 @@ if exists(select * from Sucursal where Sucursal.Direccion=@Direccion or Sucursal
 	end
 
 begin tran --insertamos la sucursal
-	insert into Sucursal(IdSucursal, Nombre)
-			values(@Direccion, @Nombre)
+	insert into Sucursal(IdSucursal, Nombre, Activa)
+			values(@Direccion, @Nombre, 1)
 
 	if @@error<>0
 	begin
@@ -276,10 +276,11 @@ GO
 
 /********OPCIONAL********/
 create proc CantidadPrestamos /*Si quisiera en algun momento saber la cantidad de prestamos de una sucursal*/
+@NumeroSucursal int
 as
 begin
 	declare @cantidad int
-	select @cantidad = COUNT(*) from Prestamo
+	select @cantidad = COUNT(*) from Prestamo where NumeroSucursal = @NumeroSucursal
 	return @cantidad
 
 end
@@ -311,14 +312,14 @@ create proc AltaMovimiento /*podemos controlar lo de la cotizacion fuera del scr
 @CiUsuario int
 as
 BEGIN
-if not exists(select * from Sucursal where Sucursal.IdSucursal=@IdSucursal)
+if not exists(select * from Sucursal where Sucursal.IdSucursal=@IdSucursal and Sucursal.Activa = 0)
 	begin
-		return -1   --sucursal no existe en el sistema
+		return -1   --sucursal no existe en el sistema o está inactiva
 	end
 	
-if not exists(select * from Usuario where Usuario.Ci=@CiUsuario)
+if not exists(select * from Usuario where Usuario.Ci=@CiUsuario and Usuario.Activo = 0)
 	begin
-		return -2   --Usuario no existe en el sistema
+		return -2   --Usuario no existe en el sistema o está inactivo
 	end
 	
 declare @cantidad int
@@ -400,6 +401,12 @@ BEGIN
 	declare @NumeroCuota int=0
 	select @NumeroCuota = Pagos.NumeroCuota from Pagos where Pagos.IdPrestamo=@IdPrestamo
 	set @NumeroCuota = @NumeroCuota+1 /*numero de la nueva cuota a pagar*/
+	
+	if exists(select * from Usuario where usuario.Ci =@IdEmpleado and Activo = 0)
+	begin
+		return -1 --usuario empleado no existe o está inactivo
+	end
+	
 
 	insert into Pagos(IdEmpleado,IdPrestamo,Fecha,Monto,NumeroCuota,NumeroSucursal)
 			values(@IdEmpleado,@IdPrestamo,@Fecha,@Monto,@NumeroCuota,@NumeroSucursal)
@@ -415,7 +422,26 @@ END
 
 GO
 
-CREATE PROC spListarAtrasados
+CREATE PROC spListarUltimosPagos --muestra el id prestamo sin cancelar y el último realizado para dicho prestamo
+@IdSucursal int
+as
+BEGIN
+
+	if exists(select * from Sucursal where IdSucursal=@IdSucursal and Activa = 0)
+	begin
+		return -1 --Sucursal no existe o está inactiva
+	end
+	select * from Prestamo INNER JOIN
+		(select IdPrestamo, MAX(Pagos.Fecha) maxfecha from Pagos group by IdPrestamo) MP on Prestamo.IdPrestamo = MP.IdPrestamo 
+		INNER JOIN Pagos on Pagos.IdPrestamo=MP.IdPrestamo and Pagos.Fecha = MP.maxfecha	
+		where Prestamo.Cancelado = 0
+
+END
+GO
+
+
+/*
+CREATE PROC spListarAtrasados --sin terminar
 @IdSucursal int,
 @FechaActual datetime
 as
@@ -440,16 +466,15 @@ ejemplo: ultimo pago 11 de julio, dia actual 10 de diciembre, esta muy atrasado.
 condiciones del sp*/ 
 
 END
-GO
+GO*/
 
 
-CREATE PROC spBuscarClientePorCi
+CREATE PROC spBuscarClientePorCi -- falta filtrar inactivos, sería agregando and Usuario.Activo=0
 @Ci as int
-
 as
 begin
 select Usuario.*, Cliente.Direccion from Usuario INNER JOIN Cliente ON Usuario.Ci = Cliente.IdCliente
- where Cliente.IdCliente = @Ci
+	where Cliente.IdCliente = @Ci
 end
 
 go 
@@ -461,6 +486,13 @@ select Usuario.* ,Cliente.Direccion from Usuario INNER JOIN Cliente ON Usuario.C
 end
 
 GO 
+
+
+/*Bajas, de empleado, cliente, usuario, desactivacion de sucursal, */
+
+
+
+
 --INSERTAMOS VALORES PREDETERMINADOS
 ------------------------------------
 
@@ -470,6 +502,8 @@ exec AltaEmpleado @IdSucursal=1, @Ci=1234567,@NombreUsuario='ElGaucho', @Nombre=
 exec AltaCliente @Direccion='aca', @Nombre='Amalfi', @Apellido='Marini',@Pass='jojojo', @Ci=3446586, @NombreUsuario = 'fito'
 exec AltaPrestamo @Monto=10000, @Cuotas=10, @Moneda='UYU', @Fecha='01/01/1998', @IdCliente=3446586, @NumeroSucursal = 1
 exec AltaPago @Fecha='01/02/1981', @Monto=1000, @NumeroSucursal=1, @IdEmpleado = 1234567, @IdPrestamo=1
+
+exec spListarUltimosPagos 1
 
 select * from Pagos
 select * from Cliente
