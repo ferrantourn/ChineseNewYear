@@ -55,6 +55,10 @@ create table Cotizacion(Fecha datetime not null,
 					  
 					
 GO
+
+create table Bitacora(IdBitacora int primary key identity not null, Fecha datetime not null, PrecioVentaViejo float, PrecioCompraViejo float,
+					  PrecioVentaNuevo float, PrecioCompraNuevo float, IdUsuario int)
+GO--guarda en una bitacora las modificaciones realizadas en Cotizacion
 		     
 create table TelefonosClientes(IdCliente int, 
 							   Tel varchar(50), 
@@ -558,7 +562,7 @@ begin
 end
 GO
 
-create proc spEliminarCliente
+create proc spEliminarCliente --chequear si tiene deudas con el banco/prestamos etc.
 @Ci int
 as
 begin
@@ -705,6 +709,43 @@ begin
 	delete from Cuenta where Cuenta.IdCuenta=@IdCuenta
 end
 go
+
+/********************************COTIZACION*******************************/
+/********************************COTIZACION*******************************/
+/********************************COTIZACION*******************************/
+/********************************COTIZACION*******************************/
+
+
+create proc spListarCotizacion
+@FechaInicio datetime,
+@FechaFin datetime
+as
+begin
+	select * from Cotizacion where cotizacion.Fecha between @FechaFin and @FechaInicio
+end
+GO
+
+create proc spBuscarCotizacion
+@Fecha datetime
+as
+begin
+	select * from Cotizacion where cotizacion.Fecha=@Fecha
+end
+GO
+
+
+create proc spModificarCotizacion
+@Fecha datetime,
+@IdUsuario int
+as
+begin
+	
+end
+GO
+
+
+
+
 --INSERTAMOS VALORES PREDETERMINADOS
 ------------------------------------
 
