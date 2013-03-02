@@ -166,14 +166,14 @@ create proc AltaEmpleado
 @IdSucursal int
 as
 BEGIN
-	if not exists(select * from Sucursal where Sucursal.IdSucursal=@IdSucursal)
+if not exists(select * from Sucursal where Sucursal.IdSucursal=@IdSucursal and Sucursal.Activa = 1)
 	begin
-		return -1   --Sucursal no existe
+		return -1   --sucursal no existe en el sistema o está inactiva
 	end
 	
 	if exists(select * from Usuario where Usuario.Ci=@Ci or Usuario.NombreUsuario = @NombreUsuario)
 	begin
-		return -3   --Usuario ya Existe
+		return -2   --Usuario ya Existe, quizás esté inactivo
 	end
 	
 	begin tran --insertamos el Empleado
@@ -248,14 +248,19 @@ create proc AltaPrestamo
 @Monto int
 as
 BEGIN
-if not exists(select * from Sucursal where Sucursal.IdSucursal=@NumeroSucursal)
+if not exists(select * from Sucursal where Sucursal.IdSucursal=@NumeroSucursal and Sucursal.Activa = 1)
 	begin
-		return -1   --sucursal no existe en el sistema
+		return -1   --sucursal no existe en el sistema o está inactiva
+	end
+	
+if not exists(select * from Usuario where Usuario.Ci=@IdCliente and Usuario.Activo = 1)
+	begin
+		return -2   --Usuario no existe en el sistema o está inactivo
 	end
 	
 if not exists(select * from Cliente where Cliente.IdCliente=@IdCliente)
 	begin
-		return -2   --cliente no existe en el sistema
+		return -3   --cliente no existe en el sistema
 	end
 	
 declare @cantidad int
@@ -267,7 +272,7 @@ insert into Prestamo(IdPrestamo, NumeroSucursal, IdCliente, Fecha, Cuotas, Moned
 			
 	if @@error<>0
 	begin
-		return -3  --Si no se pudo insertar prestamo--
+		return -4  --Si no se pudo insertar prestamo--
 	end
 
 
@@ -312,12 +317,12 @@ create proc AltaMovimiento /*podemos controlar lo de la cotizacion fuera del scr
 @CiUsuario int
 as
 BEGIN
-if not exists(select * from Sucursal where Sucursal.IdSucursal=@IdSucursal and Sucursal.Activa = 0)
+if not exists(select * from Sucursal where Sucursal.IdSucursal=@IdSucursal and Sucursal.Activa = 1)
 	begin
 		return -1   --sucursal no existe en el sistema o está inactiva
 	end
 	
-if not exists(select * from Usuario where Usuario.Ci=@CiUsuario and Usuario.Activo = 0)
+if not exists(select * from Usuario where Usuario.Ci=@CiUsuario and Usuario.Activo = 1)
 	begin
 		return -2   --Usuario no existe en el sistema o está inactivo
 	end
@@ -402,9 +407,14 @@ BEGIN
 	select @NumeroCuota = Pagos.NumeroCuota from Pagos where Pagos.IdPrestamo=@IdPrestamo
 	set @NumeroCuota = @NumeroCuota+1 /*numero de la nueva cuota a pagar*/
 	
-	if exists(select * from Usuario where usuario.Ci =@IdEmpleado and Activo = 0)
+if not exists(select * from Sucursal where Sucursal.IdSucursal=@NumeroSucursal and Sucursal.Activa = 1)
 	begin
-		return -1 --usuario empleado no existe o está inactivo
+		return -1   --sucursal no existe en el sistema o está inactiva
+	end
+	
+if not exists(select * from Usuario where Usuario.Ci=@IdEmpleado and Usuario.Activo = 1)
+	begin
+		return -2   --Usuario no existe en el sistema o está inactivo
 	end
 	
 
@@ -427,7 +437,7 @@ CREATE PROC spListarUltimosPagos --muestra el id prestamo sin cancelar y el últi
 as
 BEGIN
 
-	if exists(select * from Sucursal where IdSucursal=@IdSucursal and Activa = 0)
+	if not exists(select * from Sucursal where IdSucursal=@IdSucursal and Activa = 1)
 	begin
 		return -1 --Sucursal no existe o está inactiva
 	end
@@ -491,8 +501,210 @@ GO
 /*Bajas, de empleado, cliente, usuario, desactivacion de sucursal, */
 
 
+/********************************Empleado y Cliente*******************************/
 
+create proc spModificarCliente
+@Ci int,
+@NombreUsuario nvarchar(15),
+@Nombre nvarchar(20),
+@Apellido nvarchar(20),
+@Pass nvarchar(20),
+@IdCliente int,
+@Direccion nvarchar(20)
+as
+begin
+	begin tran
+		update Cliente set cliente.Direccion=@Direccion where cliente.IdCliente=@Ci
+		if @@error<>0
+		begin
+		rollback tran
+			return -2  --Si no se pudo cambiar datos--
+		end
+		update Usuario set Usuario.Apellido=@Apellido, Usuario.Nombre=@Nombre, 
+				Usuario.NombreUsuario=@NombreUsuario, Usuario.Pass=@Pass where Usuario.Ci=@Ci
+		if @@error<>0
+		begin
+		rollback tran
+			return -2  --Si no se pudo cambiar datos--
+		end
+	commit tran
+end
+GO
 
+create proc spModificarEmpleado
+@Ci int,
+@NombreUsuario nvarchar(15),
+@Nombre nvarchar(20),
+@Apellido nvarchar(20),
+@Pass nvarchar(20),
+@IdSucursal int
+as
+begin
+	begin tran
+		update Empleado set Empleado.IdSucursal=@IdSucursal where Empleado.IdUsuario=@Ci
+		if @@error<>0
+		begin
+		rollback tran
+			return -2  --Si no se pudo cambiar datos--
+		end
+		update Usuario set Usuario.Apellido=@Apellido, Usuario.Nombre=@Nombre, 
+				Usuario.NombreUsuario=@NombreUsuario, Usuario.Pass=@Pass where Usuario.Ci=@Ci
+		if @@error<>0
+		begin
+		rollback tran
+			return -2  --Si no se pudo cambiar datos--
+		end
+	commit tran
+end
+GO
+
+create proc spEliminarCliente
+@Ci int
+as
+begin
+	update Usuario set Activo = 0 where Usuario.Ci = @Ci
+end
+GO
+
+create proc spBuscarEmpleado
+@Ci int
+as
+begin
+	select * from Empleado, Usuario where Ci=@Ci and IdUsuario=@Ci
+end
+GO
+
+create proc spListarEmpleado
+as
+begin
+	select * from Empleado inner join Usuario on Usuario.Ci=Empleado.IdUsuario
+end
+GO
+
+create proc spEliminarEmpleado
+@Ci int
+as
+begin
+	update Usuario set Activo = 0 where Usuario.Ci = @Ci
+end
+GO
+
+/********************************SUCURSAL*******************************/
+/********************************SUCURSAL*******************************/
+/********************************SUCURSAL*******************************/
+/********************************SUCURSAL*******************************/
+
+create proc spListarSucursal
+as
+begin
+	select * from Sucursal --opcional: filtrar por activa o inactiva
+							--opcional: elegir todos los campos o solo id,.
+end
+GO
+
+create proc spBuscarSucursal
+@IdSucursal int
+as
+begin
+	select * from Sucursal where Sucursal.IdSucursal=@IdSucursal
+end
+GO
+
+create proc spEliminarSucursal
+@IdSucursal int
+as
+begin
+	update Sucursal set Activa=0 where Sucursal.IdSucursal=@IdSucursal
+end
+GO
+
+create proc spModificarSucursal
+@IdSucursal int,
+@Nombre nvarchar(20), --verificar si es 20
+@Direccion nvarchar(20) --    ''     ''
+as
+begin
+	update Sucursal set Nombre=@Nombre, Direccion=@Direccion where Sucursal.IdSucursal=@IdSucursal
+end
+GO
+/********************************CUENTA*******************************/
+/********************************CUENTA*******************************/
+/********************************CUENTA*******************************/
+/********************************CUENTA*******************************/
+
+create proc spListarCuenta
+as
+begin
+	select * from Cuenta
+end
+GO
+
+create proc spBuscarCuenta
+@IdCuenta int
+as
+begin
+	select * from Cuenta where Cuenta.IdCuenta=@IdCuenta
+end
+GO
+
+/*create table Cuenta(IdCuenta int primary key identity (1,1) not null,
+					IdSucursal int not null foreign key references Sucursal(IdSucursal),
+					Moneda nvarchar(3) not null,
+					IdCliente int foreign key references Cliente(IdCliente),
+					Saldo float not null)*/
+create proc spAltaCuenta
+@IdSucursal int,
+@Moneda nvarchar(3),
+@IdCliente int,
+@Saldo float
+as
+begin
+if not exists(select * from Sucursal where Sucursal.IdSucursal=@IdSucursal and Sucursal.Activa = 1)
+	begin
+		return -1   --sucursal no existe en el sistema o está inactiva
+	end
+	
+if not exists(select * from Usuario where Usuario.Ci=@IdCliente and Usuario.Activo = 1)
+	begin
+		return -2   --Usuario no existe en el sistema o está inactivo
+	end
+	
+	insert into Cuenta(IdCliente,IdSucursal,Moneda,Saldo) 
+				values(@IdCliente,@IdSucursal,@Moneda,@Saldo)
+	
+end
+GO
+
+create proc spModificarCuenta
+@IdCuenta int,
+@Saldo float
+as
+begin
+	if not exists (select * from Cuenta where Cuenta.IdCuenta=@IdCuenta)
+	begin
+		return -1 --cuenta no existe
+	end	
+	
+	update Cuenta set Saldo=@Saldo
+end
+GO
+
+create proc spEliminarCuenta
+@IdCuenta int
+as
+begin
+	if not exists (select * from Cuenta where Cuenta.IdCuenta=@IdCuenta)
+	begin
+		return -1 --cuenta no existe
+	end
+	if not exists (select * from Cuenta where Cuenta.IdCuenta=@IdCuenta and Cuenta.Saldo=0)
+	begin
+		return -1 --cuenta tiene saldo mayor a cero, se debe vaciar la cuenta antes de eliminarla
+	end
+	
+	delete from Cuenta where Cuenta.IdCuenta=@IdCuenta
+end
+go
 --INSERTAMOS VALORES PREDETERMINADOS
 ------------------------------------
 
