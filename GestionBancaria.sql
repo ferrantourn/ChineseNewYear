@@ -156,6 +156,37 @@ commit tran
 END
 GO
 
+create proc spAltaTelefono
+@IdCliente int,
+@Tel int
+as
+begin
+	if not exists(select * from Usuario where Usuario.Ci=@IdCliente or Usuario.Activo = 1)
+	begin
+		return -1   --Usuario no Existe, o está inactivo
+	end
+	
+	insert into TelefonosClientes(IdCliente,Tel)
+							values(@IdCliente,@Tel)
+	
+end
+
+GO
+
+create proc spBajaTelefono
+@IdCliente int,
+@Tel int
+as
+begin
+	if not exists(select * from Usuario where Usuario.Ci=@IdCliente or Usuario.Activo = 1)
+	begin
+		return -1   --Usuario no Existe, o está inactivo
+	end
+	
+	delete TelefonosClientes where TelefonosClientes.Tel=@Tel and TelefonosClientes.IdCliente=@IdCliente
+	
+end
+GO
 /*
 create table Empleado(IdUsuario int primary key, 
 					  IdSucursal int not null,
@@ -579,9 +610,10 @@ end
 GO
 
 create proc spListarEmpleado
+@Activo bit
 as
 begin
-	select * from Empleado inner join Usuario on Usuario.Ci=Empleado.IdUsuario
+	select * from Empleado inner join Usuario on Usuario.Ci=Empleado.IdUsuario and Activo=@Activo
 end
 GO
 
