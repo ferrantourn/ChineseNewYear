@@ -184,7 +184,6 @@ namespace Persistencia
                     SqlParameter _nombre = new SqlParameter("@Nombre", u.NOMBRE);
                     SqlParameter _apellido = new SqlParameter("@Apellido", u.APELLIDO);
                     SqlParameter _pass = new SqlParameter("@Pass", u.PASS);
-                    SqlParameter _idcliente = new SqlParameter("@IdCliente", u.IDCLIENTE);
                     SqlParameter _direccion = new SqlParameter("@Direccion", u.DIRECCION);
                     _retorno.Direction = ParameterDirection.ReturnValue;
                     cmd.Parameters.Add(_ci);
