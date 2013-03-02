@@ -173,39 +173,56 @@ namespace Persistencia
 
         public void ModificarCliente(Cliente u)
         {
-            SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int);
+
             using (TransactionScope tran = new TransactionScope())
             {
                 using (SqlConnection conexion = new SqlConnection(Conexion.Cnn))
                 {
-                    SqlCommand cmd = Conexion.GetCommand("spModificarCliente", conexion, CommandType.StoredProcedure);
-                    SqlParameter _ci = new SqlParameter("@Ci", u.CI);
-                    SqlParameter _nombreusuario = new SqlParameter("@NombreUsuario", u.NOMBREUSUARIO);
-                    SqlParameter _nombre = new SqlParameter("@Nombre", u.NOMBRE);
-                    SqlParameter _apellido = new SqlParameter("@Apellido", u.APELLIDO);
-                    SqlParameter _pass = new SqlParameter("@Pass", u.PASS);
-                    SqlParameter _direccion = new SqlParameter("@Direccion", u.DIRECCION);
-                    _retorno.Direction = ParameterDirection.ReturnValue;
-                    cmd.Parameters.Add(_ci);
-                    cmd.Parameters.Add(_nombreusuario);
-                    cmd.Parameters.Add(_nombre);
-                    cmd.Parameters.Add(_apellido);
-                    cmd.Parameters.Add(_pass);
-                    cmd.Parameters.Add(_idcliente);
-                    cmd.Parameters.Add(_direccion);
-                    cmd.Parameters.Add(_retorno);
-
-                    //Actualizamos los telefonos
-                    //-------------------------
-                    SqlCommand cmdTel = Conexion.GetCommand("spModificarTelefono", conexion, CommandType.StoredProcedure);
-                    SqlParameter _idCliente = new SqlParameter("@Ci", u.CI);
-
-
-
                     try
                     {
+                        SqlCommand cmd = Conexion.GetCommand("spModificarCliente", conexion, CommandType.StoredProcedure);
+                        SqlParameter _ci = new SqlParameter("@Ci", u.CI);
+                        SqlParameter _nombreusuario = new SqlParameter("@NombreUsuario", u.NOMBREUSUARIO);
+                        SqlParameter _nombre = new SqlParameter("@Nombre", u.NOMBRE);
+                        SqlParameter _apellido = new SqlParameter("@Apellido", u.APELLIDO);
+                        SqlParameter _pass = new SqlParameter("@Pass", u.PASS);
+                        SqlParameter _direccion = new SqlParameter("@Direccion", u.DIRECCION);
+                        SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int);
+
+                        _retorno.Direction = ParameterDirection.ReturnValue;
+                        cmd.Parameters.Add(_ci);
+                        cmd.Parameters.Add(_nombreusuario);
+                        cmd.Parameters.Add(_nombre);
+                        cmd.Parameters.Add(_apellido);
+                        cmd.Parameters.Add(_pass);
+                        cmd.Parameters.Add(_direccion);
+                        cmd.Parameters.Add(_retorno);
+
+                        //ACTUALIZAMOS EL CLIENTE
+                        //-----------------------
                         conexion.Open();
                         cmd.ExecuteNonQuery();
+
+                        //Damos de baja a los telefonos los telefonos
+                        //--------------------------
+                        SqlCommand cmdBajaTel = Conexion.GetCommand("spBajaTelefono", conexion, CommandType.StoredProcedure);
+                        SqlParameter _idCliente = new SqlParameter("@IdCliente", u.CI);
+                        cmdBajaTel.Parameters.Add(_idCliente);
+                        cmdBajaTel.ExecuteNonQuery();
+
+                        //ingresamos nuevos telefonos
+                        //---------------------------
+                        foreach (string tel in u.TELEFONOS)
+                        {
+                            //Ingresamos telefonos de nuevo
+                            //-----------------------------
+                            SqlCommand cmdAltaTel = Conexion.GetCommand("spAltaTelefono", conexion, CommandType.StoredProcedure);
+                            SqlParameter _CiCliente = new SqlParameter("@IdCliente", u.CI);
+                            SqlParameter _telefono = new SqlParameter("@Tel ", tel);
+                            cmdAltaTel.Parameters.Add(_idCliente);
+                            cmdAltaTel.Parameters.Add(_telefono);
+                            cmdAltaTel.ExecuteNonQuery();
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -215,9 +232,6 @@ namespace Persistencia
 
                 tran.Complete();
             }
-
-            if (Convert.ToInt32(_retorno.Value) == -2)
-                throw new ErrorBaseDeDatos();
 
         }
 
