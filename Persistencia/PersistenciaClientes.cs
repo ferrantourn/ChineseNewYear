@@ -98,6 +98,9 @@ namespace Persistencia
                 }
                 reader.Close();
 
+
+
+
                 return c;
             }
             catch (Exception ex)
@@ -219,7 +222,7 @@ namespace Persistencia
                             SqlCommand cmdAltaTel = Conexion.GetCommand("spAltaTelefono", conexion, CommandType.StoredProcedure);
                             SqlParameter _CiCliente = new SqlParameter("@IdCliente", u.CI);
                             SqlParameter _telefono = new SqlParameter("@Tel ", tel);
-                            cmdAltaTel.Parameters.Add(_idCliente);
+                            cmdAltaTel.Parameters.Add(_CiCliente);
                             cmdAltaTel.Parameters.Add(_telefono);
                             cmdAltaTel.ExecuteNonQuery();
                         }

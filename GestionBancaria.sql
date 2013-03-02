@@ -186,6 +186,21 @@ begin
 	
 end
 GO
+
+create proc spListarTelefonos
+@IdCliente int
+as
+begin
+	if not exists(select * from Usuario where Usuario.Ci=@IdCliente or Usuario.Activo = 1)
+	begin
+		return -1   --Usuario no Existe, o está inactivo
+	end
+	
+	select Tel from TelefonosClientes where TelefonosClientes.IdCliente = @IdCliente
+end
+GO
+
+
 /*
 create table Empleado(IdUsuario int primary key, 
 					  IdSucursal int not null,
