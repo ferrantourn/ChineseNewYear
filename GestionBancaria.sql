@@ -736,10 +736,37 @@ GO
 
 create proc spModificarCotizacion
 @Fecha datetime,
-@IdUsuario int
+@IdUsuario int,
+@PrecioCompra float,
+@PrecioVenta float
 as
 begin
-	
+if not exists(select * from Usuario where Usuario.Ci=@IdUsuario and Usuario.Activo = 1)
+	begin
+		return -1   --Usuario no existe en el sistema o está inactivo
+	end
+declare @PrecioCompraViejo float
+declare @PrecioVentaViejo float
+select @PrecioCompraViejo = Cotizacion.PrecioCompra from Cotizacion where Cotizacion.Fecha=@Fecha
+select @PrecioVentaViejo = Cotizacion.PrecioVenta from Cotizacion where Cotizacion.Fecha=@Fecha
+
+	begin tran
+		insert into Bitacora(Fecha,IdUsuario,PrecioCompraNuevo,PrecioVentaNuevo,PrecioCompraViejo,PrecioVentaViejo) 
+					  values(@Fecha, @IdUsuario,@PrecioCompra,@PrecioVenta,@PrecioCompraViejo,@PrecioVentaViejo)
+			
+		if @@error<>0
+		begin
+		rollback tran
+			return -1  --Si no se pudo cambiar datos--
+		end
+		
+		update Cotizacion set Cotizacion.PrecioCompra=@PrecioCompra,Cotizacion.PrecioVenta=@PrecioVenta where Cotizacion.Fecha=@Fecha
+		
+		if @@error<>0
+		begin
+		rollback tran
+			return -1  --Si no se pudo cambiar datos--
+		end
 end
 GO
 
