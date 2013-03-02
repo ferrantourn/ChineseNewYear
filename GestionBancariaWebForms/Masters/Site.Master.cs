@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 //using Entidades;
 //using ExcepcionesPersonalizadas;
 //using Logica;
-using BiosWebMail.refServiceWebMail;
+using GestionBancariaWebForms.refServiceGestionBancaria;
 
 namespace BiosWebMail.Masters
 {

@@ -4,9 +4,9 @@ using System.Web.UI;
 //using Logica;
 //using Entidades;
 //using ExcepcionesPersonalizadas;
-using BiosWebMail.refServiceWebMail;
+using GestionBancariaWebForms.refServiceGestionBancaria;
 
-namespace BiosWebMail
+namespace GestionBancariaWebForms
 {
     public partial class SiteAlumno : MasterPage
     {

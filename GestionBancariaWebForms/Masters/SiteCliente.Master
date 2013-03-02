@@ -20,7 +20,7 @@
     <div style="width: 800px; margin: auto" id="page-container">
         <table>
             <tr>
-                <td style="background-image: url(../Images/Tope.jpg); width: 800px; height: 100px">
+                <td style="background-image: url('/Images/Tope2.jpg'); width: 800px; height: 100px">
                     <div style="float: right">
                         <asp:Image runat="server" Width="110px" Height="100px" ID="imgUser" />
                     </div>

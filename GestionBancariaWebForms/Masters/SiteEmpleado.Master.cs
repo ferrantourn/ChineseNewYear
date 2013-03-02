@@ -3,7 +3,7 @@ using Entidades;
 
 namespace BiosWebMail
 {
-    public partial class SiteDocente : System.Web.UI.MasterPage
+    public partial class SiteEmpleado : System.Web.UI.MasterPage
     {
 
         public Docente USUARIO_LOGUEADO

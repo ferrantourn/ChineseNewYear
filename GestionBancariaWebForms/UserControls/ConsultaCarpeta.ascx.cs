@@ -3,7 +3,7 @@ using System.Linq;
 using System.Web.UI.WebControls;
 //using Entidades;
 //using Logica;
-using BiosWebMail.refServiceWebMail;
+using GestionBancariaWebForms.refServiceGestionBancaria;
 
 namespace BiosWebMail.UserControls
 {
