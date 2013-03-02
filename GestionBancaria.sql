@@ -544,7 +544,6 @@ create proc spModificarCliente
 @Nombre nvarchar(20),
 @Apellido nvarchar(20),
 @Pass nvarchar(20),
-@IdCliente int,
 @Direccion nvarchar(20)
 as
 begin
