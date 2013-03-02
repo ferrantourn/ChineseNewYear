@@ -19,28 +19,33 @@ namespace Persistencia
         public void AltaCliente(Cliente c)
         {
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
-            SqlCommand cmd = Conexion.GetCommand("AltaCliente", conexion, CommandType.StoredProcedure);
-
-            SqlParameter _ci = new SqlParameter("@Ci", c.CI);
-            SqlParameter _nombreusuario = new SqlParameter("@NombreUsuario", c.NOMBREUSUARIO);
-            SqlParameter _nombre = new SqlParameter("@Nombre", c.NOMBRE);
-            SqlParameter _apellido = new SqlParameter("@Apellido", c.APELLIDO);
-            SqlParameter _pass = new SqlParameter("@Pass", c.PASS);
-            SqlParameter _direccion = new SqlParameter("@Direccion", c.DIRECCION);
-            SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int);
-            _retorno.Direction = ParameterDirection.ReturnValue;
-
-            cmd.Parameters.Add(_ci);
-            cmd.Parameters.Add(_nombreusuario);
-            cmd.Parameters.Add(_nombre);
-            cmd.Parameters.Add(_apellido);
-            cmd.Parameters.Add(_pass);
-            cmd.Parameters.Add(_direccion);
-            cmd.Parameters.Add(_retorno);
+            SqlTransaction transaction;
+            conexion.Open();
+            transaction = conexion.BeginTransaction("AltaClienteTransaccion");
 
             try
             {
-                conexion.Open();
+
+                SqlCommand cmd = Conexion.GetCommand("AltaCliente", conexion, CommandType.StoredProcedure);
+                cmd.Transaction = transaction;
+
+                SqlParameter _ci = new SqlParameter("@Ci", c.CI);
+                SqlParameter _nombreusuario = new SqlParameter("@NombreUsuario", c.NOMBREUSUARIO);
+                SqlParameter _nombre = new SqlParameter("@Nombre", c.NOMBRE);
+                SqlParameter _apellido = new SqlParameter("@Apellido", c.APELLIDO);
+                SqlParameter _pass = new SqlParameter("@Pass", c.PASS);
+                SqlParameter _direccion = new SqlParameter("@Direccion", c.DIRECCION);
+                SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int);
+                _retorno.Direction = ParameterDirection.ReturnValue;
+
+                cmd.Parameters.Add(_ci);
+                cmd.Parameters.Add(_nombreusuario);
+                cmd.Parameters.Add(_nombre);
+                cmd.Parameters.Add(_apellido);
+                cmd.Parameters.Add(_pass);
+                cmd.Parameters.Add(_direccion);
+                cmd.Parameters.Add(_retorno);
+
                 cmd.ExecuteNonQuery();
 
                 if (Convert.ToInt32(_retorno.Value) == -3)
@@ -48,9 +53,30 @@ namespace Persistencia
                 else if (Convert.ToInt32(_retorno.Value) < 0)
                     throw new ErrorBaseDeDatos();
 
+
+                //ingresamos nuevos telefonos
+                //---------------------------
+                foreach (string tel in c.TELEFONOS)
+                {
+                    //Ingresamos telefonos de nuevo
+                    //-----------------------------
+                    SqlCommand cmdAltaTel = Conexion.GetCommand("spAltaTelefono", conexion, CommandType.StoredProcedure);
+                    cmdAltaTel.Transaction = transaction;
+
+                    SqlParameter _CiCliente = new SqlParameter("@IdCliente", c.CI);
+                    SqlParameter _telefono = new SqlParameter("@Tel ", tel);
+                    cmdAltaTel.Parameters.Add(_CiCliente);
+                    cmdAltaTel.Parameters.Add(_telefono);
+                    cmdAltaTel.ExecuteNonQuery();
+                }
+
+
+                transaction.Commit();
+
             }
             catch (Exception ex)
             {
+                transaction.Rollback();
                 throw ex;
             }
             finally
@@ -99,7 +125,25 @@ namespace Persistencia
                 reader.Close();
 
 
+                //LEEMOS LOS TELEFONOS DEL CLIENTE
+                //--------------------------------
+                SqlCommand cmdTelefonos = Conexion.GetCommand("spListarTelefonos", conexion, CommandType.StoredProcedure);
+                SqlParameter _CiTelefonos = new SqlParameter("@IdCliente", cliente.CI);
+                cmdTelefonos.Parameters.Add(_CiTelefonos);
 
+                SqlDataReader readerTelefonos;
+                List<string> telefonos = new List<string>();
+
+                readerTelefonos = cmdTelefonos.ExecuteReader();
+                while (readerTelefonos.Read())
+                {
+                    telefonos.Add(Convert.ToString(readerTelefonos["Tel"]));
+                }
+                readerTelefonos.Close();
+
+                //ASIGNAMOS LOS TELEFONOS LEIDOS
+                //------------------------------
+                c.TELEFONOS = telefonos;
 
                 return c;
             }
@@ -126,6 +170,8 @@ namespace Persistencia
 
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
             SqlCommand cmd = Conexion.GetCommand("spListarClientes", conexion, CommandType.StoredProcedure);
+            SqlParameter _paramActivo = new SqlParameter("@Activo", true);
+            cmd.Parameters.Add(_paramActivo);
 
             SqlDataReader _Reader;
             try
@@ -134,7 +180,7 @@ namespace Persistencia
                 cmd.ExecuteNonQuery();
                 _Reader = cmd.ExecuteReader();
                 int _ci;
-                string _nombreUsuario, _nombre, _apellido, _pass;
+                string _nombreUsuario, _nombre, _apellido, _pass, _direccion;
                 bool _activo;
 
                 while (_Reader.Read())
@@ -145,6 +191,7 @@ namespace Persistencia
                     _apellido = (string)_Reader["Apellido"];
                     _pass = (string)_Reader["Pass"];
                     _activo = (bool)_Reader["Activo"];
+                    _direccion = (string)_Reader["Direccion"];
 
                     Cliente c = new Cliente
                     {
@@ -153,7 +200,8 @@ namespace Persistencia
                         PASS = _pass,
                         NOMBRE = _nombre,
                         APELLIDO = _apellido,
-                        ACTIVO = _activo
+                        ACTIVO = _activo,
+                        DIRECCION = _direccion
 
                     };
 

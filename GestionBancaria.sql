@@ -539,9 +539,11 @@ end
 go 
 
 create procedure spListarClientes
+@Activo bit
 as
 begin
 select Usuario.* ,Cliente.Direccion from Usuario INNER JOIN Cliente ON Usuario.Ci = Cliente.IdCliente 
+where Activo = @Activo
 end
 
 GO 

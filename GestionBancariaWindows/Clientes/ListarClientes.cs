@@ -21,7 +21,7 @@ namespace GestionBancariaWindows
 
                 foreach (Cliente c in clientes)
                 {
-                    object[] row0 = {"Editar", c.CI, c.NOMBRE + " " +  c.APELLIDO, c.NOMBREUSUARIO, Convert.ToString(c.ACTIVO).Trim() == "True" ? "Activo" : "No Activo"
+                    object[] row0 = {"Editar", c.CI, c.NOMBRE + " " +  c.APELLIDO, c.NOMBREUSUARIO,c.DIRECCION, Convert.ToString(c.ACTIVO).Trim() == "True" ? "Activo" : "No Activo"
                                                 };
                     lvClientes.Rows.Add(row0);
                 }
