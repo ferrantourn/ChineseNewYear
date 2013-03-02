@@ -74,6 +74,7 @@ namespace GestionBancariaWindows
                     {
                         editar = true;
                     }
+
                     //CARGAMOS INFORMACION DEL CLIENTE
                     //--------------------------------
 
@@ -103,11 +104,13 @@ namespace GestionBancariaWindows
                     else
                     {
                         lu.AltaUsuario(CLIENTE);
+
                         lblInfo.Text = "Cliente ingresado correctamente";
+                        //LIMPIAMOS EL FORMULARIO
+                        LimpiarFormulario();
                     }
 
-                    //LIMPIAMOS EL FORMULARIO
-                    LimpiarFormulario();
+
                 }
             }
             catch (ErrorUsuarioYaExiste uex)

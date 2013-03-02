@@ -38,7 +38,7 @@ namespace Logica
                 if (u is Cliente)
                 {
                     PersistenciaClientes pclientes = new PersistenciaClientes();
-                    //pclientes.AltaCliente((Cliente)u);
+                    pclientes.ModificarCliente((Cliente)u);
                 }
                 else
                 {
@@ -48,7 +48,6 @@ namespace Logica
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
@@ -60,7 +59,7 @@ namespace Logica
                 if (u is Cliente)
                 {
                     PersistenciaClientes pclientes = new PersistenciaClientes();
-                    //pclientes.AltaCliente((Cliente)u);
+                    pclientes.EliminarCliente((Cliente)u);
                 }
                 else
                 {

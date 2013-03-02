@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Entidades;
 using ExcepcionesPersonalizadas;
+using System.Transactions;
 
 namespace Persistencia
 {
@@ -169,55 +170,84 @@ namespace Persistencia
             return _listaClientess;
         }
 
-        //public void ModificarCliente (Cliente c)
-        //{
-        //    SqlConnection conexion = new SqlConnection(Conexion.Cnn);
-        //    SqlCommand cmd = Conexion.GetCommand("spModificarDocente", conexion, CommandType.StoredProcedure);
 
-        //    SqlParameter _ci = new SqlParameter("@Ci", u.CI);
-        //    SqlParameter _nombreusuario = new SqlParameter("@NombreUsuario", u.NOMBRE_USUARIO);
-        //    SqlParameter _nombre = new SqlParameter("@Nombre", u.NOMBRE);
-        //    SqlParameter _apellido = new SqlParameter("@Apellido", u.APELLIDO);
-        //    SqlParameter _pass = new SqlParameter("@Pass", u.PASS);
-        //    SqlParameter _materias = new SqlParameter("@Materias", u.MateriasToString());
-        //    SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int);
+        public void ModificarCliente(Cliente u)
+        {
+            SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int);
+            using (TransactionScope tran = new TransactionScope())
+            {
+                using (SqlConnection conexion = new SqlConnection(Conexion.Cnn))
+                {
+                    SqlCommand cmd = Conexion.GetCommand("spModificarCliente", conexion, CommandType.StoredProcedure);
+                    SqlParameter _ci = new SqlParameter("@Ci", u.CI);
+                    SqlParameter _nombreusuario = new SqlParameter("@NombreUsuario", u.NOMBREUSUARIO);
+                    SqlParameter _nombre = new SqlParameter("@Nombre", u.NOMBRE);
+                    SqlParameter _apellido = new SqlParameter("@Apellido", u.APELLIDO);
+                    SqlParameter _pass = new SqlParameter("@Pass", u.PASS);
+                    SqlParameter _idcliente = new SqlParameter("@IdCliente", u.IDCLIENTE);
+                    SqlParameter _direccion = new SqlParameter("@Direccion", u.DIRECCION);
+                    _retorno.Direction = ParameterDirection.ReturnValue;
+                    cmd.Parameters.Add(_ci);
+                    cmd.Parameters.Add(_nombreusuario);
+                    cmd.Parameters.Add(_nombre);
+                    cmd.Parameters.Add(_apellido);
+                    cmd.Parameters.Add(_pass);
+                    cmd.Parameters.Add(_idcliente);
+                    cmd.Parameters.Add(_direccion);
+                    cmd.Parameters.Add(_retorno);
 
-        //    _retorno.Direction = ParameterDirection.ReturnValue;
-
-        //    cmd.Parameters.Add(_ci);
-        //    cmd.Parameters.Add(_nombreusuario);
-        //    cmd.Parameters.Add(_nombre);
-        //    cmd.Parameters.Add(_apellido);
-        //    cmd.Parameters.Add(_pass);
-        //    cmd.Parameters.Add(_materias);
-        //    cmd.Parameters.Add(_retorno);
-
-
-        //    try
-        //    {
-        //        conexion.Open();
-        //        cmd.ExecuteNonQuery();
-
-        //        if (Convert.ToInt32(_retorno.Value) == -1)
-        //            throw new ErrorUsuarioNoExiste();
-
-        //        if (Convert.ToInt32(_retorno.Value) == -2)
-        //            throw new ErrorBaseDeDatos();
-
-        //        if (Convert.ToInt32(_retorno.Value) <= -3)
-        //            throw new ErrorBaseDeDatos();
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    finally
-        //    {
-        //        conexion.Close();
-        //    }
+                    //Actualizamos los telefonos
+                    //-------------------------
+                    SqlCommand cmdTel = Conexion.GetCommand("spModificarTelefono", conexion, CommandType.StoredProcedure);
+                    SqlParameter _idCliente = new SqlParameter("@Ci", u.CI);
 
 
-        //}
+
+                    try
+                    {
+                        conexion.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
+
+                tran.Complete();
+            }
+
+            if (Convert.ToInt32(_retorno.Value) == -2)
+                throw new ErrorBaseDeDatos();
+
+        }
+
+
+        public void EliminarCliente(Cliente u)
+        {
+            SqlConnection conexion = new SqlConnection(Conexion.Cnn);
+            SqlCommand cmd = Conexion.GetCommand("spEliminarCliente", conexion, CommandType.StoredProcedure);
+            SqlParameter _ci = new SqlParameter("@ci", u.CI);
+
+            cmd.Parameters.Add(_ci);
+
+            SqlParameter _Retorno = new SqlParameter("@Retorno", SqlDbType.Int);
+            _Retorno.Direction = ParameterDirection.ReturnValue;
+
+            try
+            {
+                conexion.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Problemas con la base de datos:" + ex.Message);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+        }
     }
 }
