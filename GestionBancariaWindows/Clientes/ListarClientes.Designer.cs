@@ -45,11 +45,11 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.lblHeader = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblInfo = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lvClientes = new System.Windows.Forms.DataGridView();
-            this.lblInfo = new System.Windows.Forms.Label();
             this.ColumnEditar = new System.Windows.Forms.DataGridViewLinkColumn();
             this.CiCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NombreCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -209,6 +209,14 @@
             this.panel2.Size = new System.Drawing.Size(683, 47);
             this.panel2.TabIndex = 1;
             // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(116, 17);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(0, 13);
+            this.lblInfo.TabIndex = 2;
+            // 
             // btnCancelar
             // 
             this.btnCancelar.Dock = System.Windows.Forms.DockStyle.Left;
@@ -218,6 +226,7 @@
             this.btnCancelar.TabIndex = 1;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnGuardar
             // 
@@ -254,15 +263,6 @@
             this.lvClientes.Size = new System.Drawing.Size(683, 279);
             this.lvClientes.TabIndex = 0;
             this.lvClientes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvClientes_CellClick);
-            // 
-            // lblInfo
-            // 
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(116, 17);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(35, 13);
-            this.lblInfo.TabIndex = 2;
-            this.lblInfo.Text = "label1";
             // 
             // ColumnEditar
             // 

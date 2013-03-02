@@ -19,27 +19,41 @@ namespace GestionBancariaWindows
 
         }
 
+
         private void NuevoCliente_Load(object sender, EventArgs e)
         {
-            toolTip1.SetToolTip(txtTelefonos, "Ingrese los telefonos separados por una coma ','");
-            if (CLIENTE != null)
+            try
             {
 
-                txtApellido.Text = CLIENTE.APELLIDO;
-                txtCedula.Text = Convert.ToString(CLIENTE.CI);
-                txtDireccion.Text = CLIENTE.DIRECCION;
-                txtNombre.Text = CLIENTE.NOMBRE;
-                txtPassword.Text = CLIENTE.PASS;
-                txtReiterarPass.Text = CLIENTE.PASS;
-                string telefonos = "";
-                foreach (string s in CLIENTE.TELEFONOS)
+                toolTip1.SetToolTip(txtTelefonos, "Ingrese los telefonos separados por una coma ','");
+                if (CLIENTE != null)
                 {
-                    telefonos = telefonos + s + ",";
+                    txtApellido.Text = CLIENTE.APELLIDO;
+                    txtCedula.Text = Convert.ToString(CLIENTE.CI);
+                    txtDireccion.Text = CLIENTE.DIRECCION;
+                    txtNombre.Text = CLIENTE.NOMBRE;
+                    txtPassword.Text = CLIENTE.PASS;
+                    txtReiterarPass.Text = CLIENTE.PASS;
+                    txtUsuario.Text = CLIENTE.NOMBREUSUARIO;
+
+                    string telefonos = "";
+                    if (CLIENTE.TELEFONOS != null)
+                    {
+                        foreach (string s in CLIENTE.TELEFONOS)
+                        {
+                            telefonos = telefonos + s + ",";
+                        }
+                    }
+                    txtTelefonos.Text = telefonos;
+
+                    btnGuardar.Text = "Actualizar";
+
                 }
+            }
+            catch (Exception ex)
+            {
 
-                txtUsuario.Text = CLIENTE.NOMBREUSUARIO;
-                btnGuardar.Text = "Actualizar";
-
+                lblInfo.Text = ex.Message;
             }
         }
 
@@ -79,11 +93,12 @@ namespace GestionBancariaWindows
                     }
 
                     //GUARDAMOS LA INFORMACION EN LA BASE DE DATOS
+                    //---------------------------------------------
                     LogicaUsuarios lu = new LogicaUsuarios();
                     if (editar)
                     {
+                        lu.ActualizarUsuario(CLIENTE);
                         lblInfo.Text = "Cliente actualizado correctamente";
-
                     }
                     else
                     {
@@ -225,6 +240,26 @@ namespace GestionBancariaWindows
 
         }
         #endregion
+
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("Esta seguro de eliminar el cliente " + CLIENTE.NOMBRE + " " + CLIENTE.APELLIDO, "Eliminar Cliente", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    LogicaUsuarios lu = new LogicaUsuarios();
+                    lu.EliminarUsuario(CLIENTE);
+                    lblInfo.Text = "Cliente eliminado correctamente";
+                    LimpiarFormulario();
+                    btnGuardar.Text = "Guardar";
+                }
+            }
+            catch (Exception ex)
+            {
+                lblInfo.Text = ex.Message;
+            }
+        }
 
 
 

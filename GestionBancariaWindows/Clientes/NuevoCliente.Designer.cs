@@ -54,6 +54,7 @@
             this.txtCedula = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnEliminar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -81,6 +82,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnEliminar);
             this.panel2.Controls.Add(this.lblInfo);
             this.panel2.Controls.Add(this.btnCancelar);
             this.panel2.Controls.Add(this.btnGuardar);
@@ -292,6 +294,16 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Location = new System.Drawing.Point(286, 0);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(110, 47);
+            this.btnEliminar.TabIndex = 3;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
             // NuevoCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -341,5 +353,6 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Button btnEliminar;
     }
 }
