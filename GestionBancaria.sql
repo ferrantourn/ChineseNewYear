@@ -687,9 +687,10 @@ GO
 /********************************CUENTA*******************************/
 
 create proc spListarCuenta
+@IdCliente int
 as
 begin
-	select * from Cuenta
+	select * from Cuenta inner join Cliente on Cuenta.IdCliente = Cliente.IdCliente
 end
 GO
 
@@ -755,8 +756,22 @@ begin
 	begin
 		return -1 --cuenta tiene saldo mayor a cero, se debe vaciar la cuenta antes de eliminarla
 	end
+	begin tran
 	
-	delete from Cuenta where Cuenta.IdCuenta=@IdCuenta
+		delete from Movimiento where Movimiento.IdCuenta=@IdCuenta
+		if @@error<>0
+		begin
+		rollback tran
+			return -2  --Si no se pudo borrar datos--
+		end
+		delete from Cuenta where Cuenta.IdCuenta=@IdCuenta
+		if @@error<>0
+		begin
+		rollback tran
+			return -3  --Si no se pudo borrar datos--
+		end
+		
+	commit tran
 end
 go
 
