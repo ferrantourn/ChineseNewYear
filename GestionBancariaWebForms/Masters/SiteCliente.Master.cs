@@ -8,7 +8,7 @@ using GestionBancariaWebForms.refServiceGestionBancaria;
 
 namespace GestionBancariaWebForms
 {
-    public partial class SiteAlumno : MasterPage
+    public partial class SiteCliente : MasterPage
     {
 
         public Cliente USUARIO_LOGUEADO

@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Configuration;
+using System.Web.UI;
 using Entidades;
+
 
 namespace GestionBancariaWebForm
 {
-    public partial class SiteEmpleado : System.Web.UI.MasterPage
+    public partial class SiteEmpleado : MasterPage
     {
 
         public Usuario USUARIO_LOGUEADO
@@ -12,7 +15,7 @@ namespace GestionBancariaWebForm
             {
                 if (Session["Usuario"] == null)
                     return null;
-                return (Docente)Session["Usuario"];
+                return (Empleado)Session["Usuario"];
             }
             set
             {
