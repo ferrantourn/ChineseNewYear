@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="PersistenciaClientes.cs" />
     <Compile Include="Conexion.cs" />
+    <Compile Include="PersistenciaCuentas.cs" />
     <Compile Include="PersistenciaEmpleados.cs" />
     <Compile Include="PersistenciaSucursal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

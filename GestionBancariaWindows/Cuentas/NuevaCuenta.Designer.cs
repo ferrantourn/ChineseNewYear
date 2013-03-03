@@ -177,6 +177,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "NuevaCuenta";
             this.Text = "Nueva Cuenta";
+            this.Load += new System.EventHandler(this.NuevaCuenta_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

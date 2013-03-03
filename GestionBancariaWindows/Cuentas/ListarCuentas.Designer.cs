@@ -32,9 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListarCuentas));
             this.panel1 = new System.Windows.Forms.Panel();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
@@ -45,21 +43,24 @@
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.lblHeader = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnNueva = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.CiCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lvCuentas = new System.Windows.Forms.DataGridView();
+            this.CuentasbindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.CuentaCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaldoCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClienteCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaldoCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MonedaCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnNueva = new System.Windows.Forms.Button();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lvCuentas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CuentasbindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -74,9 +75,9 @@
             // 
             // bindingNavigator1
             // 
-            this.bindingNavigator1.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.bindingNavigator1.AddNewItem = null;
             this.bindingNavigator1.CountItem = this.bindingNavigatorCountItem;
-            this.bindingNavigator1.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.bindingNavigator1.DeleteItem = null;
             this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindingNavigatorMoveFirstItem,
@@ -88,8 +89,7 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2,
-            this.bindingNavigatorAddNewItem,
-            this.bindingNavigatorDeleteItem});
+            this.toolStripButton1});
             this.bindingNavigator1.Location = new System.Drawing.Point(0, 37);
             this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
@@ -101,30 +101,12 @@
             this.bindingNavigator1.TabIndex = 1;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "Agregar nuevo";
-            // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
             this.bindingNavigatorCountItem.Size = new System.Drawing.Size(37, 22);
             this.bindingNavigatorCountItem.Text = "de {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Número total de elementos";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "Eliminar";
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -198,6 +180,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblInfo);
             this.panel2.Controls.Add(this.btnNueva);
             this.panel2.Controls.Add(this.btnCancelar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -205,6 +188,17 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(683, 47);
             this.panel2.TabIndex = 1;
+            // 
+            // btnNueva
+            // 
+            this.btnNueva.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnNueva.Location = new System.Drawing.Point(573, 0);
+            this.btnNueva.Name = "btnNueva";
+            this.btnNueva.Size = new System.Drawing.Size(110, 47);
+            this.btnNueva.TabIndex = 2;
+            this.btnNueva.Text = "Nueva Cuenta";
+            this.btnNueva.UseVisualStyleBackColor = true;
+            this.btnNueva.Click += new System.EventHandler(this.btnNueva_Click);
             // 
             // btnCancelar
             // 
@@ -218,62 +212,83 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.dataGridView1);
+            this.panel3.Controls.Add(this.lvCuentas);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 62);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(683, 279);
             this.panel3.TabIndex = 2;
             // 
-            // dataGridView1
+            // lvCuentas
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.CiCol,
+            this.lvCuentas.AllowUserToAddRows = false;
+            this.lvCuentas.AllowUserToDeleteRows = false;
+            this.lvCuentas.AutoGenerateColumns = false;
+            this.lvCuentas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.lvCuentas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CuentaCol,
-            this.SaldoCol,
             this.ClienteCol,
+            this.SaldoCol,
             this.MonedaCol});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(683, 279);
-            this.dataGridView1.TabIndex = 0;
+            this.lvCuentas.DataSource = this.CuentasbindingSource;
+            this.lvCuentas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvCuentas.Location = new System.Drawing.Point(0, 0);
+            this.lvCuentas.Name = "lvCuentas";
+            this.lvCuentas.ReadOnly = true;
+            this.lvCuentas.Size = new System.Drawing.Size(683, 279);
+            this.lvCuentas.TabIndex = 0;
+            this.lvCuentas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvCuentas_CellClick);
             // 
-            // CiCol
+            // CuentasbindingSource
             // 
-            this.CiCol.HeaderText = "Cedula";
-            this.CiCol.Name = "CiCol";
+            this.CuentasbindingSource.DataSource = typeof(Entidades.Cuenta);
             // 
             // CuentaCol
             // 
+            this.CuentaCol.DataPropertyName = "IDCUENTA";
             this.CuentaCol.HeaderText = "Cuenta";
             this.CuentaCol.Name = "CuentaCol";
-            // 
-            // SaldoCol
-            // 
-            this.SaldoCol.HeaderText = "Saldo";
-            this.SaldoCol.Name = "SaldoCol";
+            this.CuentaCol.ReadOnly = true;
             // 
             // ClienteCol
             // 
+            this.ClienteCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ClienteCol.DataPropertyName = "CLIENTE.NOMBRE";
             this.ClienteCol.HeaderText = "Cliente";
             this.ClienteCol.Name = "ClienteCol";
+            this.ClienteCol.ReadOnly = true;
+            // 
+            // SaldoCol
+            // 
+            this.SaldoCol.DataPropertyName = "SALDO";
+            this.SaldoCol.HeaderText = "Saldo";
+            this.SaldoCol.Name = "SaldoCol";
+            this.SaldoCol.ReadOnly = true;
             // 
             // MonedaCol
             // 
+            this.MonedaCol.DataPropertyName = "MONEDA";
             this.MonedaCol.HeaderText = "Moneda";
             this.MonedaCol.Name = "MonedaCol";
+            this.MonedaCol.ReadOnly = true;
             // 
-            // btnNueva
+            // lblInfo
             // 
-            this.btnNueva.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnNueva.Location = new System.Drawing.Point(573, 0);
-            this.btnNueva.Name = "btnNueva";
-            this.btnNueva.Size = new System.Drawing.Size(110, 47);
-            this.btnNueva.TabIndex = 2;
-            this.btnNueva.Text = "Nueva Cuenta";
-            this.btnNueva.UseVisualStyleBackColor = true;
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(116, 3);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(0, 13);
+            this.lblInfo.TabIndex = 3;
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(63, 22);
+            this.toolStripButton1.Text = "Actualizar";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // ListarCuentas
             // 
@@ -285,14 +300,17 @@
             this.Controls.Add(this.panel1);
             this.Name = "ListarCuentas";
             this.Text = "Listar Cuentas";
+            this.Load += new System.EventHandler(this.ListarCuentas_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lvCuentas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CuentasbindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -304,11 +322,9 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView lvCuentas;
         private System.Windows.Forms.BindingNavigator bindingNavigator1;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
@@ -317,11 +333,13 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CiCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CuentaCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SaldoCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClienteCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MonedaCol;
         private System.Windows.Forms.Button btnNueva;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CuentaCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClienteCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SaldoCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MonedaCol;
+        private System.Windows.Forms.BindingSource CuentasbindingSource;
+        private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }

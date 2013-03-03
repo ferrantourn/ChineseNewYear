@@ -19,7 +19,6 @@ namespace Entidades
         private decimal _saldo;
         public decimal SALDO { get; set; }
 
-
         private List<Movimiento> _movimientosCuenta;
         public List<Movimiento> MOVIMIENTOSCUENTA { get; set; }
 

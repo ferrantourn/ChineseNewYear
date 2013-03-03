@@ -11,37 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcepcionesPersonalizadas",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logica", "Logica\Logica.csproj", "{A9672D4B-2190-4037-B4DC-7AC5D8B3627A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionBancariaWebForms", "GestionBancariaWebForms\GestionBancariaWebForms.csproj", "{506F497B-6775-4F3E-B59A-2BEDB6BC8849}"
-	ProjectSection(ProjectDependencies) = postProject
-		{8318CD64-D2BA-403D-84AF-514EB320D343} = {8318CD64-D2BA-403D-84AF-514EB320D343}
-	EndProjectSection
-EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "GestionBancariaWS", "GestionBancariaWS\", "{8318CD64-D2BA-403D-84AF-514EB320D343}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv3.5"
-		ProjectReferences = "{ADCDD125-1B3A-4F63-AA9D-936983889A1B}|Entidades.dll;{B188EAE8-5882-4E0D-BD33-C22332E164BF}|ExcepcionesPersonalizadas.dll;{A9672D4B-2190-4037-B4DC-7AC5D8B3627A}|Logica.dll;{28675E2C-8EE4-431D-ADD9-70B31FF3C6A2}|Persistencia.dll;"
-		Debug.AspNetCompiler.VirtualPath = "/GestionBancariaWS"
-		Debug.AspNetCompiler.PhysicalPath = "GestionBancariaWS\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\GestionBancariaWS\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/GestionBancariaWS"
-		Release.AspNetCompiler.PhysicalPath = "GestionBancariaWS\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\GestionBancariaWS\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "1826"
-		DefaultWebSiteLanguage = "Visual C#"
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommServicioRemoting", "ServicioRemoting\CommServicioRemoting.csproj", "{79ABC9C8-5158-4487-8334-6DD4058A7314}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommRemoting", "Remoting\CommRemoting.csproj", "{D51B517D-CB5A-4264-A8AE-818E1332B357}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,46 +71,6 @@ Global
 		{A9672D4B-2190-4037-B4DC-7AC5D8B3627A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A9672D4B-2190-4037-B4DC-7AC5D8B3627A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A9672D4B-2190-4037-B4DC-7AC5D8B3627A}.Release|x86.ActiveCfg = Release|Any CPU
-		{506F497B-6775-4F3E-B59A-2BEDB6BC8849}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{506F497B-6775-4F3E-B59A-2BEDB6BC8849}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{506F497B-6775-4F3E-B59A-2BEDB6BC8849}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{506F497B-6775-4F3E-B59A-2BEDB6BC8849}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{506F497B-6775-4F3E-B59A-2BEDB6BC8849}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{506F497B-6775-4F3E-B59A-2BEDB6BC8849}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{506F497B-6775-4F3E-B59A-2BEDB6BC8849}.Release|Any CPU.Build.0 = Release|Any CPU
-		{506F497B-6775-4F3E-B59A-2BEDB6BC8849}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{506F497B-6775-4F3E-B59A-2BEDB6BC8849}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{506F497B-6775-4F3E-B59A-2BEDB6BC8849}.Release|x86.ActiveCfg = Release|Any CPU
-		{8318CD64-D2BA-403D-84AF-514EB320D343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8318CD64-D2BA-403D-84AF-514EB320D343}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8318CD64-D2BA-403D-84AF-514EB320D343}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{8318CD64-D2BA-403D-84AF-514EB320D343}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{8318CD64-D2BA-403D-84AF-514EB320D343}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{8318CD64-D2BA-403D-84AF-514EB320D343}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{8318CD64-D2BA-403D-84AF-514EB320D343}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{8318CD64-D2BA-403D-84AF-514EB320D343}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{8318CD64-D2BA-403D-84AF-514EB320D343}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
-		{8318CD64-D2BA-403D-84AF-514EB320D343}.Release|x86.ActiveCfg = Debug|Any CPU
-		{79ABC9C8-5158-4487-8334-6DD4058A7314}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{79ABC9C8-5158-4487-8334-6DD4058A7314}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{79ABC9C8-5158-4487-8334-6DD4058A7314}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{79ABC9C8-5158-4487-8334-6DD4058A7314}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{79ABC9C8-5158-4487-8334-6DD4058A7314}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{79ABC9C8-5158-4487-8334-6DD4058A7314}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{79ABC9C8-5158-4487-8334-6DD4058A7314}.Release|Any CPU.Build.0 = Release|Any CPU
-		{79ABC9C8-5158-4487-8334-6DD4058A7314}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{79ABC9C8-5158-4487-8334-6DD4058A7314}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{79ABC9C8-5158-4487-8334-6DD4058A7314}.Release|x86.ActiveCfg = Release|Any CPU
-		{D51B517D-CB5A-4264-A8AE-818E1332B357}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D51B517D-CB5A-4264-A8AE-818E1332B357}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D51B517D-CB5A-4264-A8AE-818E1332B357}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{D51B517D-CB5A-4264-A8AE-818E1332B357}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{D51B517D-CB5A-4264-A8AE-818E1332B357}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D51B517D-CB5A-4264-A8AE-818E1332B357}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D51B517D-CB5A-4264-A8AE-818E1332B357}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D51B517D-CB5A-4264-A8AE-818E1332B357}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{D51B517D-CB5A-4264-A8AE-818E1332B357}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{D51B517D-CB5A-4264-A8AE-818E1332B357}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
