@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BiosWebMail {
+namespace GestionBancariaWebForms {
     
     
     public partial class SiteAlumno {

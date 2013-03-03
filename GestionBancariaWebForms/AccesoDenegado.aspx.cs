@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace BiosWebMail
+namespace GestionBancariaWebForms
 {
     public partial class AccesoDenegado : System.Web.UI.Page
     {

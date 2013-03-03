@@ -4,7 +4,7 @@ using System.Web.UI;
 //using Logica;
 //using Entidades;
 //using ExcepcionesPersonalizadas;
-using GestionBancariaWebForms.refServiceGestionBancaria;
+using GestionBancariaWebForms.refServicioGestionBancaria;
 
 namespace GestionBancariaWebForms
 {

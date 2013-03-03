@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="Acceso Denegado" Language="C#" MasterPageFile="~/Masters/Site.Master"
-    AutoEventWireup="true" CodeBehind="Registro.aspx.cs" Inherits="BiosWebMail.Registro" %>
+    AutoEventWireup="true" CodeBehind="Registro.aspx.cs" Inherits="GestionBancariaWebForms.Registro" %>
 
 <%@ Register Assembly="Controles" Namespace="Controles" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">

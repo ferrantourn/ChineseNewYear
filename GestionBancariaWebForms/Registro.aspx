@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masters/Site.Master" AutoEventWireup="true"
-    CodeBehind="Registro.aspx.cs" Inherits="BiosWebMail.Registro" %>
+    CodeBehind="Registro.aspx.cs" Inherits="GestionBancariaWebForms.Registro" %>
 
 <%@ Register Assembly="Controles" Namespace="Controles" TagPrefix="cc1" %>
 <%@ Register Src="UserControls/Usuario.ascx" TagName="Usuario" TagPrefix="uc1" %>

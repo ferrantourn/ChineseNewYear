@@ -10,8 +10,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebMailWS</RootNamespace>
-    <AssemblyName>WebMailWS</AssemblyName>
+    <RootNamespace>ServicioGestionBancaria</RootNamespace>
+    <AssemblyName>ServicioGestionBancaria</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
@@ -70,15 +70,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entidades\Entidades.csproj">
-      <Project>{5206827F-CEB2-4DD4-A434-8186923BB3D0}</Project>
+      <Project>{ADCDD125-1B3A-4F63-AA9D-936983889A1B}</Project>
       <Name>Entidades</Name>
     </ProjectReference>
     <ProjectReference Include="..\ExcepcionesPersonalizadas\ExcepcionesPersonalizadas.csproj">
-      <Project>{7FE23584-B3B3-48B9-911C-0DE0AE696C1E}</Project>
+      <Project>{B188EAE8-5882-4E0D-BD33-C22332E164BF}</Project>
       <Name>ExcepcionesPersonalizadas</Name>
     </ProjectReference>
     <ProjectReference Include="..\Logica\Logica.csproj">
-      <Project>{3D182DE6-CA16-471B-A67F-FDBDA736361F}</Project>
+      <Project>{A9672D4B-2190-4037-B4DC-7AC5D8B3627A}</Project>
       <Name>Logica</Name>
     </ProjectReference>
   </ItemGroup>

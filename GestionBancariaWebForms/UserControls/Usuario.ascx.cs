@@ -3,9 +3,9 @@ using System.Text;
 //using Entidades;
 //using ExcepcionesPersonalizadas;
 //using Logica;
-using BiosWebMail.refServiceWebMail;
+using GestionBancariaWebForms.refServicioGestionBancaria;
 
-namespace BiosWebMail.UserControls
+namespace GestionBancariaWebForms.UserControls
 {
     public partial class Usuario : System.Web.UI.UserControl
     {

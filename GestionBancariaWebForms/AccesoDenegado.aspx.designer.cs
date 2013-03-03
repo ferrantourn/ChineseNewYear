@@ -7,7 +7,8 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace BiosWebMail {
+namespace GestionBancariaWebForms
+{
     
     
     public partial class AccesoDenegado {

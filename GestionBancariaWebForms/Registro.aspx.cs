@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 //using ExcepcionesPersonalizadas;
 //using Logica;
 
-namespace BiosWebMail
+namespace GestionBancariaWebForms
 {
     public partial class Registro : System.Web.UI.Page
     {

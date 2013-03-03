@@ -8,9 +8,9 @@ using System.Web.UI.WebControls;
 //using Entidades;
 //using ExcepcionesPersonalizadas;
 //using Logica;
-using GestionBancariaWebForms.refServiceGestionBancaria;
+using GestionBancariaWebForms.refServicioGestionBancaria;
 
-namespace BiosWebMail.Masters
+namespace GestionBancariaWebForms.Masters
 {
     public partial class Site : System.Web.UI.MasterPage
     {

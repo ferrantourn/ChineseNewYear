@@ -5,7 +5,7 @@ using System.Web.UI.WebControls;
 //using Logica;
 using GestionBancariaWebForms.refServiceGestionBancaria;
 
-namespace BiosWebMail.UserControls
+namespace GestionBancariaWebForms.UserControls
 {
     public partial class ConsultaCarpeta : System.Web.UI.UserControl
     {

@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masters/Site.Master" AutoEventWireup="true"
-    CodeBehind="Index.aspx.cs" Inherits="BiosWebMail.Index" %>
+    CodeBehind="Index.aspx.cs" Inherits="GestionBancariaWebForms.Index" %>
 <%@ Register Assembly="Controles" Namespace="Controles" TagPrefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
