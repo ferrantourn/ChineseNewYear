@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
-using System.Runtime.Remoting.Channels.Tcp;
+using System.Runtime.Remoting.Channels.Tcp;//
 
 namespace ServicioRemoting
 {

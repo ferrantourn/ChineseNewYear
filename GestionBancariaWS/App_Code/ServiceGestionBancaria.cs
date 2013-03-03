@@ -30,7 +30,7 @@ public class ServiceGestionBancaria : System.Web.Services.WebService
     {
         try
         {
-            ILogicaUsuario le = FabricaLogica.getLogicaUsuario();
+            ILogicaUsuario le = FabricaLogica.getLogicaUsuario();//
             return le.getLoginUsuario(userName, pass);
         }
         /*catch (ErrorAlumnoBloqueado exal)

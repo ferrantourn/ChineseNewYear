@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 using Entidades;
 using ExcepcionesPersonalizadas;
 using Logica;
-using GestionBancariaWebForms.refServiceGestionBancaria;
+using GestionBancariaWebForms.refServiceGestionBancaria;//
 
 namespace GestionBancariaWebForms.Masters
 {
