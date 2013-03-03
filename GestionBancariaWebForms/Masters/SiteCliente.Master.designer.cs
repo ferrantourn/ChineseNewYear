@@ -10,7 +10,7 @@
 namespace GestionBancariaWebForms {
     
     
-    public partial class SiteCliente {
+    public partial class SiteAlumno {
         
         /// <summary>
         /// head control.
@@ -46,7 +46,7 @@ namespace GestionBancariaWebForms {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Menu MenuCliente;
+        protected global::System.Web.UI.WebControls.Menu MenuAlumno;
         
         /// <summary>
         /// PanelLogout control.
