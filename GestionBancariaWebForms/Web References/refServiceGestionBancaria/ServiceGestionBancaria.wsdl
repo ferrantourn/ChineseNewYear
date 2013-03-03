@@ -20,13 +20,13 @@
   <wsdl:message name="HelloWorldSoapOut">
     <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
   </wsdl:message>
-  <wsdl:portType name="ServiceSoap">
+  <wsdl:portType name="ServiceGestionBancariaSoap">
     <wsdl:operation name="HelloWorld">
       <wsdl:input message="tns:HelloWorldSoapIn" />
       <wsdl:output message="tns:HelloWorldSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+  <wsdl:binding name="ServiceGestionBancariaSoap" type="tns:ServiceGestionBancariaSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="HelloWorld">
       <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
@@ -38,7 +38,7 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+  <wsdl:binding name="ServiceGestionBancariaSoap12" type="tns:ServiceGestionBancariaSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="HelloWorld">
       <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
@@ -50,12 +50,12 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:service name="Service">
-    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
-      <soap:address location="http://localhost:1826/GestionBancariaWS/Service.asmx" />
+  <wsdl:service name="ServiceGestionBancaria">
+    <wsdl:port name="ServiceGestionBancariaSoap" binding="tns:ServiceGestionBancariaSoap">
+      <soap:address location="http://localhost:1826/GestionBancariaWS/ServiceGestionBancaria.asmx" />
     </wsdl:port>
-    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
-      <soap12:address location="http://localhost:1826/GestionBancariaWS/Service.asmx" />
+    <wsdl:port name="ServiceGestionBancariaSoap12" binding="tns:ServiceGestionBancariaSoap12">
+      <soap12:address location="http://localhost:1826/GestionBancariaWS/ServiceGestionBancaria.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

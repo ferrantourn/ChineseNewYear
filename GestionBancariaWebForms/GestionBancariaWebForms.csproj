@@ -66,13 +66,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Service References\ServiceReference1\Service.disco" />
-    <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
-    <None Include="Service References\ServiceReference1\configuration.svcinfo" />
-    <None Include="Service References\ServiceReference1\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
+    <None Include="Web References\refServiceGestionBancaria\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\refServiceGestionBancaria\ServiceGestionBancaria.disco" />
     <Content Include="web.config" />
     <Content Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
@@ -80,7 +78,7 @@
     <Content Include="web.Release.config">
       <DependentUpon>web.config</DependentUpon>
     </Content>
-    <None Include="Service References\ServiceReference1\Service.wsdl" />
+    <None Include="Web References\refServiceGestionBancaria\ServiceGestionBancaria.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccesoDenegado.aspx.cs">
@@ -124,16 +122,24 @@
     <Compile Include="Registro.aspx.designer.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Service References\ServiceReference1\Reference.cs">
+    <Compile Include="Web References\refServiceGestionBancaria\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
+      <DependentUpon>Reference.map</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{ADCDD125-1B3A-4F63-AA9D-936983889A1B}</Project>
+      <Name>Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExcepcionesPersonalizadas\ExcepcionesPersonalizadas.csproj">
+      <Project>{B188EAE8-5882-4E0D-BD33-C22332E164BF}</Project>
+      <Name>ExcepcionesPersonalizadas</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Logica\Logica.csproj">
       <Project>{3D182DE6-CA16-471B-A67F-FDBDA736361F}</Project>
       <Name>Logica</Name>
@@ -149,7 +155,20 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ServiceReference1\" />
+    <Folder Include="Cliente\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:1826/GestionBancariaWS/ServiceGestionBancaria.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\refServiceGestionBancaria\</RelPath>
+      <UpdateFromURL>http://localhost:1826/GestionBancariaWS/ServiceGestionBancaria.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>GestionBancariaWebForms_refServiceGestionBancaria_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

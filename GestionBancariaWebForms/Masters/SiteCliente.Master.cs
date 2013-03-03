@@ -2,22 +2,22 @@
 using System.Configuration;
 using System.Web.UI;
 //using Logica;
-//using Entidades;
+using Entidades;
 //using ExcepcionesPersonalizadas;
-using GestionBancariaWebForms.refServicioGestionBancaria;
+using GestionBancariaWebForms.refServiceGestionBancaria;
 
 namespace GestionBancariaWebForms
 {
     public partial class SiteAlumno : MasterPage
     {
 
-        public Alumno USUARIO_LOGUEADO
+        public Cliente USUARIO_LOGUEADO
         {
             get
             {
                 if (Session["Usuario"] == null)
                     return null;
-                return (Alumno)Session["Usuario"];
+                return (Cliente)Session["Usuario"];
             }
             set
             {
@@ -49,18 +49,8 @@ namespace GestionBancariaWebForms
                     else
                     {
 
-                        string pictureName = Convert.ToString(((Alumno)Session["Usuario"]).FOTO);
-                        if (string.IsNullOrEmpty(pictureName))
-                        {
-                            imgUser.ImageUrl = ConfigurationManager.AppSettings["ImagesFolder"] + "userDefaultPicture.png";
-                        }
-                        else
-                        {
-                            imgUser.ImageUrl = ConfigurationManager.AppSettings["ImagesFolder"] + pictureName;
-
-                        }
-
-                        lblLogueadoComo.Text = ((Alumno) Session["Usuario"]).NOMBRE_USUARIO;
+                      
+                        lblLogueadoComo.Text = ((Cliente)Session["Usuario"]).NOMBREUSUARIO;
                     }
                 }
 
