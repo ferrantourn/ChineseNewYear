@@ -7,10 +7,10 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace BiosWebMail {
+namespace GestionBancariaWebForm {
     
     
-    public partial class SiteDocente {
+    public partial class SiteEmpleado {
         
         /// <summary>
         /// Control head.
@@ -37,7 +37,7 @@ namespace BiosWebMail {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Menu MenuDocente;
+        protected global::System.Web.UI.WebControls.Menu MenuEmpleado;
         
         /// <summary>
         /// Control PanelLogout.

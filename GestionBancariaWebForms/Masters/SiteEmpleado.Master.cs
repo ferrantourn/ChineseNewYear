@@ -1,12 +1,12 @@
 ﻿using System;
 using Entidades;
 
-namespace BiosWebMail
+namespace GestionBancariaWebForm
 {
     public partial class SiteEmpleado : System.Web.UI.MasterPage
     {
 
-        public Docente USUARIO_LOGUEADO
+        public Usuario USUARIO_LOGUEADO
         {
             get
             {
@@ -47,7 +47,7 @@ namespace BiosWebMail
 
                     lblLogueadoComo.Text = "Bienvenido " + USUARIO_LOGUEADO.NOMBRE_USUARIO + " - " +
                                                "Tipo de usuario: " +
-                                               "Docente";
+                                               "Empleado";
                 }
             }
 
