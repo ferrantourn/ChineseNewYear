@@ -217,6 +217,8 @@
     <EmbeddedResource Include="Sucursales\NuevaSucursal.resx">
       <DependentUpon>NuevaSucursal.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\Entidades.Sucursal.datasource" />
+    <None Include="Properties\DataSources\Logica.LogicaSucursal.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -49,6 +49,10 @@ namespace GestionBancariaWindows
                     btnGuardar.Text = "Actualizar";
 
                 }
+                else
+                {
+                    btnEliminar.Visible = false;
+                }
             }
             catch (Exception ex)
             {
@@ -256,6 +260,9 @@ namespace GestionBancariaWindows
                     lblInfo.Text = "Cliente eliminado correctamente";
                     LimpiarFormulario();
                     btnGuardar.Text = "Guardar";
+
+                    this.Close();
+                    this.Dispose();
                 }
             }
             catch (Exception ex)
@@ -263,6 +270,8 @@ namespace GestionBancariaWindows
                 lblInfo.Text = ex.Message;
             }
         }
+
+
 
 
 

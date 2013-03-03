@@ -30,7 +30,6 @@ namespace Logica
             }
         }
 
-
         public void ActualizarUsuario(Usuario u)
         {
             try
@@ -43,7 +42,7 @@ namespace Logica
                 else
                 {
                     PersistenciaEmpleados pempleados = new PersistenciaEmpleados();
-                    //pempleados.AltaEmpleado((Empleado)u);
+                    pempleados.ModificarEmpleado((Empleado)u);
                 }
             }
             catch (Exception ex)
@@ -64,7 +63,7 @@ namespace Logica
                 else
                 {
                     PersistenciaEmpleados pempleados = new PersistenciaEmpleados();
-                    //pempleados.AltaEmpleado((Empleado)u);
+                    pempleados.EliminarEmpleado((Empleado)u);
                 }
             }
             catch (Exception ex)
@@ -87,6 +86,18 @@ namespace Logica
             }
         }
 
+        public List<Empleado> ListarEmpleados()
+        {
+            try
+            {
+                PersistenciaEmpleados pemp = new PersistenciaEmpleados();
+                return pemp.ListarEmpleados();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public Usuario BuscarUsuarioPorCi(Usuario u)
         {
@@ -99,8 +110,8 @@ namespace Logica
                 }
                 else
                 {
-                    //PersistenciaEmpleados pempleados = new PersistenciaEmpleados();
-                    //pempleados.AltaEmpleado((Empleado)u);
+                    PersistenciaEmpleados pempleados = new PersistenciaEmpleados();
+                    return pempleados.BuscarEmpleadoPorCi((Empleado)u);
                 }
                 return null;
             }
@@ -110,8 +121,6 @@ namespace Logica
                 throw ex;
             }
         }
-
-
 
     }
 }

@@ -153,6 +153,7 @@ begin tran --insertamos el cliente
 		end
 
 commit tran
+
 END
 GO
 
@@ -620,7 +621,9 @@ create proc spBuscarEmpleado
 @Ci int
 as
 begin
-	select * from Empleado, Usuario where Ci=@Ci and IdUsuario=@Ci
+	select Usuario.*, IdSucursal from Usuario 
+	inner join Empleado on Usuario.Ci = Empleado.IdUsuario
+	where Ci=@Ci 
 end
 GO
 

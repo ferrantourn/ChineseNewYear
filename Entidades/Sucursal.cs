@@ -17,6 +17,9 @@ namespace Entidades
        private string _direccion;
        public string DIRECCION { get; set; }
 
+       private bool _activa;
+       public bool ACTIVA { get; set; }
+
        private List<Cuenta> _cuentasSucursal;
        public List<Cuenta> CUENTASSUCURSAL { get; set; }
 

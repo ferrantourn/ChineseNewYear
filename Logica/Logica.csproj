@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="FabricaLogica.cs" />
     <Compile Include="ILogicaUsuario.cs" />
+    <Compile Include="LogicaSucursal.cs" />
     <Compile Include="LogicaUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

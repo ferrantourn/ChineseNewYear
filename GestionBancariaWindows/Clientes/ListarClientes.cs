@@ -19,13 +19,11 @@ namespace GestionBancariaWindows
                 LogicaUsuarios lu = new LogicaUsuarios();
                 List<Cliente> clientes = lu.ListarClientes();
 
-                foreach (Cliente c in clientes)
-                {
-                    object[] row0 = {"Editar", c.CI, c.NOMBRE + " " +  c.APELLIDO, c.NOMBREUSUARIO,c.DIRECCION, Convert.ToString(c.ACTIVO).Trim() == "True" ? "Activo" : "No Activo"
-                                                };
-                    lvClientes.Rows.Add(row0);
-                }
+                bindingSource1.DataSource = clientes;
+                lvClientes.DataSource = bindingSource1;
+                bindingNavigator1.BindingSource = bindingSource1;
 
+             
             }
             catch (Exception ex)
             {
@@ -40,7 +38,7 @@ namespace GestionBancariaWindows
                 if (e.ColumnIndex == 0 && e.RowIndex >= 0)
                 {
                     int ci;
-                    if (Int32.TryParse(Convert.ToString(lvClientes.Rows[e.RowIndex].Cells[1].Value), out ci))
+                    if (Int32.TryParse(Convert.ToString(lvClientes.Rows[e.RowIndex].Cells[0].Value), out ci))
                     {
                         // Cliente a = new Cliente{ CI = ci };
                         //LogicaUsuarios lu = new LogicaUsuarios();
@@ -72,6 +70,38 @@ namespace GestionBancariaWindows
             {
                 this.Close();
                 this.Dispose();
+            }
+            catch (Exception ex)
+            {
+                lblInfo.Text = ex.Message;
+            }
+        }
+
+        private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                NuevoCliente nc = new NuevoCliente();
+                nc.Show();
+            }
+            catch (Exception ex)
+            {
+                lblInfo.Text = ex.Message;
+            }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lvClientes.Rows.Clear();
+
+                LogicaUsuarios lu = new LogicaUsuarios();
+                List<Cliente> clientes = lu.ListarClientes();
+
+                bindingSource1.DataSource = clientes;
+                lvClientes.DataSource = bindingSource1;
+                bindingNavigator1.BindingSource = bindingSource1;
             }
             catch (Exception ex)
             {

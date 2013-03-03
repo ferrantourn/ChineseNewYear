@@ -52,6 +52,7 @@ namespace Persistencia
                     throw new ErrorUsuarioYaExiste();
                 else if (Convert.ToInt32(_retorno.Value) < 0)
                     throw new ErrorBaseDeDatos();
+                
 
 
                 //ingresamos nuevos telefonos
