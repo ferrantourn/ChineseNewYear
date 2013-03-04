@@ -6,6 +6,7 @@ using Entidades;
 using ExcepcionesPersonalizadas;
 using System.Data.SqlClient;
 using System.Data;
+using System.Transactions;
 
 namespace Persistencia
 {
@@ -90,7 +91,7 @@ namespace Persistencia
                     {
                         IDCUENTA = _idCuenta,
                         CLIENTE = new Cliente { CI = _idCliente },
-                        SUCURSAL = new Sucursal { IDSUCURSAL = _idSucursal},
+                        SUCURSAL = new Sucursal { IDSUCURSAL = _idSucursal },
                         SALDO = _saldo,
                         MONEDA = _moneda,
                     };
@@ -163,7 +164,45 @@ namespace Persistencia
 
         }
 
-        public void EliminarCuenta (Cuenta c)
+        public void ModificarCuenta(Cuenta c)
+        {
+            using (SqlConnection conexion = new SqlConnection(Conexion.Cnn))
+            {
+                try
+                {
+                    SqlCommand cmd = Conexion.GetCommand("spModificarCuenta", conexion, CommandType.StoredProcedure);
+                    SqlParameter _IdCuenta = new SqlParameter("@IdCuenta", c.IDCUENTA);
+                    SqlParameter _saldo = new SqlParameter("@Saldo", c.SALDO);
+                    SqlParameter _idCliente = new SqlParameter("@IdCliente", c.CLIENTE.CI);
+                    SqlParameter _moneda = new SqlParameter("@Moneda", c.MONEDA);
+                    SqlParameter _idSucursal = new SqlParameter("@IdSucursal", c.SUCURSAL.IDSUCURSAL);
+                    SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int);
+
+                    _retorno.Direction = ParameterDirection.ReturnValue;
+                    cmd.Parameters.Add(_IdCuenta);
+                    cmd.Parameters.Add(_saldo);
+                    cmd.Parameters.Add(_idCliente);
+                    cmd.Parameters.Add(_moneda);
+                    cmd.Parameters.Add(_idSucursal);
+                    cmd.Parameters.Add(_retorno);
+
+                    //ACTUALIZAMOS LA CUENTA
+                    //-----------------------
+                    conexion.Open();
+                    cmd.ExecuteNonQuery();
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+        }
+
+
+
+        public void EliminarCuenta(Cuenta c)
         {
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
             SqlCommand cmd = Conexion.GetCommand("spEliminarCuenta", conexion, CommandType.StoredProcedure);

@@ -19,40 +19,128 @@ namespace GestionBancariaWindows
             InitializeComponent();
         }
 
-        public Cuenta CUENTA{ get; set; }
+        public Cuenta CUENTA { get; set; }
 
         private void NuevaCuenta_Load(object sender, EventArgs e)
         {
             try
             {
+                //CARGAMOS LA INFORMACION DE CLEINTES EXISTENTES
+                //---------------------------------------------
+                LogicaUsuarios lc = new LogicaUsuarios();
+                List<Cliente> clientes = lc.ListarClientes();
+
+                foreach (Cliente c in clientes)
+                {
+                    ClientesbindingSource.Add(c);
+                }
 
                 if (CUENTA != null)
                 {
-                    txtApellido.Text = CLIENTE.APELLIDO;
-                    txtCedula.Text = Convert.ToString(CLIENTE.CI);
-                    txtDireccion.Text = CLIENTE.DIRECCION;
-                    txtNombre.Text = CLIENTE.NOMBRE;
-                    txtPassword.Text = CLIENTE.PASS;
-                    txtReiterarPass.Text = CLIENTE.PASS;
-                    txtUsuario.Text = CLIENTE.NOMBREUSUARIO;
-
-                    string telefonos = "";
-                    if (CLIENTE.TELEFONOS != null)
-                    {
-                        foreach (string s in CLIENTE.TELEFONOS)
-                        {
-                            telefonos = telefonos + s + ",";
-                        }
-                    }
-                    txtTelefonos.Text = telefonos;
+                    txtNumeroCuenta.Text = Convert.ToString(CUENTA.IDCUENTA);
+                    txtSaldo.Text = Convert.ToString(CUENTA.SALDO);
+                    cmbClientes.SelectedValue = CUENTA.CLIENTE.CI;
+                    cmbMoneda.SelectedValue = CUENTA.MONEDA;
 
                     btnGuardar.Text = "Actualizar";
-
                 }
                 else
                 {
                     btnEliminar.Visible = false;
+                    txtSaldo.Text = Convert.ToString(Decimal.Zero);//LAS CUENTAS SE ABREN CON SALDO 0
+                    txtSaldo.ReadOnly = true;
                 }
+            }
+            catch (Exception ex)
+            {
+
+                lblInfo.Text = ex.Message;
+            }
+        }
+
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LogicaCuentas lc = new LogicaCuentas();
+                lc.EliminarCuenta(CUENTA);
+            }
+            catch (Exception ex)
+            {
+
+                lblInfo.Text = ex.Message;
+            }
+        }
+
+
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.ValidateChildren(ValidationConstraints.Enabled))
+                {
+                    bool editar = false;
+                    if (CUENTA == null)
+                    {
+                        CUENTA = new Cuenta();
+                        CUENTA.CLIENTE = new Cliente();
+                        CUENTA.SUCURSAL = new Sucursal { IDSUCURSAL = 1 };//** AQUI SE DEBE COLOCAR LA SUCURSAL DONDE TRABAJA EL EMPLEADO
+                    }
+                    else
+                    {
+                        editar = true;
+                    }
+
+                    //CARGAMOS INFORMACION DE CUENTA
+                    //------------------------------
+                    CUENTA.MONEDA = Convert.ToString(cmbMoneda.SelectedValue);
+                    CUENTA.SALDO = Convert.ToDecimal(txtSaldo.Text);
+                    CUENTA.CLIENTE.CI = Convert.ToInt32(cmbClientes.SelectedValue);
+                  
+
+                    //GUARDAMOS LA INFORMACION EN LA BASE DE DATOS
+                    //---------------------------------------------
+                    LogicaCuentas lc = new LogicaCuentas();
+                    if (editar)
+                    {
+                        lc.ActualizarCuenta(CUENTA);
+                        lblInfo.Text = "Cuenta actualizada correctamente";
+                    }
+                    else
+                    {
+                        lc.AltaCuenta(CUENTA);
+                        lblInfo.Text = "Cuenta ingresada correctamente";
+
+                        //LIMPIAMOS EL FORMULARIO
+                        LimpiarFormulario();
+                    }
+
+
+                }
+            }
+            catch (ErrorUsuarioYaExiste uex)
+            {
+                lblInfo.Text = uex.Message;
+            }
+            catch (Exception ex)
+            {
+
+                lblInfo.Text = ex.Message;
+            }
+        }
+
+
+        private void LimpiarFormulario()
+        {
+            try
+            {
+                txtNumeroCuenta.Text = "";
+                txtSaldo.Text = "";
+                cmbClientes.SelectedValue = "";
+                cmbMoneda.SelectedValue = "";
+
             }
             catch (Exception ex)
             {

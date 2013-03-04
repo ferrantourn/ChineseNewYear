@@ -65,5 +65,18 @@ namespace Logica
             }
         }
 
+        public void ActualizarCuenta(Cuenta c)
+        {
+            try
+            {
+                PersistenciaCuentas pc = new PersistenciaCuentas();
+                pc.ModificarCuenta(c);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

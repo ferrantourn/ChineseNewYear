@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblHeader = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -37,13 +38,17 @@
             this.lblMoneda = new System.Windows.Forms.Label();
             this.cmbClientes = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtSaldo = new System.Windows.Forms.TextBox();
             this.lblSaldo = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtNumeroCuenta = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.ClientesbindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.lblInfo = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ClientesbindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -68,6 +73,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblInfo);
+            this.panel2.Controls.Add(this.btnEliminar);
             this.panel2.Controls.Add(this.btnGuardar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 178);
@@ -84,6 +91,7 @@
             this.btnGuardar.TabIndex = 0;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // panel3
             // 
@@ -91,9 +99,9 @@
             this.panel3.Controls.Add(this.lblMoneda);
             this.panel3.Controls.Add(this.cmbClientes);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.textBox2);
+            this.panel3.Controls.Add(this.txtSaldo);
             this.panel3.Controls.Add(this.lblSaldo);
-            this.panel3.Controls.Add(this.textBox1);
+            this.panel3.Controls.Add(this.txtNumeroCuenta);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 54);
@@ -104,6 +112,9 @@
             // cmbMoneda
             // 
             this.cmbMoneda.FormattingEnabled = true;
+            this.cmbMoneda.Items.AddRange(new object[] {
+            "USD",
+            "UYU"});
             this.cmbMoneda.Location = new System.Drawing.Point(340, 21);
             this.cmbMoneda.Name = "cmbMoneda";
             this.cmbMoneda.Size = new System.Drawing.Size(121, 21);
@@ -120,11 +131,14 @@
             // 
             // cmbClientes
             // 
+            this.cmbClientes.DataSource = this.ClientesbindingSource;
+            this.cmbClientes.DisplayMember = "NOMBREUSUARIO";
             this.cmbClientes.FormattingEnabled = true;
             this.cmbClientes.Location = new System.Drawing.Point(104, 53);
             this.cmbClientes.Name = "cmbClientes";
             this.cmbClientes.Size = new System.Drawing.Size(121, 21);
             this.cmbClientes.TabIndex = 5;
+            this.cmbClientes.ValueMember = "CI";
             // 
             // label2
             // 
@@ -135,12 +149,12 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Cliente";
             // 
-            // textBox2
+            // txtSaldo
             // 
-            this.textBox2.Location = new System.Drawing.Point(340, 55);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(121, 20);
-            this.textBox2.TabIndex = 3;
+            this.txtSaldo.Location = new System.Drawing.Point(340, 55);
+            this.txtSaldo.Name = "txtSaldo";
+            this.txtSaldo.Size = new System.Drawing.Size(121, 20);
+            this.txtSaldo.TabIndex = 3;
             // 
             // lblSaldo
             // 
@@ -151,12 +165,13 @@
             this.lblSaldo.TabIndex = 2;
             this.lblSaldo.Text = "Saldo";
             // 
-            // textBox1
+            // txtNumeroCuenta
             // 
-            this.textBox1.Location = new System.Drawing.Point(103, 22);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(122, 20);
-            this.textBox1.TabIndex = 1;
+            this.txtNumeroCuenta.Location = new System.Drawing.Point(103, 22);
+            this.txtNumeroCuenta.Name = "txtNumeroCuenta";
+            this.txtNumeroCuenta.ReadOnly = true;
+            this.txtNumeroCuenta.Size = new System.Drawing.Size(122, 20);
+            this.txtNumeroCuenta.TabIndex = 1;
             // 
             // label1
             // 
@@ -166,6 +181,29 @@
             this.label1.Size = new System.Drawing.Size(81, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Numero Cuenta";
+            // 
+            // ClientesbindingSource
+            // 
+            this.ClientesbindingSource.DataSource = typeof(Entidades.Cliente);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnEliminar.Location = new System.Drawing.Point(324, 0);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(110, 47);
+            this.btnEliminar.TabIndex = 1;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(13, 4);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(0, 13);
+            this.lblInfo.TabIndex = 2;
             // 
             // NuevaCuenta
             // 
@@ -181,8 +219,10 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ClientesbindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -194,13 +234,16 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtSaldo;
         private System.Windows.Forms.Label lblSaldo;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtNumeroCuenta;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbMoneda;
         private System.Windows.Forms.Label lblMoneda;
         private System.Windows.Forms.ComboBox cmbClientes;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.BindingSource ClientesbindingSource;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Label lblInfo;
     }
 }
