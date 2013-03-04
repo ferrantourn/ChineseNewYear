@@ -687,7 +687,6 @@ GO
 /********************************CUENTA*******************************/
 
 create proc spListarCuenta
-@IdCliente int
 as
 begin
 	select * from Cuenta inner join Cliente on Cuenta.IdCliente = Cliente.IdCliente
@@ -699,6 +698,14 @@ create proc spBuscarCuenta
 as
 begin
 	select * from Cuenta where Cuenta.IdCuenta=@IdCuenta
+end
+GO
+
+create proc spBuscarCuentaPorCi
+@Ci int
+as
+begin
+	select * from Cuenta inner join Cliente on Cuenta.IdCliente = Cliente.IdCliente and Cuenta.IdCliente=@Ci
 end
 GO
 
