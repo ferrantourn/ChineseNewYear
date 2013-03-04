@@ -84,7 +84,7 @@ namespace Persistencia
                     _idCuenta = (int)_Reader["IdCuenta"];
                     _idCliente = (int)_Reader["IdCliente"];
                     _idSucursal = (int)_Reader["IdSucursal"];
-                    _saldo = (decimal)_Reader["IdSucursal"];
+                    _saldo = Convert.ToDecimal(_Reader["Saldo"]);
                     _moneda = (string)_Reader["Moneda"];
 
                     Cuenta c = new Cuenta
@@ -136,7 +136,7 @@ namespace Persistencia
                     _idCuenta = (int)_Reader["IdCuenta"];
                     _idCliente = (int)_Reader["IdCliente"];
                     _idSucursal = (int)_Reader["IdSucursal"];
-                    _saldo = (decimal)_Reader["IdSucursal"];
+                    _saldo = Convert.ToDecimal(_Reader["Saldo"]);
                     _moneda = (string)_Reader["Moneda"];
 
                     c = new Cuenta

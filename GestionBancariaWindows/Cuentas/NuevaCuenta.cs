@@ -40,7 +40,7 @@ namespace GestionBancariaWindows
                     txtNumeroCuenta.Text = Convert.ToString(CUENTA.IDCUENTA);
                     txtSaldo.Text = Convert.ToString(CUENTA.SALDO);
                     cmbClientes.SelectedValue = CUENTA.CLIENTE.CI;
-                    cmbMoneda.SelectedValue = CUENTA.MONEDA;
+                    cmbMoneda.Text = CUENTA.MONEDA;
 
                     btnGuardar.Text = "Actualizar";
                 }
@@ -65,6 +65,9 @@ namespace GestionBancariaWindows
             {
                 LogicaCuentas lc = new LogicaCuentas();
                 lc.EliminarCuenta(CUENTA);
+
+                lblInfo.Text = "Cuenta eliminada correctamente";
+                LimpiarFormulario();
             }
             catch (Exception ex)
             {
@@ -95,7 +98,7 @@ namespace GestionBancariaWindows
 
                     //CARGAMOS INFORMACION DE CUENTA
                     //------------------------------
-                    CUENTA.MONEDA = Convert.ToString(cmbMoneda.SelectedValue);
+                    CUENTA.MONEDA = Convert.ToString(cmbMoneda.Text);
                     CUENTA.SALDO = Convert.ToDecimal(txtSaldo.Text);
                     CUENTA.CLIENTE.CI = Convert.ToInt32(cmbClientes.SelectedValue);
                   
@@ -139,7 +142,7 @@ namespace GestionBancariaWindows
                 txtNumeroCuenta.Text = "";
                 txtSaldo.Text = "";
                 cmbClientes.SelectedValue = "";
-                cmbMoneda.SelectedValue = "";
+                cmbMoneda.Text = "";
 
             }
             catch (Exception ex)

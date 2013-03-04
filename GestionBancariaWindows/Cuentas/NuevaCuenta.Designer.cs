@@ -32,19 +32,19 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblHeader = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.btnEliminar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.cmbMoneda = new System.Windows.Forms.ComboBox();
             this.lblMoneda = new System.Windows.Forms.Label();
             this.cmbClientes = new System.Windows.Forms.ComboBox();
+            this.ClientesbindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.txtSaldo = new System.Windows.Forms.TextBox();
             this.lblSaldo = new System.Windows.Forms.Label();
             this.txtNumeroCuenta = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.ClientesbindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnEliminar = new System.Windows.Forms.Button();
-            this.lblInfo = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -82,6 +82,25 @@
             this.panel2.Size = new System.Drawing.Size(544, 47);
             this.panel2.TabIndex = 1;
             // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(13, 4);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(0, 13);
+            this.lblInfo.TabIndex = 2;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnEliminar.Location = new System.Drawing.Point(324, 0);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(110, 47);
+            this.btnEliminar.TabIndex = 1;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
             // btnGuardar
             // 
             this.btnGuardar.Dock = System.Windows.Forms.DockStyle.Right;
@@ -111,6 +130,7 @@
             // 
             // cmbMoneda
             // 
+            this.cmbMoneda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMoneda.FormattingEnabled = true;
             this.cmbMoneda.Items.AddRange(new object[] {
             "USD",
@@ -133,12 +153,17 @@
             // 
             this.cmbClientes.DataSource = this.ClientesbindingSource;
             this.cmbClientes.DisplayMember = "NOMBREUSUARIO";
+            this.cmbClientes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbClientes.FormattingEnabled = true;
             this.cmbClientes.Location = new System.Drawing.Point(104, 53);
             this.cmbClientes.Name = "cmbClientes";
             this.cmbClientes.Size = new System.Drawing.Size(121, 21);
             this.cmbClientes.TabIndex = 5;
             this.cmbClientes.ValueMember = "CI";
+            // 
+            // ClientesbindingSource
+            // 
+            this.ClientesbindingSource.DataSource = typeof(Entidades.Cliente);
             // 
             // label2
             // 
@@ -181,29 +206,6 @@
             this.label1.Size = new System.Drawing.Size(81, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Numero Cuenta";
-            // 
-            // ClientesbindingSource
-            // 
-            this.ClientesbindingSource.DataSource = typeof(Entidades.Cliente);
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnEliminar.Location = new System.Drawing.Point(324, 0);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(110, 47);
-            this.btnEliminar.TabIndex = 1;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
-            // lblInfo
-            // 
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(13, 4);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(0, 13);
-            this.lblInfo.TabIndex = 2;
             // 
             // NuevaCuenta
             // 
