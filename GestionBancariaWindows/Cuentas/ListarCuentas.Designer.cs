@@ -41,19 +41,25 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.lblHeader = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblInfo = new System.Windows.Forms.Label();
             this.btnNueva = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lvCuentas = new System.Windows.Forms.DataGridView();
-            this.CuentasbindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.CuentaCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClienteCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CuentaCol = new System.Windows.Forms.DataGridViewLinkColumn();
             this.SaldoCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MonedaCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblInfo = new System.Windows.Forms.Label();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClienteCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CuentasbindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.iDCUENTADataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sUCURSALDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mONEDADataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cLIENTEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sALDODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
@@ -168,6 +174,16 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(63, 22);
+            this.toolStripButton1.Text = "Actualizar";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
             // lblHeader
             // 
             this.lblHeader.AutoSize = true;
@@ -189,6 +205,14 @@
             this.panel2.Size = new System.Drawing.Size(683, 47);
             this.panel2.TabIndex = 1;
             // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(116, 3);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(0, 13);
+            this.lblInfo.TabIndex = 3;
+            // 
             // btnNueva
             // 
             this.btnNueva.Dock = System.Windows.Forms.DockStyle.Right;
@@ -209,6 +233,7 @@
             this.btnCancelar.TabIndex = 1;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // panel3
             // 
@@ -229,7 +254,12 @@
             this.CuentaCol,
             this.ClienteCol,
             this.SaldoCol,
-            this.MonedaCol});
+            this.MonedaCol,
+            this.iDCUENTADataGridViewTextBoxColumn,
+            this.sUCURSALDataGridViewTextBoxColumn,
+            this.mONEDADataGridViewTextBoxColumn,
+            this.cLIENTEDataGridViewTextBoxColumn,
+            this.sALDODataGridViewTextBoxColumn});
             this.lvCuentas.DataSource = this.CuentasbindingSource;
             this.lvCuentas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvCuentas.Location = new System.Drawing.Point(0, 0);
@@ -239,24 +269,14 @@
             this.lvCuentas.TabIndex = 0;
             this.lvCuentas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvCuentas_CellClick);
             // 
-            // CuentasbindingSource
-            // 
-            this.CuentasbindingSource.DataSource = typeof(Entidades.Cuenta);
-            // 
             // CuentaCol
             // 
             this.CuentaCol.DataPropertyName = "IDCUENTA";
-            this.CuentaCol.HeaderText = "Cuenta";
+            this.CuentaCol.HeaderText = "Numero Cuenta";
             this.CuentaCol.Name = "CuentaCol";
             this.CuentaCol.ReadOnly = true;
-            // 
-            // ClienteCol
-            // 
-            this.ClienteCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ClienteCol.DataPropertyName = "CLIENTE.NOMBRE";
-            this.ClienteCol.HeaderText = "Cliente";
-            this.ClienteCol.Name = "ClienteCol";
-            this.ClienteCol.ReadOnly = true;
+            this.CuentaCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.CuentaCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // SaldoCol
             // 
@@ -272,23 +292,59 @@
             this.MonedaCol.Name = "MonedaCol";
             this.MonedaCol.ReadOnly = true;
             // 
-            // lblInfo
+            // dataGridViewTextBoxColumn1
             // 
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(116, 3);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(0, 13);
-            this.lblInfo.TabIndex = 3;
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "CLIENTE";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Cliente";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             // 
-            // toolStripButton1
+            // ClienteCol
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(63, 22);
-            this.toolStripButton1.Text = "Actualizar";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.ClienteCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ClienteCol.DataPropertyName = "CLIENTE";
+            this.ClienteCol.HeaderText = "Cliente";
+            this.ClienteCol.Name = "ClienteCol";
+            this.ClienteCol.ReadOnly = true;
+            // 
+            // CuentasbindingSource
+            // 
+            this.CuentasbindingSource.DataSource = typeof(Entidades.Cuenta);
+            // 
+            // iDCUENTADataGridViewTextBoxColumn
+            // 
+            this.iDCUENTADataGridViewTextBoxColumn.DataPropertyName = "IDCUENTA";
+            this.iDCUENTADataGridViewTextBoxColumn.HeaderText = "IDCUENTA";
+            this.iDCUENTADataGridViewTextBoxColumn.Name = "iDCUENTADataGridViewTextBoxColumn";
+            this.iDCUENTADataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // sUCURSALDataGridViewTextBoxColumn
+            // 
+            this.sUCURSALDataGridViewTextBoxColumn.DataPropertyName = "SUCURSAL";
+            this.sUCURSALDataGridViewTextBoxColumn.HeaderText = "SUCURSAL";
+            this.sUCURSALDataGridViewTextBoxColumn.Name = "sUCURSALDataGridViewTextBoxColumn";
+            this.sUCURSALDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // mONEDADataGridViewTextBoxColumn
+            // 
+            this.mONEDADataGridViewTextBoxColumn.DataPropertyName = "MONEDA";
+            this.mONEDADataGridViewTextBoxColumn.HeaderText = "MONEDA";
+            this.mONEDADataGridViewTextBoxColumn.Name = "mONEDADataGridViewTextBoxColumn";
+            this.mONEDADataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // cLIENTEDataGridViewTextBoxColumn
+            // 
+            this.cLIENTEDataGridViewTextBoxColumn.DataPropertyName = "CLIENTE";
+            this.cLIENTEDataGridViewTextBoxColumn.HeaderText = "CLIENTE";
+            this.cLIENTEDataGridViewTextBoxColumn.Name = "cLIENTEDataGridViewTextBoxColumn";
+            this.cLIENTEDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // sALDODataGridViewTextBoxColumn
+            // 
+            this.sALDODataGridViewTextBoxColumn.DataPropertyName = "SALDO";
+            this.sALDODataGridViewTextBoxColumn.HeaderText = "SALDO";
+            this.sALDODataGridViewTextBoxColumn.Name = "sALDODataGridViewTextBoxColumn";
+            this.sALDODataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // ListarCuentas
             // 
@@ -334,12 +390,18 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.Button btnNueva;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CuentaCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClienteCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SaldoCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MonedaCol;
         private System.Windows.Forms.BindingSource CuentasbindingSource;
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.DataGridViewLinkColumn CuentaCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClienteCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SaldoCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MonedaCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iDCUENTADataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sUCURSALDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mONEDADataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cLIENTEDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sALDODataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
     }
 }

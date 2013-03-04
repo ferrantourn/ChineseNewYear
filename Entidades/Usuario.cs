@@ -22,5 +22,11 @@ namespace Entidades
         private bool _activo;
         public bool ACTIVO { get; set; }
 
+
+        public override string ToString()
+        {
+            return NOMBRE + " " + APELLIDO + " "  + "(" + CI + ")";
+        }
+
     }
 }

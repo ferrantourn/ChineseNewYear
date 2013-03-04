@@ -14,6 +14,7 @@ namespace GestionBancariaWindows
             InitializeComponent();
         }
 
+
         private void ListarCuentas_Load(object sender, System.EventArgs e)
         {
             try
@@ -22,9 +23,9 @@ namespace GestionBancariaWindows
                 List<Cuenta> cuentas = lc.ListarCuentas();
 
                 CuentasbindingSource.DataSource = cuentas;
+
                 lvCuentas.DataSource = CuentasbindingSource;
                 bindingNavigator1.BindingSource = CuentasbindingSource;
-
             }
             catch (Exception ex)
             {
@@ -32,11 +33,13 @@ namespace GestionBancariaWindows
             }
         }
 
+
         private void btnNueva_Click(object sender, System.EventArgs e)
         {
             NuevaCuenta nc = new NuevaCuenta();
             nc.Show();
         }
+
 
         private void lvCuentas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -48,7 +51,6 @@ namespace GestionBancariaWindows
                     if (Int32.TryParse(Convert.ToString(lvCuentas.Rows[e.RowIndex].Cells[0].Value), out idCuenta))
                     {
                         LogicaCuentas lC = new LogicaCuentas();
-
                         Cuenta c = new Cuenta { IDCUENTA= idCuenta };
 
                         c = (Cuenta)lC.BuscarCuenta(c);
@@ -63,6 +65,7 @@ namespace GestionBancariaWindows
                 lblInfo.Text = ex.Message;
             }
         }
+
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
@@ -81,6 +84,13 @@ namespace GestionBancariaWindows
             {
                 lblInfo.Text = ex.Message;
             }
+        }
+
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            this.Dispose();
         }
 
 

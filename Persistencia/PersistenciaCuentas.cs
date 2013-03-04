@@ -77,7 +77,8 @@ namespace Persistencia
                 _Reader = cmd.ExecuteReader();
                 int _idCuenta, _idSucursal, _idCliente;
                 decimal _saldo;
-                string _moneda;
+                string _moneda,_nombreUsuario,_nombre,_apellido;
+                bool _activo;
 
                 while (_Reader.Read())
                 {
@@ -86,11 +87,15 @@ namespace Persistencia
                     _idSucursal = (int)_Reader["IdSucursal"];
                     _saldo = Convert.ToDecimal(_Reader["Saldo"]);
                     _moneda = (string)_Reader["Moneda"];
+                    _activo = (bool)_Reader["Activo"];
+                    _nombreUsuario =(string) _Reader["NombreUsuario"];
+                    _nombre = (string)_Reader["Nombre"];
+                    _apellido = (string)_Reader["Apellido"];
 
                     Cuenta c = new Cuenta
                     {
                         IDCUENTA = _idCuenta,
-                        CLIENTE = new Cliente { CI = _idCliente },
+                        CLIENTE = new Cliente { CI = _idCliente, ACTIVO= _activo, APELLIDO = _apellido, NOMBRE=_nombre, NOMBREUSUARIO= _nombreUsuario },
                         SUCURSAL = new Sucursal { IDSUCURSAL = _idSucursal },
                         SALDO = _saldo,
                         MONEDA = _moneda,

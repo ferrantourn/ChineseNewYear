@@ -690,6 +690,7 @@ create proc spListarCuenta
 as
 begin
 	select * from Cuenta inner join Cliente on Cuenta.IdCliente = Cliente.IdCliente
+	inner join Usuario on Cuenta.IdCliente = Usuario.Ci
 end
 GO
 
