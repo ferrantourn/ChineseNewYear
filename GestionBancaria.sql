@@ -648,6 +648,8 @@ GO
 /********************************SUCURSAL*******************************/
 /********************************SUCURSAL*******************************/
 
+
+
 create proc spListarSucursal
 as
 begin
@@ -661,6 +663,14 @@ create proc spBuscarSucursal
 as
 begin
 	select * from Sucursal where Sucursal.IdSucursal=@IdSucursal
+end
+GO
+
+create proc spBuscarSucursalPorCi
+@IdEmpleado int
+as
+begin
+	select * from Sucursal inner join Empleado on Empleado.IdSucursal=Sucursal.IdSucursal and Empleado.IdUsuario=@IdEmpleado
 end
 GO
 
@@ -740,7 +750,9 @@ GO
 
 create proc spModificarCuenta
 @IdCuenta int,
-@Saldo float
+@Saldo float,
+@IdSucursal int,
+@Moneda nvarchar(3)
 as
 begin
 	if not exists (select * from Cuenta where Cuenta.IdCuenta=@IdCuenta)
@@ -748,7 +760,7 @@ begin
 		return -1 --cuenta no existe
 	end	
 	
-	update Cuenta set Saldo=@Saldo
+	update Cuenta set Saldo=@Saldo, IdSucursal=@IdSucursal, Moneda=@Moneda
 end
 GO
 
