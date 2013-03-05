@@ -760,7 +760,7 @@ begin
 		return -1 --cuenta no existe
 	end	
 	
-	update Cuenta set Saldo=@Saldo, IdSucursal=@IdSucursal, Moneda=@Moneda
+	update Cuenta set Saldo=@Saldo, IdSucursal=@IdSucursal, Moneda=@Moneda where Cuenta.IdCuenta=@IdCuenta
 end
 GO
 
