@@ -7,15 +7,15 @@ using Persistencia;
 
 namespace Logica
 {
-    public class LogicaSucursal
+    public class LogicaCotizacion
     {
 
-        public List<Sucursal> ListarSucursales()
+        public List<Cotizacion> ListarCotizaciones()
         {
             try
             {
-                PersistenciaSucursal ps = new PersistenciaSucursal();
-                return ps.ListarSucursales();
+                PersistenciaCotizacion ps = new PersistenciaCotizacion();
+                return ps.ListarCotizaciones();
             }
             catch (Exception ex)
             {
@@ -23,11 +23,11 @@ namespace Logica
             }
         }
 
-        public void AltaSucursal(Sucursal s)
+        public void AltaCotizacion(Cotizacion s)
         {
             try
             {
-                PersistenciaSucursal pc = new PersistenciaSucursal();
+                PersistenciaCotizacion pc = new PersistenciaCotizacion();
                 //pc.AltaSucursal(c);
             }
             catch (Exception ex)
@@ -36,11 +36,11 @@ namespace Logica
             }
         }
 
-        public void EliminarSucursal(Sucursal s)
+        public void EliminarCotizacion(Cotizacion s)
         {
             try
             {
-                PersistenciaSucursal pc = new PersistenciaSucursal();
+                PersistenciaCotizacion pc = new PersistenciaCotizacion();
                 //pc.EliminarSucursal(s);
             }
             catch (Exception ex)
@@ -49,11 +49,11 @@ namespace Logica
             }
         }
 
-        public Sucursal BuscarSucursal(Sucursal s)
+        public Cotizacion BuscarCotizacion(Cotizacion s)
         {
             try
             {
-                PersistenciaSucursal pc = new PersistenciaSucursal();
+                PersistenciaCotizacion pc = new PersistenciaCotizacion();
                 //return pc.BuscaSucursal();
                 return null;
             }
@@ -63,11 +63,11 @@ namespace Logica
             }
         }
 
-        public void ActualizarSucursal(Sucursal c)
+        public void ActualizarCotizacion(Cotizacion c)
         {
             try
             {
-                PersistenciaSucursal pc = new PersistenciaSucursal();
+                PersistenciaCotizacion pc = new PersistenciaCotizacion();
                 //pc.ModificarSucursal(c);
             }
             catch (Exception ex)

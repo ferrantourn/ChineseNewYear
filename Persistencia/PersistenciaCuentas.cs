@@ -77,7 +77,7 @@ namespace Persistencia
                 _Reader = cmd.ExecuteReader();
                 int _idCuenta, _idSucursal, _idCliente;
                 decimal _saldo;
-                string _moneda,_nombreUsuario,_nombre,_apellido;
+                string _moneda, _nombreUsuario, _nombre, _apellido;
                 bool _activo;
 
                 while (_Reader.Read())
@@ -88,14 +88,14 @@ namespace Persistencia
                     _saldo = Convert.ToDecimal(_Reader["Saldo"]);
                     _moneda = (string)_Reader["Moneda"];
                     _activo = (bool)_Reader["Activo"];
-                    _nombreUsuario =(string) _Reader["NombreUsuario"];
+                    _nombreUsuario = (string)_Reader["NombreUsuario"];
                     _nombre = (string)_Reader["Nombre"];
                     _apellido = (string)_Reader["Apellido"];
 
                     Cuenta c = new Cuenta
                     {
                         IDCUENTA = _idCuenta,
-                        CLIENTE = new Cliente { CI = _idCliente, ACTIVO= _activo, APELLIDO = _apellido, NOMBRE=_nombre, NOMBREUSUARIO= _nombreUsuario },
+                        CLIENTE = new Cliente { CI = _idCliente, ACTIVO = _activo, APELLIDO = _apellido, NOMBRE = _nombre, NOMBREUSUARIO = _nombreUsuario },
                         SUCURSAL = new Sucursal { IDSUCURSAL = _idSucursal },
                         SALDO = _saldo,
                         MONEDA = _moneda,
@@ -178,7 +178,7 @@ namespace Persistencia
                     SqlCommand cmd = Conexion.GetCommand("spModificarCuenta", conexion, CommandType.StoredProcedure);
                     SqlParameter _IdCuenta = new SqlParameter("@IdCuenta", c.IDCUENTA);
                     SqlParameter _saldo = new SqlParameter("@Saldo", c.SALDO);
-                    SqlParameter _idCliente = new SqlParameter("@IdCliente", c.CLIENTE.CI);
+                    //SqlParameter _idCliente = new SqlParameter("@IdCliente", c.CLIENTE.CI);
                     SqlParameter _moneda = new SqlParameter("@Moneda", c.MONEDA);
                     SqlParameter _idSucursal = new SqlParameter("@IdSucursal", c.SUCURSAL.IDSUCURSAL);
                     SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int);
@@ -186,7 +186,7 @@ namespace Persistencia
                     _retorno.Direction = ParameterDirection.ReturnValue;
                     cmd.Parameters.Add(_IdCuenta);
                     cmd.Parameters.Add(_saldo);
-                    cmd.Parameters.Add(_idCliente);
+                    //cmd.Parameters.Add(_idCliente);
                     cmd.Parameters.Add(_moneda);
                     cmd.Parameters.Add(_idSucursal);
                     cmd.Parameters.Add(_retorno);
@@ -202,7 +202,6 @@ namespace Persistencia
                     throw ex;
                 }
             }
-
         }
 
 
@@ -217,21 +216,26 @@ namespace Persistencia
 
             SqlParameter _Retorno = new SqlParameter("@Retorno", SqlDbType.Int);
             _Retorno.Direction = ParameterDirection.ReturnValue;
+            cmd.Parameters.Add(_Retorno);
 
             try
             {
                 conexion.Open();
                 cmd.ExecuteNonQuery();
+
+                if (Convert.ToInt32(_Retorno.Value) == -1)
+                {
+                    throw new ErrorVaciarCuenta();
+                }
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Problemas con la base de datos:" + ex.Message);
+                throw ex;
             }
             finally
             {
                 conexion.Close();
             }
-
         }
     }
 }

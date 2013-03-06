@@ -43,6 +43,7 @@ namespace GestionBancariaWindows
                     cmbMoneda.Text = CUENTA.MONEDA;
 
                     btnGuardar.Text = "Actualizar";
+                    cmbClientes.Enabled = false;
                 }
                 else
                 {
@@ -63,11 +64,16 @@ namespace GestionBancariaWindows
         {
             try
             {
-                LogicaCuentas lc = new LogicaCuentas();
-                lc.EliminarCuenta(CUENTA);
+                if (MessageBox.Show("Esta seguro de eliminar la cuenta " + CUENTA.IDCUENTA, "Eliminar Cuenta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    LogicaCuentas lc = new LogicaCuentas();
+                    lc.EliminarCuenta(CUENTA);
 
-                lblInfo.Text = "Cuenta eliminada correctamente";
-                LimpiarFormulario();
+                    lblInfo.Text = "Cuenta eliminada correctamente";
+                    LimpiarFormulario();
+                    this.Close();
+                    this.Dispose();
+                }
             }
             catch (Exception ex)
             {
@@ -101,7 +107,7 @@ namespace GestionBancariaWindows
                     CUENTA.MONEDA = Convert.ToString(cmbMoneda.Text);
                     CUENTA.SALDO = Convert.ToDecimal(txtSaldo.Text);
                     CUENTA.CLIENTE.CI = Convert.ToInt32(cmbClientes.SelectedValue);
-                  
+
 
                     //GUARDAMOS LA INFORMACION EN LA BASE DE DATOS
                     //---------------------------------------------

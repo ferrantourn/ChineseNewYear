@@ -49,17 +49,12 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lvCuentas = new System.Windows.Forms.DataGridView();
+            this.CuentasbindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CuentaCol = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.ClienteCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaldoCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MonedaCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClienteCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CuentasbindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.iDCUENTADataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sUCURSALDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mONEDADataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cLIENTEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sALDODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
@@ -254,12 +249,7 @@
             this.CuentaCol,
             this.ClienteCol,
             this.SaldoCol,
-            this.MonedaCol,
-            this.iDCUENTADataGridViewTextBoxColumn,
-            this.sUCURSALDataGridViewTextBoxColumn,
-            this.mONEDADataGridViewTextBoxColumn,
-            this.cLIENTEDataGridViewTextBoxColumn,
-            this.sALDODataGridViewTextBoxColumn});
+            this.MonedaCol});
             this.lvCuentas.DataSource = this.CuentasbindingSource;
             this.lvCuentas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvCuentas.Location = new System.Drawing.Point(0, 0);
@@ -269,6 +259,17 @@
             this.lvCuentas.TabIndex = 0;
             this.lvCuentas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvCuentas_CellClick);
             // 
+            // CuentasbindingSource
+            // 
+            this.CuentasbindingSource.DataSource = typeof(Entidades.Cuenta);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "CLIENTE";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Cliente";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
             // CuentaCol
             // 
             this.CuentaCol.DataPropertyName = "IDCUENTA";
@@ -277,6 +278,14 @@
             this.CuentaCol.ReadOnly = true;
             this.CuentaCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.CuentaCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // ClienteCol
+            // 
+            this.ClienteCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ClienteCol.DataPropertyName = "CLIENTE";
+            this.ClienteCol.HeaderText = "Cliente";
+            this.ClienteCol.Name = "ClienteCol";
+            this.ClienteCol.ReadOnly = true;
             // 
             // SaldoCol
             // 
@@ -291,60 +300,6 @@
             this.MonedaCol.HeaderText = "Moneda";
             this.MonedaCol.Name = "MonedaCol";
             this.MonedaCol.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "CLIENTE";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Cliente";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // ClienteCol
-            // 
-            this.ClienteCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ClienteCol.DataPropertyName = "CLIENTE";
-            this.ClienteCol.HeaderText = "Cliente";
-            this.ClienteCol.Name = "ClienteCol";
-            this.ClienteCol.ReadOnly = true;
-            // 
-            // CuentasbindingSource
-            // 
-            this.CuentasbindingSource.DataSource = typeof(Entidades.Cuenta);
-            // 
-            // iDCUENTADataGridViewTextBoxColumn
-            // 
-            this.iDCUENTADataGridViewTextBoxColumn.DataPropertyName = "IDCUENTA";
-            this.iDCUENTADataGridViewTextBoxColumn.HeaderText = "IDCUENTA";
-            this.iDCUENTADataGridViewTextBoxColumn.Name = "iDCUENTADataGridViewTextBoxColumn";
-            this.iDCUENTADataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // sUCURSALDataGridViewTextBoxColumn
-            // 
-            this.sUCURSALDataGridViewTextBoxColumn.DataPropertyName = "SUCURSAL";
-            this.sUCURSALDataGridViewTextBoxColumn.HeaderText = "SUCURSAL";
-            this.sUCURSALDataGridViewTextBoxColumn.Name = "sUCURSALDataGridViewTextBoxColumn";
-            this.sUCURSALDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // mONEDADataGridViewTextBoxColumn
-            // 
-            this.mONEDADataGridViewTextBoxColumn.DataPropertyName = "MONEDA";
-            this.mONEDADataGridViewTextBoxColumn.HeaderText = "MONEDA";
-            this.mONEDADataGridViewTextBoxColumn.Name = "mONEDADataGridViewTextBoxColumn";
-            this.mONEDADataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // cLIENTEDataGridViewTextBoxColumn
-            // 
-            this.cLIENTEDataGridViewTextBoxColumn.DataPropertyName = "CLIENTE";
-            this.cLIENTEDataGridViewTextBoxColumn.HeaderText = "CLIENTE";
-            this.cLIENTEDataGridViewTextBoxColumn.Name = "cLIENTEDataGridViewTextBoxColumn";
-            this.cLIENTEDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // sALDODataGridViewTextBoxColumn
-            // 
-            this.sALDODataGridViewTextBoxColumn.DataPropertyName = "SALDO";
-            this.sALDODataGridViewTextBoxColumn.HeaderText = "SALDO";
-            this.sALDODataGridViewTextBoxColumn.Name = "sALDODataGridViewTextBoxColumn";
-            this.sALDODataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // ListarCuentas
             // 
@@ -393,15 +348,10 @@
         private System.Windows.Forms.BindingSource CuentasbindingSource;
         private System.Windows.Forms.Label lblInfo;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewLinkColumn CuentaCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClienteCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaldoCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn MonedaCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iDCUENTADataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sUCURSALDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn mONEDADataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cLIENTEDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sALDODataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
     }
 }

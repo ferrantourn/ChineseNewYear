@@ -113,8 +113,6 @@ namespace GestionBancariaWindows
                         //LIMPIAMOS EL FORMULARIO
                         LimpiarFormulario();
                     }
-
-
                 }
             }
             catch (ErrorUsuarioYaExiste uex)
@@ -123,7 +121,6 @@ namespace GestionBancariaWindows
             }
             catch (Exception ex)
             {
-
                 lblInfo.Text = ex.Message;
             }
         }

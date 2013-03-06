@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LogicaCotizacion.cs" />
     <Compile Include="LogicaCuentas.cs" />
     <Compile Include="FabricaLogica.cs" />
     <Compile Include="ILogicaUsuario.cs" />

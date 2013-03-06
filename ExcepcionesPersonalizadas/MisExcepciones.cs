@@ -147,6 +147,27 @@ namespace ExcepcionesPersonalizadas
 
     }
 
-    
+    //[Serializable] DESCOMENTAR CUANDO SE USE WEB SERVICE
+    public class ErrorVaciarCuenta : Exception
+    {
+        public ErrorVaciarCuenta()
+        {
+
+        }
+
+        public ErrorVaciarCuenta(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+
+        }
+
+        private const string Mensaje = "ERROR: Se debe vaciar la cuenta antes de eliminarla.";
+
+        public override string Message
+        {
+            get { return Mensaje; }
+        }
+
+    }
 }
 

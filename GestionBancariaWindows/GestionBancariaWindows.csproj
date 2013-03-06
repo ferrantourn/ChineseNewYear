@@ -146,6 +146,12 @@
     <Compile Include="Sucursales\ArqueoCaja.Designer.cs">
       <DependentUpon>ArqueoCaja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sucursales\ListarSucursales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sucursales\ListarSucursales.Designer.cs">
+      <DependentUpon>ListarSucursales.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sucursales\NuevaSucursal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,10 +220,14 @@
     <EmbeddedResource Include="Sucursales\ArqueoCaja.resx">
       <DependentUpon>ArqueoCaja.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Sucursales\ListarSucursales.resx">
+      <DependentUpon>ListarSucursales.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Sucursales\NuevaSucursal.resx">
       <DependentUpon>NuevaSucursal.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\Entidades.Cliente.datasource" />
+    <None Include="Properties\DataSources\Entidades.Cotizacion.datasource" />
     <None Include="Properties\DataSources\Entidades.Cuenta.datasource" />
     <None Include="Properties\DataSources\Entidades.Sucursal.datasource" />
     <None Include="Properties\DataSources\Logica.LogicaSucursal.datasource" />

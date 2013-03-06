@@ -1,6 +1,6 @@
 ﻿namespace GestionBancariaWindows
 {
-    partial class ListarCotizaciones
+    partial class ListarSucursales
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListarCotizaciones));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListarSucursales));
             this.panel1 = new System.Windows.Forms.Panel();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -41,30 +41,30 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.lblHeader = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnNueva = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.lvCotizaciones = new System.Windows.Forms.DataGridView();
-            this.CotizacionbindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fECHADataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.pRECIOCOMPRADataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pRECIOVENTADataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblInfo = new System.Windows.Forms.Label();
-            this.Actualizar = new System.Windows.Forms.ToolStripButton();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lvSucursales = new System.Windows.Forms.DataGridView();
+            this.SucursalesbindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.iDSUCURSALDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nOMBREDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dIRECCIONDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aCTIVADataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.lvCotizaciones)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CotizacionbindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lvSucursales)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SucursalesbindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panel1.Controls.Add(this.bindingNavigator1);
             this.panel1.Controls.Add(this.lblHeader);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -89,7 +89,7 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2,
-            this.Actualizar});
+            this.toolStripButton1});
             this.bindingNavigator1.Location = new System.Drawing.Point(0, 37);
             this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
@@ -168,37 +168,44 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(63, 22);
+            this.toolStripButton1.Text = "Actualizar";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
             // lblHeader
             // 
             this.lblHeader.AutoSize = true;
             this.lblHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHeader.Location = new System.Drawing.Point(3, 9);
             this.lblHeader.Name = "lblHeader";
-            this.lblHeader.Size = new System.Drawing.Size(162, 20);
+            this.lblHeader.Size = new System.Drawing.Size(98, 20);
             this.lblHeader.TabIndex = 0;
-            this.lblHeader.Text = "Listar Cotizaciones";
+            this.lblHeader.Text = "Sucursales";
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.lblInfo);
-            this.panel2.Controls.Add(this.btnNueva);
             this.panel2.Controls.Add(this.btnCancelar);
+            this.panel2.Controls.Add(this.btnGuardar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 341);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(683, 47);
             this.panel2.TabIndex = 1;
             // 
-            // btnNueva
+            // lblInfo
             // 
-            this.btnNueva.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnNueva.Location = new System.Drawing.Point(573, 0);
-            this.btnNueva.Name = "btnNueva";
-            this.btnNueva.Size = new System.Drawing.Size(110, 47);
-            this.btnNueva.TabIndex = 2;
-            this.btnNueva.Text = "Nueva Cuenta";
-            this.btnNueva.UseVisualStyleBackColor = true;
-            this.btnNueva.Click += new System.EventHandler(this.btnNueva_Click);
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(110, 17);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(0, 13);
+            this.lblInfo.TabIndex = 2;
             // 
             // btnCancelar
             // 
@@ -211,80 +218,79 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnGuardar.Location = new System.Drawing.Point(573, 0);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(110, 47);
+            this.btnGuardar.TabIndex = 0;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.lvCotizaciones);
+            this.panel3.Controls.Add(this.lvSucursales);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 62);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(683, 279);
             this.panel3.TabIndex = 2;
             // 
-            // lvCotizaciones
+            // lvSucursales
             // 
-            this.lvCotizaciones.AllowUserToAddRows = false;
-            this.lvCotizaciones.AllowUserToDeleteRows = false;
-            this.lvCotizaciones.AutoGenerateColumns = false;
-            this.lvCotizaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.lvCotizaciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.fECHADataGridViewTextBoxColumn,
-            this.pRECIOCOMPRADataGridViewTextBoxColumn,
-            this.pRECIOVENTADataGridViewTextBoxColumn});
-            this.lvCotizaciones.DataSource = this.CotizacionbindingSource;
-            this.lvCotizaciones.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvCotizaciones.Location = new System.Drawing.Point(0, 0);
-            this.lvCotizaciones.Name = "lvCotizaciones";
-            this.lvCotizaciones.ReadOnly = true;
-            this.lvCotizaciones.Size = new System.Drawing.Size(683, 279);
-            this.lvCotizaciones.TabIndex = 0;
+            this.lvSucursales.AllowUserToAddRows = false;
+            this.lvSucursales.AllowUserToDeleteRows = false;
+            this.lvSucursales.AutoGenerateColumns = false;
+            this.lvSucursales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.lvSucursales.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.iDSUCURSALDataGridViewTextBoxColumn,
+            this.nOMBREDataGridViewTextBoxColumn,
+            this.dIRECCIONDataGridViewTextBoxColumn,
+            this.aCTIVADataGridViewCheckBoxColumn});
+            this.lvSucursales.DataSource = this.SucursalesbindingSource;
+            this.lvSucursales.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvSucursales.Location = new System.Drawing.Point(0, 0);
+            this.lvSucursales.Name = "lvSucursales";
+            this.lvSucursales.ReadOnly = true;
+            this.lvSucursales.Size = new System.Drawing.Size(683, 279);
+            this.lvSucursales.TabIndex = 0;
             // 
-            // CotizacionbindingSource
+            // SucursalesbindingSource
             // 
-            this.CotizacionbindingSource.DataSource = typeof(Entidades.Cotizacion);
+            this.SucursalesbindingSource.DataSource = typeof(Entidades.Sucursal);
             // 
-            // fECHADataGridViewTextBoxColumn
+            // iDSUCURSALDataGridViewTextBoxColumn
             // 
-            this.fECHADataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.fECHADataGridViewTextBoxColumn.DataPropertyName = "FECHA";
-            this.fECHADataGridViewTextBoxColumn.HeaderText = "Fecha";
-            this.fECHADataGridViewTextBoxColumn.Name = "fECHADataGridViewTextBoxColumn";
-            this.fECHADataGridViewTextBoxColumn.ReadOnly = true;
-            this.fECHADataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.fECHADataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.iDSUCURSALDataGridViewTextBoxColumn.DataPropertyName = "IDSUCURSAL";
+            this.iDSUCURSALDataGridViewTextBoxColumn.HeaderText = "Id Sucursal";
+            this.iDSUCURSALDataGridViewTextBoxColumn.Name = "iDSUCURSALDataGridViewTextBoxColumn";
+            this.iDSUCURSALDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // pRECIOCOMPRADataGridViewTextBoxColumn
+            // nOMBREDataGridViewTextBoxColumn
             // 
-            this.pRECIOCOMPRADataGridViewTextBoxColumn.DataPropertyName = "PRECIOCOMPRA";
-            this.pRECIOCOMPRADataGridViewTextBoxColumn.HeaderText = "Precio Compra";
-            this.pRECIOCOMPRADataGridViewTextBoxColumn.Name = "pRECIOCOMPRADataGridViewTextBoxColumn";
-            this.pRECIOCOMPRADataGridViewTextBoxColumn.ReadOnly = true;
+            this.nOMBREDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nOMBREDataGridViewTextBoxColumn.DataPropertyName = "NOMBRE";
+            this.nOMBREDataGridViewTextBoxColumn.HeaderText = "Sucursal";
+            this.nOMBREDataGridViewTextBoxColumn.Name = "nOMBREDataGridViewTextBoxColumn";
+            this.nOMBREDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // pRECIOVENTADataGridViewTextBoxColumn
+            // dIRECCIONDataGridViewTextBoxColumn
             // 
-            this.pRECIOVENTADataGridViewTextBoxColumn.DataPropertyName = "PRECIOVENTA";
-            this.pRECIOVENTADataGridViewTextBoxColumn.HeaderText = "Precio Venta";
-            this.pRECIOVENTADataGridViewTextBoxColumn.Name = "pRECIOVENTADataGridViewTextBoxColumn";
-            this.pRECIOVENTADataGridViewTextBoxColumn.ReadOnly = true;
+            this.dIRECCIONDataGridViewTextBoxColumn.DataPropertyName = "DIRECCION";
+            this.dIRECCIONDataGridViewTextBoxColumn.HeaderText = "Direccion";
+            this.dIRECCIONDataGridViewTextBoxColumn.Name = "dIRECCIONDataGridViewTextBoxColumn";
+            this.dIRECCIONDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // lblInfo
+            // aCTIVADataGridViewCheckBoxColumn
             // 
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(117, 7);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(0, 13);
-            this.lblInfo.TabIndex = 3;
+            this.aCTIVADataGridViewCheckBoxColumn.DataPropertyName = "ACTIVA";
+            this.aCTIVADataGridViewCheckBoxColumn.HeaderText = "Activa";
+            this.aCTIVADataGridViewCheckBoxColumn.Name = "aCTIVADataGridViewCheckBoxColumn";
+            this.aCTIVADataGridViewCheckBoxColumn.ReadOnly = true;
             // 
-            // Actualizar
-            // 
-            this.Actualizar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.Actualizar.Image = ((System.Drawing.Image)(resources.GetObject("Actualizar.Image")));
-            this.Actualizar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Actualizar.Name = "Actualizar";
-            this.Actualizar.Size = new System.Drawing.Size(63, 22);
-            this.Actualizar.Text = "Actualizar";
-            this.Actualizar.Click += new System.EventHandler(this.Actualizar_Click);
-            // 
-            // ListarCotizaciones
+            // ListarSucursales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -292,9 +298,9 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Name = "ListarCotizaciones";
-            this.Text = "Listar Cuentas";
-            this.Load += new System.EventHandler(this.ListarCotizaciones_Load);
+            this.Name = "ListarSucursales";
+            this.Text = "Sucursales";
+            this.Load += new System.EventHandler(this.ListarSucursales_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
@@ -303,8 +309,8 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.lvCotizaciones)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CotizacionbindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lvSucursales)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SucursalesbindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -314,9 +320,10 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblHeader;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.DataGridView lvCotizaciones;
+        private System.Windows.Forms.DataGridView lvSucursales;
         private System.Windows.Forms.BindingNavigator bindingNavigator1;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
@@ -327,12 +334,12 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.Button btnNueva;
-        private System.Windows.Forms.DataGridViewLinkColumn fECHADataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pRECIOCOMPRADataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pRECIOVENTADataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource CotizacionbindingSource;
         private System.Windows.Forms.Label lblInfo;
-        private System.Windows.Forms.ToolStripButton Actualizar;
+        private System.Windows.Forms.BindingSource SucursalesbindingSource;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iDSUCURSALDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nOMBREDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dIRECCIONDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn aCTIVADataGridViewCheckBoxColumn;
     }
 }

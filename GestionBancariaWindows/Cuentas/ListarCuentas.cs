@@ -93,6 +93,8 @@ namespace GestionBancariaWindows
             this.Dispose();
         }
 
+      
+
 
     }
 }

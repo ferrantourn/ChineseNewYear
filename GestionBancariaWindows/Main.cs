@@ -111,6 +111,12 @@ namespace GestionBancariaWindows
             listadoProductividadForm.Show();
         }
 
+        private void listarSucursalesToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            ListarSucursales ls = new ListarSucursales();
+            ls.Show();
+        }
+
        
     }
 }
