@@ -38,12 +38,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtMontoaPagar = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtCliente = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.gbBuscar = new System.Windows.Forms.GroupBox();
             this.gbCliente = new System.Windows.Forms.GroupBox();
+            this.txtCliente = new System.Windows.Forms.TextBox();
+            this.txtMontoaPagar = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -111,6 +111,7 @@
             this.btnBuscar.TabIndex = 9;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // cmbSucursal
             // 
@@ -145,38 +146,6 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Numero Prestamo";
             // 
-            // txtMontoaPagar
-            // 
-            this.txtMontoaPagar.Location = new System.Drawing.Point(330, 19);
-            this.txtMontoaPagar.Name = "txtMontoaPagar";
-            this.txtMontoaPagar.Size = new System.Drawing.Size(121, 20);
-            this.txtMontoaPagar.TabIndex = 11;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(237, 22);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Monto a Pagar";
-            // 
-            // txtCliente
-            // 
-            this.txtCliente.Location = new System.Drawing.Point(120, 19);
-            this.txtCliente.Name = "txtCliente";
-            this.txtCliente.Size = new System.Drawing.Size(100, 20);
-            this.txtCliente.TabIndex = 13;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 22);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Cliente";
-            // 
             // gbBuscar
             // 
             this.gbBuscar.Location = new System.Drawing.Point(17, 6);
@@ -199,6 +168,40 @@
             this.gbCliente.TabStop = false;
             this.gbCliente.Text = "Informacion del Prestamo";
             // 
+            // txtCliente
+            // 
+            this.txtCliente.Location = new System.Drawing.Point(120, 19);
+            this.txtCliente.Name = "txtCliente";
+            this.txtCliente.ReadOnly = true;
+            this.txtCliente.Size = new System.Drawing.Size(100, 20);
+            this.txtCliente.TabIndex = 13;
+            // 
+            // txtMontoaPagar
+            // 
+            this.txtMontoaPagar.Location = new System.Drawing.Point(330, 19);
+            this.txtMontoaPagar.Name = "txtMontoaPagar";
+            this.txtMontoaPagar.ReadOnly = true;
+            this.txtMontoaPagar.Size = new System.Drawing.Size(121, 20);
+            this.txtMontoaPagar.TabIndex = 11;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 22);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(39, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Cliente";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(237, 22);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Monto a Pagar";
+            // 
             // PagoCuota
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -209,6 +212,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "PagoCuota";
             this.Text = "Pago Cuota";
+            this.Load += new System.EventHandler(this.PagoCuota_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

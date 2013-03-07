@@ -10,6 +10,26 @@ namespace Logica
     public class LogicaPrestamo
     {
 
+        public decimal CalcularMontoCuotaPrestamo(Prestamo p)
+        {
+            try
+            {
+                Prestamo prestamo = BuscarPrestamo(p);
+                if (prestamo != null)
+                {
+                    decimal monto = Decimal.Zero;
+                    monto = prestamo.MONTO / prestamo.TOTALCUOTAS;
+                    return monto;
+                }
+
+                return Decimal.Zero;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<Prestamo> ListarPrestamo()
         {
             try

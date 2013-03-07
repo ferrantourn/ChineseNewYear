@@ -419,7 +419,6 @@ insert into Cotizacion(Fecha,PrecioCompra,PrecioVenta)
 		return -2  --Si no se pudo insertar la cotización--
 	end
 
-commit tran
 END
 GO
 
@@ -806,7 +805,8 @@ create proc spListarCotizacion
 @FechaFin datetime
 as
 begin
-	select * from Cotizacion where cotizacion.Fecha between @FechaFin and @FechaInicio
+	--select * from Cotizacion where cotizacion.Fecha between @FechaFin and @FechaInicio
+	select * from Cotizacion where cotizacion.Fecha <= @FechaFin and cotizacion.Fecha >= @FechaInicio
 end
 GO
 

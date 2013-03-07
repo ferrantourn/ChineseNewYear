@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Entidades;
 using Persistencia;
-
+using ExcepcionesPersonalizadas;
 namespace Logica
 {
     public class LogicaCotizacion
@@ -30,6 +30,10 @@ namespace Logica
                 PersistenciaCotizacion pc = new PersistenciaCotizacion();
                 pc.AltaCotizacion(s);
             }
+            catch (ErrorCotizacionYaExiste ex)
+            {
+                throw ex;
+            }   
             catch (Exception ex)
             {
                 throw ex;

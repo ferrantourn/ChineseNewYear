@@ -29,8 +29,6 @@ namespace GestionBancariaWindows
                 CotizacionbindingSource.DataSource = cotizaciones;
                 lvCotizaciones.DataSource = CotizacionbindingSource;
                 bindingNavigator1.BindingSource = CotizacionbindingSource;
-
-
             }
             catch (Exception ex)
             {
@@ -63,6 +61,32 @@ namespace GestionBancariaWindows
                 CotizacionbindingSource.DataSource = cotizaciones;
                 lvCotizaciones.DataSource = CotizacionbindingSource;
                 bindingNavigator1.BindingSource = CotizacionbindingSource;
+            }
+            catch (Exception ex)
+            {
+                lblInfo.Text = ex.Message;
+            }
+        }
+
+        private void lvCotizaciones_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.ColumnIndex == 0 && e.RowIndex >= 0)
+                {
+                    if (!String.IsNullOrEmpty(Convert.ToString(lvCotizaciones.Rows[e.RowIndex].Cells[0].Value)))
+                    {
+                        DateTime dt = Convert.ToDateTime(lvCotizaciones.Rows[e.RowIndex].Cells[0].Value);
+                        LogicaCotizacion lu = new LogicaCotizacion();
+
+                        Cotizacion cot = new Cotizacion{ FECHA =  dt};
+
+                        cot = (Cotizacion)lu.BuscarCotizacion(cot);
+                        NuevaCotizacion nu = new NuevaCotizacion { COTIZACION = cot };
+
+                        nu.Show();
+                    }
+                }
             }
             catch (Exception ex)
             {

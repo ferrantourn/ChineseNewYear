@@ -8,5 +8,17 @@ namespace GestionBancariaWindows
         {
             InitializeComponent();
         }
+
+        private void PagoCuota_Load(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void btnBuscar_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        
     }
 }

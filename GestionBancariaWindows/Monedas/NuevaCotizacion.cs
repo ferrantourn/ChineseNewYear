@@ -70,7 +70,8 @@ namespace GestionBancariaWindows
                     LogicaCotizacion lu = new LogicaCotizacion();
                     if (editar)
                     {
-                        lu.ActualizarCotizacion(COTIZACION);
+
+                        lu.ActualizarCotizacion(COTIZACION, new Empleado()); //***** ACA HAY QUE PASAR EL EMPLEADO ACTUALMENTE LOGUEADO
                         lblInfo.Text = "Cotizacion actualizada correctamente";
                     }
                     else
@@ -85,9 +86,9 @@ namespace GestionBancariaWindows
 
                 }
             }
-            catch (ErrorUsuarioYaExiste uex)
+            catch (ErrorCotizacionYaExiste ex)
             {
-                lblInfo.Text = uex.Message;
+                lblInfo.Text = ex.Message;
             }
             catch (Exception ex)
             {
@@ -132,6 +133,7 @@ namespace GestionBancariaWindows
                     btnEliminar.Visible = false;
                 }
             }
+           
             catch (Exception ex)
             {
 
@@ -148,7 +150,7 @@ namespace GestionBancariaWindows
 
         private void txtCompra_Validating(object sender, CancelEventArgs e)
         {
-            if (String.IsNullOrEmpty(txtVenta.Text))
+            if (String.IsNullOrEmpty(txtCompra.Text))
             {
                 errorProvider.SetError(txtCompra, "Debe ingresar un precio de compra.");
                 e.Cancel = true;

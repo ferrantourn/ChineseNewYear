@@ -28,7 +28,7 @@ namespace Persistencia
             try
             {
                 conexion.Open();
-                cmd.ExecuteNonQuery();
+                //cmd.ExecuteNonQuery();
                 _Reader = cmd.ExecuteReader();
                 DateTime _fecha;
                 decimal _precioCompra, _precioVenta;
@@ -70,7 +70,7 @@ namespace Persistencia
             try
             {
 
-                SqlCommand cmd = Conexion.GetCommand("spAltaCotizacion", conexion, CommandType.StoredProcedure);
+                SqlCommand cmd = Conexion.GetCommand("AltaCotizacion", conexion, CommandType.StoredProcedure);
 
                 SqlParameter _fecha = new SqlParameter("@Fecha", s.FECHA);
                 SqlParameter _precioCompra = new SqlParameter("@PrecioCompra", s.PRECIOCOMPRA);
@@ -210,7 +210,7 @@ namespace Persistencia
                     cmd.Parameters.Add(_retorno);
 
                     //ACTUALIZAMOS LA CUENTA
-                    //-----------------------
+                    //----------------------
                     conexion.Open();
                     cmd.ExecuteNonQuery();
 

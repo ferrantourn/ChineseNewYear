@@ -41,18 +41,18 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.Actualizar = new System.Windows.Forms.ToolStripButton();
             this.lblHeader = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblInfo = new System.Windows.Forms.Label();
             this.btnNueva = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lvCotizaciones = new System.Windows.Forms.DataGridView();
-            this.CotizacionbindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fECHADataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewLinkColumn();
             this.pRECIOCOMPRADataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pRECIOVENTADataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblInfo = new System.Windows.Forms.Label();
-            this.Actualizar = new System.Windows.Forms.ToolStripButton();
+            this.CotizacionbindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
@@ -168,6 +168,16 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // Actualizar
+            // 
+            this.Actualizar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.Actualizar.Image = ((System.Drawing.Image)(resources.GetObject("Actualizar.Image")));
+            this.Actualizar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Actualizar.Name = "Actualizar";
+            this.Actualizar.Size = new System.Drawing.Size(63, 22);
+            this.Actualizar.Text = "Actualizar";
+            this.Actualizar.Click += new System.EventHandler(this.Actualizar_Click);
+            // 
             // lblHeader
             // 
             this.lblHeader.AutoSize = true;
@@ -188,6 +198,14 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(683, 47);
             this.panel2.TabIndex = 1;
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(117, 7);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(0, 13);
+            this.lblInfo.TabIndex = 3;
             // 
             // btnNueva
             // 
@@ -237,10 +255,7 @@
             this.lvCotizaciones.ReadOnly = true;
             this.lvCotizaciones.Size = new System.Drawing.Size(683, 279);
             this.lvCotizaciones.TabIndex = 0;
-            // 
-            // CotizacionbindingSource
-            // 
-            this.CotizacionbindingSource.DataSource = typeof(Entidades.Cotizacion);
+            this.lvCotizaciones.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.lvCotizaciones_CellClick);
             // 
             // fECHADataGridViewTextBoxColumn
             // 
@@ -266,23 +281,9 @@
             this.pRECIOVENTADataGridViewTextBoxColumn.Name = "pRECIOVENTADataGridViewTextBoxColumn";
             this.pRECIOVENTADataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // lblInfo
+            // CotizacionbindingSource
             // 
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(117, 7);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(0, 13);
-            this.lblInfo.TabIndex = 3;
-            // 
-            // Actualizar
-            // 
-            this.Actualizar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.Actualizar.Image = ((System.Drawing.Image)(resources.GetObject("Actualizar.Image")));
-            this.Actualizar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Actualizar.Name = "Actualizar";
-            this.Actualizar.Size = new System.Drawing.Size(63, 22);
-            this.Actualizar.Text = "Actualizar";
-            this.Actualizar.Click += new System.EventHandler(this.Actualizar_Click);
+            this.CotizacionbindingSource.DataSource = typeof(Entidades.Cotizacion);
             // 
             // ListarCotizaciones
             // 

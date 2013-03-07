@@ -162,8 +162,8 @@
             this.nuevaCotizacionToolStripMenuItem,
             this.listarCotizacionesToolStripMenuItem});
             this.cotizacionesToolStripMenuItem.Name = "cotizacionesToolStripMenuItem";
-            this.cotizacionesToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
-            this.cotizacionesToolStripMenuItem.Text = "Monedas";
+            this.cotizacionesToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
+            this.cotizacionesToolStripMenuItem.Text = "Cotizaciones";
             // 
             // nuevaCotizacionToolStripMenuItem
             // 

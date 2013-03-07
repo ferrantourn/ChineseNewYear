@@ -10,8 +10,11 @@ using System.Transactions;
 
 namespace Persistencia
 {
+
     public class PersistenciaPrestamo
     {
+
        
     }
+
 }
