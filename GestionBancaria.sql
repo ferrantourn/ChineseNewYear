@@ -416,7 +416,7 @@ insert into Cotizacion(Fecha,PrecioCompra,PrecioVenta)
 			
 	if @@error<>0
 	begin
-		return -3  --Si no se pudo insertar la cotización--
+		return -2  --Si no se pudo insertar la cotización--
 	end
 
 commit tran
@@ -842,7 +842,7 @@ select @PrecioVentaViejo = Cotizacion.PrecioVenta from Cotizacion where Cotizaci
 		if @@error<>0
 		begin
 		rollback tran
-			return -1  --Si no se pudo cambiar datos--
+			return -2  --Si no se pudo cambiar datos--
 		end
 		
 		update Cotizacion set Cotizacion.PrecioCompra=@PrecioCompra,Cotizacion.PrecioVenta=@PrecioVenta where Cotizacion.Fecha=@Fecha
@@ -850,10 +850,27 @@ select @PrecioVentaViejo = Cotizacion.PrecioVenta from Cotizacion where Cotizaci
 		if @@error<>0
 		begin
 		rollback tran
-			return -1  --Si no se pudo cambiar datos--
+			return -3  --Si no se pudo cambiar datos--
 		end
 end
 GO
+
+create proc spEliminarCotizacion  --Limitar derecho de ejecución a solo administradores.
+@Fecha datetime
+as
+begin
+if not exists(select * from Cotizacion where Cotizacion.Fecha=@Fecha)
+	begin
+		return -1 --no existe cotización para tal fecha
+	end
+	
+	delete Cotizacion where Cotizacion.Fecha = @Fecha
+	
+end
+GO
+	
+	
+
 
 
 

@@ -28,7 +28,7 @@ namespace Logica
             try
             {
                 PersistenciaCotizacion pc = new PersistenciaCotizacion();
-                //pc.AltaSucursal(c);
+                pc.AltaCotizacion(s);
             }
             catch (Exception ex)
             {
@@ -41,7 +41,7 @@ namespace Logica
             try
             {
                 PersistenciaCotizacion pc = new PersistenciaCotizacion();
-                //pc.EliminarSucursal(s);
+                pc.EliminarCotizacion(s);
             }
             catch (Exception ex)
             {
@@ -54,8 +54,7 @@ namespace Logica
             try
             {
                 PersistenciaCotizacion pc = new PersistenciaCotizacion();
-                //return pc.BuscaSucursal();
-                return null;
+                return pc.BuscarCotizacion(s);
             }
             catch (Exception ex)
             {
@@ -63,12 +62,12 @@ namespace Logica
             }
         }
 
-        public void ActualizarCotizacion(Cotizacion c)
+        public void ActualizarCotizacion(Cotizacion s, Empleado e)
         {
             try
             {
                 PersistenciaCotizacion pc = new PersistenciaCotizacion();
-                //pc.ModificarSucursal(c);
+                pc.ModificarCotizacion(s,e);
             }
             catch (Exception ex)
             {

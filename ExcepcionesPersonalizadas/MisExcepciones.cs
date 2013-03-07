@@ -169,5 +169,53 @@ namespace ExcepcionesPersonalizadas
         }
 
     }
+
+    /*ErrorCotizacionYaExiste*/
+
+    //[Serializable]
+    public class ErrorCotizacionYaExiste : Exception
+    {
+        public ErrorCotizacionYaExiste()
+        {
+
+        }
+
+        public ErrorCotizacionYaExiste(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+
+        }
+
+        private const string Mensaje = "ERROR: Ya existe una cotización para la fecha seleccionada.";
+
+        public override string Message
+        {
+            get { return Mensaje; }
+        }
+
+    }
+
+    /*ErrorNoExisteCotizacion*/
+    public class ErrorNoExisteCotizacion : Exception
+    {
+        public ErrorNoExisteCotizacion()
+        {
+
+        }
+
+        public ErrorNoExisteCotizacion(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+
+        }
+
+        private const string Mensaje = "ERROR: No existe cotización para la fecha seleccionada.";
+
+        public override string Message
+        {
+            get { return Mensaje; }
+        }
+
+    }
 }
 
