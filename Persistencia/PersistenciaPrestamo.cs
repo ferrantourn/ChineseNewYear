@@ -14,7 +14,17 @@ namespace Persistencia
     public class PersistenciaPrestamo
     {
 
-       
+        public void PagarCuota()
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
     }
 
 }

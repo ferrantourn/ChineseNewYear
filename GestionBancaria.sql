@@ -869,7 +869,20 @@ if not exists(select * from Cotizacion where Cotizacion.Fecha=@Fecha)
 end
 GO
 	
-	
+create proc spPagoPrestamo
+@IdEmpleado as int,
+@IdPrestamo as int,
+@NumeroSucursal as int,
+@Monto as float,
+@Fecha as datetime
+as
+begin
+	declare @numCuota as int
+	SET @numCuota = (select COUNT(*) from Pagos where IdPrestamo = @IdPrestamo) + 1
+	insert into Pagos (IdEmpleado,IdPrestamo,NumeroSucursal,Monto,Fecha,NumeroCuota) values (@IdEmpleado,@IdPrestamo,
+	@NumeroSucursal,@Monto,@Fecha,@numCuota)
+	return @@error
+end
 
 
 

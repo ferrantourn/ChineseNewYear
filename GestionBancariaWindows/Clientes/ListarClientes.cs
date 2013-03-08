@@ -14,21 +14,21 @@ namespace GestionBancariaWindows
 
         private void ListarClientes_Load(object sender, EventArgs e)
         {
-            try
-            {
-                LogicaUsuarios lu = new LogicaUsuarios();
-                List<Cliente> clientes = lu.ListarClientes();
+                try
+                {
+                    LogicaUsuarios lu = new LogicaUsuarios();
+                    List<Cliente> clientes = lu.ListarClientes();
 
-                bindingSource1.DataSource = clientes;
-                lvClientes.DataSource = bindingSource1;
-                bindingNavigator1.BindingSource = bindingSource1;
+                    bindingSource1.DataSource = clientes;
+                    lvClientes.DataSource = bindingSource1;
+                    bindingNavigator1.BindingSource = bindingSource1;
 
              
-            }
-            catch (Exception ex)
-            {
-                lblInfo.Text = ex.Message;
-            }
+                }
+                catch (Exception ex)
+                {
+                    lblInfo.Text = ex.Message;
+                }
         }
 
         private void lvClientes_CellClick(object sender, DataGridViewCellEventArgs e)

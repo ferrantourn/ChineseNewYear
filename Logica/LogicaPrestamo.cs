@@ -30,6 +30,19 @@ namespace Logica
             }
         }
 
+        public void PagarCuota(Prestamo p)
+        {
+            try
+            {
+                PersistenciaPrestamo persPrestamo = new PersistenciaPrestamo();
+                //persPrestamo
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<Prestamo> ListarPrestamo()
         {
             try

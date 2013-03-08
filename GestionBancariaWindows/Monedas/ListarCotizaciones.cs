@@ -68,6 +68,8 @@ namespace GestionBancariaWindows
             }
         }
 
+
+
         private void lvCotizaciones_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try

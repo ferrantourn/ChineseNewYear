@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblHeader = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -36,7 +37,7 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.cmbSucursal = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtNumPrestamo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.gbBuscar = new System.Windows.Forms.GroupBox();
             this.gbCliente = new System.Windows.Forms.GroupBox();
@@ -44,10 +45,13 @@
             this.txtMontoaPagar = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.SucursalbindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.gbCliente.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SucursalbindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -71,6 +75,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblInfo);
             this.panel2.Controls.Add(this.btnAceptar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 313);
@@ -87,13 +92,14 @@
             this.btnAceptar.TabIndex = 0;
             this.btnAceptar.Text = "Hacer Pago";
             this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.btnBuscar);
             this.panel3.Controls.Add(this.cmbSucursal);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.textBox1);
+            this.panel3.Controls.Add(this.txtNumPrestamo);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.gbBuscar);
             this.panel3.Controls.Add(this.gbCliente);
@@ -115,11 +121,15 @@
             // 
             // cmbSucursal
             // 
+            this.cmbSucursal.DataSource = this.SucursalbindingSource;
+            this.cmbSucursal.DisplayMember = "NOMBRE";
+            this.cmbSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSucursal.FormattingEnabled = true;
             this.cmbSucursal.Location = new System.Drawing.Point(347, 27);
             this.cmbSucursal.Name = "cmbSucursal";
             this.cmbSucursal.Size = new System.Drawing.Size(121, 21);
             this.cmbSucursal.TabIndex = 8;
+            this.cmbSucursal.ValueMember = "IDSUCURSAL";
             // 
             // label2
             // 
@@ -130,12 +140,12 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Sucursal";
             // 
-            // textBox1
+            // txtNumPrestamo
             // 
-            this.textBox1.Location = new System.Drawing.Point(131, 28);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 6;
+            this.txtNumPrestamo.Location = new System.Drawing.Point(131, 28);
+            this.txtNumPrestamo.Name = "txtNumPrestamo";
+            this.txtNumPrestamo.Size = new System.Drawing.Size(100, 20);
+            this.txtNumPrestamo.TabIndex = 6;
             // 
             // label1
             // 
@@ -163,7 +173,7 @@
             this.gbCliente.Controls.Add(this.label3);
             this.gbCliente.Location = new System.Drawing.Point(17, 90);
             this.gbCliente.Name = "gbCliente";
-            this.gbCliente.Size = new System.Drawing.Size(569, 100);
+            this.gbCliente.Size = new System.Drawing.Size(592, 100);
             this.gbCliente.TabIndex = 15;
             this.gbCliente.TabStop = false;
             this.gbCliente.Text = "Informacion del Prestamo";
@@ -202,6 +212,18 @@
             this.label3.TabIndex = 10;
             this.label3.Text = "Monto a Pagar";
             // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(13, 7);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(0, 13);
+            this.lblInfo.TabIndex = 1;
+            // 
+            // SucursalbindingSource
+            // 
+            this.SucursalbindingSource.DataSource = typeof(Entidades.Sucursal);
+            // 
             // PagoCuota
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -216,10 +238,12 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.gbCliente.ResumeLayout(false);
             this.gbCliente.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SucursalbindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -236,11 +260,13 @@
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.ComboBox cmbSucursal;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtNumPrestamo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox gbBuscar;
         private System.Windows.Forms.GroupBox gbCliente;
         private System.Windows.Forms.TextBox txtCliente;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.BindingSource SucursalbindingSource;
     }
 }
