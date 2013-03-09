@@ -480,6 +480,33 @@ if not exists(select * from Usuario where Usuario.Ci=@IdEmpleado and Usuario.Act
 END
 
 GO
+-- LOGINS
+create proc spLoginCliente
+@Usuario as nvarchar(15),
+@Pass as nvarchar(20)
+as
+begin
+	
+	select * from Usuario inner join Cliente on Usuario.Ci = Cliente.IdCliente
+	where Usuario.NombreUsuario = @Usuario and Usuario.Pass = @Pass
+	
+end
+GO
+
+create proc spLoginEmpleado
+@Usuario as nvarchar(15)
+as
+begin
+	
+	select Usuario.*, Sucursal.Activa as SucursalActiva, Sucursal.Direccion as DireccionSucursal, Sucursal.IdSucursal,
+	Sucursal.Nombre as NombreSucursal from Usuario inner join Empleado on Usuario.Ci = Empleado.IdUsuario
+	inner join Sucursal on Empleado.IdSucursal = Sucursal.IdSucursal
+	where Usuario.NombreUsuario = @Usuario
+	
+end
+GO
+
+--END LOGINS
 
 --muestra el id prestamo sin cancelar y el último realizado para dicho prestamo
 CREATE PROC spListarUltimosPagos 

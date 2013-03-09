@@ -10,7 +10,69 @@ namespace Persistencia
 {
     public class PersistenciaEmpleados
     {
+        public Empleado LoginEmpleado(string NombreUsuario, string Pass)
+        {
+            SqlConnection conexion = new SqlConnection(Conexion.Cnn);
+            SqlCommand cmd = Conexion.GetCommand("spLoginEmpleado", conexion, CommandType.StoredProcedure);
+            SqlParameter _userName = new SqlParameter("@Usuario", NombreUsuario);
+            cmd.Parameters.Add(_userName);
+            //SqlParameter _passWord = new SqlParameter("@Pass", Pass);
+            //cmd.Parameters.Add(_passWord);
+            SqlDataReader reader;
 
+            Empleado e = null;
+            int _ci, _idSucursal;
+            string _nombreusuario, _nombre, _nombreSucursal, _direccionSucursal, _apellido, _password;
+            bool _activo, _activaSucursal;
+            Sucursal s = new Sucursal();
+
+            try
+            {
+                conexion.Open();
+                reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    _ci = (int)reader["Ci"];
+                    _nombre = (string)reader["Nombre"];
+                    _nombreusuario = (string)reader["NombreUsuario"];
+                    _apellido = (string)reader["Apellido"];
+                    _password = (string)reader["Pass"];
+                    _activo = (bool)reader["Activo"];
+                    _nombreSucursal = (string)reader["NombreSucursal"];
+                    _direccionSucursal = (string)reader["DireccionSucursal"];
+                    _idSucursal = (int)reader["IdSucursal"];
+                    _activaSucursal = (bool)reader["SucursalActiva"];
+                    e = new Empleado
+                    {
+                        CI = _ci,
+                        NOMBREUSUARIO = _nombreusuario,
+                        NOMBRE = _nombre,
+                        APELLIDO = _apellido,
+                        PASS = _password,
+                        ACTIVO = _activo,
+                        SUCURSAL = new Sucursal
+                        {
+                            IDSUCURSAL = _idSucursal,
+                            NOMBRE = _nombreSucursal,
+                            ACTIVA = _activaSucursal,
+                            DIRECCION = _direccionSucursal
+                        }
+                    };
+                }
+                reader.Close();
+            }
+            catch
+            {
+                throw new ErrorBaseDeDatos();
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+            return e;
+        }
 
         /// <summary>
         /// Ingresa un nuevo Empleado en el sistema
@@ -90,7 +152,7 @@ namespace Persistencia
                         NOMBRE = _nombre,
                         APELLIDO = _apellido,
                         PASS = _password,
-                        SUCURSAL = new Sucursal { IDSUCURSAL= _idSucursal }
+                        SUCURSAL = new Sucursal { IDSUCURSAL = _idSucursal }
                     };
                 }
                 reader.Close();

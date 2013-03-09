@@ -122,5 +122,33 @@ namespace Logica
             }
         }
 
+
+        public Usuario getLoginUsuario(string NombreUsuario, string Pass)
+        {
+            try
+            {
+                //ServicioRemoting.ServicioAlumno _objServicioA = new ServicioRemoting.ServicioAlumno();
+                PersistenciaClientes pc = new PersistenciaClientes();
+                Cliente a = pc.LoginCliente(NombreUsuario, Pass);
+                if (a != null)
+                {
+                    return a;
+                }
+                else
+                {
+                    PersistenciaEmpleados pe = new PersistenciaEmpleados();
+
+                    //ServicioRemoting.ServicioDocente _objServicioD = new ServicioRemoting.ServicioDocente();
+                    pe.LoginEmpleado(NombreUsuario,Pass);
+                    Empleado e = pe.LoginEmpleado(NombreUsuario, Pass);
+                    
+                    return e;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

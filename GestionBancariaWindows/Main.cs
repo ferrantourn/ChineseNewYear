@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-
+using Entidades;
 namespace GestionBancariaWindows
 {
     public partial class Main : Form
@@ -8,6 +8,8 @@ namespace GestionBancariaWindows
         {
             InitializeComponent();
         }
+
+        public Empleado EMPLEADO { get;set;}
 
         private void arqueoDeCajaToolStripMenuItem_Click(object sender, System.EventArgs e)
         {

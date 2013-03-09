@@ -52,7 +52,7 @@ namespace Persistencia
                     throw new ErrorUsuarioYaExiste();
                 else if (Convert.ToInt32(_retorno.Value) < 0)
                     throw new ErrorBaseDeDatos();
-                
+
 
 
                 //ingresamos nuevos telefonos
@@ -313,6 +313,60 @@ namespace Persistencia
                 conexion.Close();
             }
 
+        }
+
+        public Cliente LoginCliente(string NombreUsuario, string Pass)
+        {
+            SqlConnection conexion = new SqlConnection(Conexion.Cnn);
+            SqlCommand cmd = Conexion.GetCommand("spLoginCliente", conexion, CommandType.StoredProcedure);
+            SqlParameter _userName = new SqlParameter("@Usuario", NombreUsuario);
+            cmd.Parameters.Add(_userName);
+            SqlParameter _passWord = new SqlParameter("@Pass", Pass);
+            cmd.Parameters.Add(_passWord);
+            SqlDataReader reader;
+
+            Cliente c = null;
+            int _ci;
+            string _nombreusuario, _nombre, _apellido, _password, _direccion;
+            bool _activo;
+
+            try
+            {
+                conexion.Open();
+                reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    _ci = (int)reader["Ci"];
+                    _nombre = (string)reader["Nombre"];
+                    _nombreusuario = (string)reader["NombreUsuario"];
+                    _apellido = (string)reader["Apellido"];
+                    _password = (string)reader["Pass"];
+                    _activo = (bool)reader["Activo"];
+                    c = new Cliente
+                    {
+                        CI = _ci,
+                        NOMBREUSUARIO = _nombreusuario,
+                        NOMBRE = _nombre,
+                        APELLIDO = _apellido,
+                        PASS = _password,
+                        TELEFONOS = null,
+                        ACTIVO = _activo,
+                        
+                    };
+                }
+                reader.Close();
+            }
+            catch
+            {
+                throw new ErrorBaseDeDatos();
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+            return c;
         }
     }
 }
