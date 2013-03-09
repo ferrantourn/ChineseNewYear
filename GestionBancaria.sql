@@ -265,7 +265,7 @@ if exists(select * from Sucursal where Sucursal.Direccion=@Direccion or Sucursal
 	end
 
 begin tran --insertamos la sucursal
-	insert into Sucursal(IdSucursal, Nombre, Activa)
+	insert into Sucursal(Direccion, Nombre, Activa)
 			values(@Direccion, @Nombre, 1)
 
 	if @@error<>0
