@@ -883,7 +883,7 @@ begin
 	@NumeroSucursal,@Monto,@Fecha,@numCuota)
 	return @@error
 end
-
+GO
 
 
 

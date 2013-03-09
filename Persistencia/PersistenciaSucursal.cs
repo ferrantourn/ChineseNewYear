@@ -5,11 +5,48 @@ using System.Text;
 using Entidades;
 using System.Data.SqlClient;
 using System.Data;
+using ExcepcionesPersonalizadas;
 
 namespace Persistencia
 {
     public class PersistenciaSucursal
     {
+
+
+        public void AltaSucursal(Sucursal L)
+        {
+            SqlConnection conexion = new SqlConnection(Conexion.Cnn);
+            SqlCommand cmd = Conexion.GetCommand("AltaSucursal", conexion, CommandType.StoredProcedure);
+
+
+            SqlParameter _nombre = new SqlParameter("@Nombre", L.NOMBRE);
+            SqlParameter _direccion = new SqlParameter("@Direccion", L.DIRECCION);
+
+            SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int) { Direction = ParameterDirection.ReturnValue };
+
+
+            cmd.Parameters.Add(_nombre);
+            cmd.Parameters.Add(_direccion);
+            cmd.Parameters.Add(_retorno);
+
+            try
+            {
+                conexion.Open();
+                cmd.ExecuteNonQuery();
+
+                if (Convert.ToInt32(_retorno.Value) < 0)
+                    throw new ErrorBaseDeDatos();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
 
         /// <summary>
         /// LISTA LAS SUCURSALES DEL BANCO
