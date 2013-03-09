@@ -11,7 +11,7 @@ namespace Entidades
         public Empleado EMPLEADO { get; set; }
 
         private Prestamo _prestamo;
-        public Prestamo Prestamo { get; set; }
+        public Prestamo PRESTAMO { get; set; }
 
         private decimal _monto;
         public decimal MONTO { get; set; }

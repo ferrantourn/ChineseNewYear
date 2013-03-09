@@ -30,18 +30,43 @@ namespace Logica
             }
         }
 
-        public void PagarCuota(Prestamo p)
+        /// <summary>
+        /// LISTA LOS PRESTAMOS QUE ESTAN ATRASADOS EN SU PAGO
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public List<Prestamo> ListarPrestamosAtrasados(Sucursal s)
         {
             try
             {
-                PersistenciaPrestamo persPrestamo = new PersistenciaPrestamo();
-                //persPrestamo
+                PersistenciaPagos pp = new PersistenciaPagos();
+                List<Pago> ultimosPagos = pp.ListarUltimoPagoPrestamos(s);
+
+                List<Prestamo> prestamosAtrasados = new List<Prestamo>();
+
+                foreach (Pago pago in ultimosPagos)
+                {
+                    DateTime fechaUltimoPagoPrestamo = pago.FECHAPAGO;
+                    DateTime fechaPagoPrestamoMesActual = new DateTime(DateTime.Now.Year, DateTime.Now.Month, pago.PRESTAMO.FECHAEMITIDO.Day);
+
+                    if (fechaPagoPrestamoMesActual > fechaUltimoPagoPrestamo)
+                    {
+                        if (DateTime.Today > fechaPagoPrestamoMesActual)
+                        {
+                            prestamosAtrasados.Add(pago.PRESTAMO);
+                        }
+                    }
+                }
+
+                return prestamosAtrasados;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
+
 
         public List<Prestamo> ListarPrestamo()
         {

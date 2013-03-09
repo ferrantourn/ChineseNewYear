@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PersistenciaPagos.cs" />
     <Compile Include="PersistenciaPrestamo.cs" />
     <Compile Include="PersistenciaCotizacion.cs" />
     <Compile Include="PersistenciaClientes.cs" />

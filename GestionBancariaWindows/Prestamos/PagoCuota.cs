@@ -21,6 +21,9 @@ namespace GestionBancariaWindows
         {
             try
             {
+                lblInfo.Text = "";
+
+                
                 LogicaSucursal lu = new LogicaSucursal();
                 List<Sucursal> sucursales = lu.ListarSucursales();
 
@@ -28,7 +31,6 @@ namespace GestionBancariaWindows
                 {
                     SucursalbindingSource.Add(s);
                 }
-
             }
             catch (Exception ex)
             {
@@ -40,11 +42,13 @@ namespace GestionBancariaWindows
         {
             try
             {
-                    int numPrestamo;
-                    if (Int32.TryParse(txtNumPrestamo.Text, out numPrestamo))
+                int numPrestamo;
+                if (Int32.TryParse(txtNumPrestamo.Text, out numPrestamo))
+                {
+                    LogicaPrestamo lu = new LogicaPrestamo();
+                    Prestamo p = new Prestamo { IDPRESTAMO = numPrestamo };
+                    if (p != null)
                     {
-                        LogicaPrestamo lu = new LogicaPrestamo();
-                        Prestamo p = new Prestamo { IDPRESTAMO = numPrestamo };
                         p = (Prestamo)lu.BuscarPrestamo(p);
 
                         txtCliente.Text = p.CLIENTE.NOMBRE + " " + p.CLIENTE.APELLIDO;
@@ -52,6 +56,12 @@ namespace GestionBancariaWindows
 
                         PRESTAMO = p;
                     }
+                    else
+                    {
+                        lblInfo.Text = "No se encontro ningun prestamo.";
+                    }
+
+                }
             }
             catch (Exception ex)
             {
@@ -69,27 +79,21 @@ namespace GestionBancariaWindows
 
         }
 
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             try
             {
                 if (this.ValidateChildren(ValidationConstraints.Enabled))
                 {
-                    LogicaPrestamo lp = new LogicaPrestamo();
-                    
+                    LogicaPagos lp = new LogicaPagos();
 
-                    //CARGAMOS INFORMACION DEL CLIENTE
-                    //--------------------------------
+                    lp.PagarCuota(PRESTAMO);
 
-                  
+                    lblInfo.Text = "Cuota pagada correctamente";
+                    LimpiarFormulario();
 
-
-              
                 }
-            }
-            catch (ErrorUsuarioYaExiste uex)
-            {
-                lblInfo.Text = uex.Message;
             }
             catch (Exception ex)
             {
@@ -97,6 +101,6 @@ namespace GestionBancariaWindows
             }
         }
 
-        
+
     }
 }

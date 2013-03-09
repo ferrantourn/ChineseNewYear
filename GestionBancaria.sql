@@ -481,7 +481,8 @@ END
 
 GO
 
-CREATE PROC spListarUltimosPagos --muestra el id prestamo sin cancelar y el último realizado para dicho prestamo
+--muestra el id prestamo sin cancelar y el último realizado para dicho prestamo
+CREATE PROC spListarUltimosPagos 
 @IdSucursal int
 as
 BEGIN
@@ -493,12 +494,33 @@ BEGIN
 	select * from Prestamo INNER JOIN
 		(select IdPrestamo, MAX(Pagos.Fecha) maxfecha from Pagos group by IdPrestamo) MP on Prestamo.IdPrestamo = MP.IdPrestamo 
 		INNER JOIN Pagos on Pagos.IdPrestamo=MP.IdPrestamo and Pagos.Fecha = MP.maxfecha	
-		where Prestamo.Cancelado = 0
-
+		where Prestamo.Cancelado = 0 and Prestamo.NumeroSucursal = @IdSucursal
 END
 GO
 
 
+CREATE PROC spListarPrestamos
+@Cancelado as bit,
+@IdSucursal as bit
+as
+begin
+select * from Prestamo where Prestamo.Cancelado = @Cancelado
+and Prestamo.NumeroSucursal = @IdSucursal
+end
+
+GO
+
+CREATE PROC spListarUltimoPagoPrestamo
+@IdPrestamo as bit
+as
+begin
+select top 1 * from Pagos 
+where Pagos.IdPrestamo = @IdPrestamo
+order by Fecha desc 
+end
+
+
+GO
 /*
 CREATE PROC spListarAtrasados --sin terminar
 @IdSucursal int,
@@ -894,7 +916,7 @@ end
 GO
 
 
-
+GO
 
 --INSERTAMOS VALORES PREDETERMINADOS
 ------------------------------------
@@ -906,7 +928,10 @@ exec AltaCliente @Direccion='aca', @Nombre='Amalfi', @Apellido='Marini',@Pass='j
 exec AltaPrestamo @Monto=10000, @Cuotas=10, @Moneda='UYU', @Fecha='01/01/1998', @IdCliente=3446586, @NumeroSucursal = 1
 exec AltaPago @Fecha='01/02/1981', @Monto=1000, @NumeroSucursal=1, @IdEmpleado = 1234567, @IdPrestamo=1
 
-exec spListarUltimosPagos 1
+EXEC AltaPrestamo @NumeroSucursal = 1,@IdCliente = 3446586,@Fecha = '01/01/2013',@Cuotas = 5,@Moneda = 'USD',@Monto = 200
+EXEC AltaPago @IdEmpleado = 1234567, @IdPrestamo = 2, @NumeroSucursal = 1, @Monto = 40, @Fecha = '12/01/2013'
+
+--exec spListarUltimosPagos 1
 
 select * from Pagos
 select * from Cliente

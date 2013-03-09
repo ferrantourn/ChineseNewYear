@@ -14,17 +14,107 @@ namespace Persistencia
     public class PersistenciaPrestamo
     {
 
-        public void PagarCuota()
+       
+        public List<Prestamo> ListarPrestamos(Sucursal s, bool cancelado)
         {
+
+            List<Prestamo> listaPrestamos = new List<Prestamo>();
+            SqlConnection conexion = new SqlConnection(Conexion.Cnn);
+            SqlCommand cmd = Conexion.GetCommand("spListarPrestamos", conexion, CommandType.StoredProcedure);
+            SqlParameter _numSucursal = new SqlParameter("@IdSucursal", s.IDSUCURSAL);
+            SqlParameter _cancelado = new SqlParameter("@Cancelado", cancelado);
+            cmd.Parameters.Add(_numSucursal);
+            cmd.Parameters.Add(_cancelado);
+            SqlDataReader _Reader;
             try
             {
+                conexion.Open();
+                _Reader = cmd.ExecuteReader();
+                int _idEmpleado, _idPrestamo, _cuotasPrestamo, _idCliente;
+                string _moneda;
+                decimal _montoTotalPrestamo;
+                DateTime _fechaEmitidoPrestamo;
 
+                while (_Reader.Read())
+                {
+                    _fechaEmitidoPrestamo = Convert.ToDateTime(_Reader["Fecha"]);
+                    _idPrestamo = Convert.ToInt32(_Reader["IdPrestamo"]);
+                    _cuotasPrestamo = Convert.ToInt32(_Reader["Cuotas"]);
+                    _idCliente = Convert.ToInt32(_Reader["IdCliente"]);
+                    _moneda = Convert.ToString(_Reader["Moneda"]);
+                    _montoTotalPrestamo = Convert.ToDecimal(_Reader["Monto"]);
+                    _idEmpleado = Convert.ToInt32(_Reader["IdEmpleado"]);
+
+                    Prestamo p = new Prestamo
+                    {
+                        CANCELADO = cancelado,
+                        CLIENTE = new Cliente { CI = _idCliente },
+                        FECHAEMITIDO = _fechaEmitidoPrestamo,
+                        IDPRESTAMO = _idPrestamo,
+                        MONEDA = _moneda,
+                        MONTO = _montoTotalPrestamo,
+                        SUCURSAL = s,
+                        TOTALCUOTAS = _cuotasPrestamo
+                    };
+
+                    listaPrestamos.Add(p);
+                }
+                _Reader.Close();
+
+                return listaPrestamos;
             }
             catch (Exception ex)
             {
-
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
             }
         }
-    }
 
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+
+    }
 }

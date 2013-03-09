@@ -229,6 +229,8 @@
     <None Include="Properties\DataSources\Entidades.Cliente.datasource" />
     <None Include="Properties\DataSources\Entidades.Cotizacion.datasource" />
     <None Include="Properties\DataSources\Entidades.Cuenta.datasource" />
+    <None Include="Properties\DataSources\Entidades.Pago.datasource" />
+    <None Include="Properties\DataSources\Entidades.Prestamo.datasource" />
     <None Include="Properties\DataSources\Entidades.Sucursal.datasource" />
     <None Include="Properties\DataSources\Logica.LogicaSucursal.datasource" />
     <None Include="Properties\Settings.settings">
