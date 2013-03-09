@@ -707,6 +707,10 @@ create proc spBuscarCuenta
 @IdCuenta int
 as
 begin
+if not exists(select * from Cuenta where Cuenta.IdCuenta=@IdCuenta)
+	begin
+		return -1   --Cuenta no existe en el sistema o está inactiva
+	end
 	select * from Cuenta where Cuenta.IdCuenta=@IdCuenta
 end
 GO
@@ -715,6 +719,10 @@ create proc spBuscarCuentaPorCi
 @Ci int
 as
 begin
+if not exists(select * from Usuario where Usuario.Ci = @Ci and Usuario.Activo = 1)
+	begin
+		return -1   --Usuario no existe en el sistema o está inactiva
+	end
 	select * from Cuenta inner join Cliente on Cuenta.IdCliente = Cliente.IdCliente and Cuenta.IdCliente=@Ci
 end
 GO

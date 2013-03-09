@@ -21,10 +21,44 @@ namespace Persistencia
 
             SqlParameter _nombre = new SqlParameter("@Nombre", L.NOMBRE);
             SqlParameter _direccion = new SqlParameter("@Direccion", L.DIRECCION);
-
             SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int) { Direction = ParameterDirection.ReturnValue };
 
 
+            cmd.Parameters.Add(_nombre);
+            cmd.Parameters.Add(_direccion);
+            cmd.Parameters.Add(_retorno);
+
+            try
+            {
+                conexion.Open();
+                cmd.ExecuteNonQuery();
+
+                if (Convert.ToInt32(_retorno.Value) < 0)
+                    throw new ErrorBaseDeDatos();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+
+        public void ModificarSucursal(Sucursal L)
+        {
+            SqlConnection conexion = new SqlConnection(Conexion.Cnn);
+            SqlCommand cmd = Conexion.GetCommand("spModificarSucursal", conexion, CommandType.StoredProcedure);
+
+            SqlParameter _IdSucursal = new SqlParameter("@IdSucursal", L.NOMBRE);
+            SqlParameter _nombre = new SqlParameter("@Nombre", L.NOMBRE);
+            SqlParameter _direccion = new SqlParameter("@Direccion", L.DIRECCION);
+            SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int) { Direction = ParameterDirection.ReturnValue };
+
+
+            cmd.Parameters.Add(_IdSucursal);
             cmd.Parameters.Add(_nombre);
             cmd.Parameters.Add(_direccion);
             cmd.Parameters.Add(_retorno);
