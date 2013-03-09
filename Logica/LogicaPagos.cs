@@ -23,7 +23,7 @@ namespace Logica
             }
         }
 
-        public List<Pago> ListarPagos()
+        public List<Pago> ListarPagos(Prestamo p)
         {
             try
             {

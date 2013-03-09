@@ -98,6 +98,7 @@ namespace GestionBancariaWindows
         private void prestamosAtrasadosToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             PrestamosAtrasados prestamosAtrasadosForm = new PrestamosAtrasados();
+            prestamosAtrasadosForm.EMPLEADO = EMPLEADO;
             prestamosAtrasadosForm.Show();
         }
 

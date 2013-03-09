@@ -135,5 +135,31 @@ namespace Logica
             }
         }
 
+
+        public List<Pago> IsPrestamoCancelado(ref Prestamo p)
+        {
+            try
+            {
+                LogicaPagos lp = new LogicaPagos();
+                List<Pago> pagos = lp.ListarPagos(p);
+
+                if (pagos.Count == p.TOTALCUOTAS)
+                {
+                    p.CANCELADO = true;
+                }
+                else
+                {
+                    p.CANCELADO = false;
+                }
+               
+                return pagos;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

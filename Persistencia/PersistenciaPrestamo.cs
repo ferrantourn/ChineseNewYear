@@ -10,11 +10,8 @@ using System.Transactions;
 
 namespace Persistencia
 {
-
     public class PersistenciaPrestamo
     {
-
-       
         public List<Prestamo> ListarPrestamos(Sucursal s, bool cancelado)
         {
 

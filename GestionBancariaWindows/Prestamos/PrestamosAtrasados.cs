@@ -18,14 +18,15 @@ namespace GestionBancariaWindows
         {
             InitializeComponent();
         }
+        public Empleado EMPLEADO { get; set; }
 
         private void PrestamosAtrasados_Load(object sender, EventArgs e)
         {
             try
             {
                 LogicaPrestamo lp = new LogicaPrestamo();
-                Sucursal s = new Sucursal();
-                List<Prestamo> prestamosAtrasados = lp.ListarPrestamosAtrasados(s);
+                //Sucursal s = new Sucursal();
+                List<Prestamo> prestamosAtrasados = lp.ListarPrestamosAtrasados(EMPLEADO.SUCURSAL);
 
                 PrestamosbindingSource.DataSource = prestamosAtrasados;
                 lvPrestamosAtrasados.DataSource = PrestamosbindingSource;
