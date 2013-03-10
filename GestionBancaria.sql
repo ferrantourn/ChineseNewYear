@@ -987,7 +987,7 @@ begin
 	select * from prestamo where prestamo.IdPrestamo=@IdPrestamo
 
 end
-
+GO
 
 create proc spArqueoCaja
 @Fecha datetime,
