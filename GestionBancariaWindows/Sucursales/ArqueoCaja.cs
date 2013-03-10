@@ -6,6 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Logica;
+using ExcepcionesPersonalizadas;
+using Entidades;
 
 namespace GestionBancariaWindows
 {
@@ -16,29 +19,56 @@ namespace GestionBancariaWindows
             InitializeComponent();
         }
 
+
+
         private void NuevaSucursal_Load(object sender, EventArgs e)
         {
 
         }
+
+
 
         private void lblDireccion_Click(object sender, EventArgs e)
         {
 
         }
 
+
+
         private void txtDireccion_TextChanged(object sender, EventArgs e)
         {
 
         }
+
+
 
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
         }
 
+
+
         private void lblCantidadTotalPrestamos_Click(object sender, EventArgs e)
         {
 
         }
+
+
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LogicaSucursal ls = new LogicaSucursal();
+                
+            }
+            catch (Exception ex)
+            {
+                lblInfo.Text = ex.Message;
+            }
+        }
+
+
     }
 }

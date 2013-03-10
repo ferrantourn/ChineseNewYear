@@ -89,5 +89,21 @@ namespace Logica
             }
         }
 
+
+        
+        public void ArqueoCaja (Empleado e)
+        {
+            try
+            {
+                PersistenciaSucursal ps = new PersistenciaSucursal();
+                // ps.ArqueoCaja(DateTime.Now,"USD",e);
+                // ps.ArqueoCaja(DateTime.Now,"UYU",e);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
