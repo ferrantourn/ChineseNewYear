@@ -32,12 +32,14 @@ namespace GestionBancariaWindows
         private void retiroToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             RetiroCuenta retiroCuentaForm = new RetiroCuenta();
+            retiroCuentaForm.EMPLEADO = EMPLEADO;
             retiroCuentaForm.Show();
         }
 
         private void depositoToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             DepositoCuenta depositoCuentaForm = new DepositoCuenta();
+            depositoCuentaForm.EMPLEADO = EMPLEADO;
             depositoCuentaForm.Show();
         }
 

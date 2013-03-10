@@ -237,5 +237,62 @@ namespace Persistencia
                 conexion.Close();
             }
         }
+
+        public List<Cuenta> BuscarCuentasCliente(Cliente cliente)
+        {
+            List<Cuenta> _listaCuentas = new List<Cuenta>();
+
+            SqlConnection conexion = new SqlConnection(Conexion.Cnn);
+            SqlCommand cmd = Conexion.GetCommand("spBuscarCuentaPorCi", conexion, CommandType.StoredProcedure);
+            SqlParameter _ci = new SqlParameter("@Ci", cliente.CI);
+            cmd.Parameters.Add(_ci);
+
+            SqlDataReader _Reader;
+            try
+            {
+                conexion.Open();
+                cmd.ExecuteNonQuery();
+                _Reader = cmd.ExecuteReader();
+                int _idCuenta, _idSucursal, _idCliente;
+                decimal _saldo;
+                string _moneda, _nombreUsuario, _nombre, _apellido;
+                bool _activo;
+
+                while (_Reader.Read())
+                {
+                    _idCuenta = (int)_Reader["IdCuenta"];
+                    _idCliente = (int)_Reader["IdCliente"];
+                    _idSucursal = (int)_Reader["IdSucursal"];
+                    _saldo = Convert.ToDecimal(_Reader["Saldo"]);
+                    _moneda = (string)_Reader["Moneda"];
+                    _activo = (bool)_Reader["Activo"];
+                    _nombreUsuario = (string)_Reader["NombreUsuario"];
+                    _nombre = (string)_Reader["Nombre"];
+                    _apellido = (string)_Reader["Apellido"];
+
+                    Cuenta c = new Cuenta
+                    {
+                        IDCUENTA = _idCuenta,
+                        CLIENTE = new Cliente { CI = _idCliente, ACTIVO = _activo, APELLIDO = _apellido, NOMBRE = _nombre, NOMBREUSUARIO = _nombreUsuario },
+                        SUCURSAL = new Sucursal { IDSUCURSAL = _idSucursal },
+                        SALDO = _saldo,
+                        MONEDA = _moneda,
+                    };
+
+                    _listaCuentas.Add(c);
+                }
+                _Reader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Problemas con la base de datos:" + ex.Message);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+            return _listaCuentas;
+        }
     }
 }

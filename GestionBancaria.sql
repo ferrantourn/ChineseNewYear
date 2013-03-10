@@ -357,14 +357,15 @@ create table Movimiento(IdSucursal int not null references Sucursal(IdSucursal),
 						-- . No es necesario establecer un campo de tipo bit para definir si es un movimiento web o dentro de entidad
 						*/
 
-create proc AltaMovimiento /*podemos controlar lo de la cotizacion fuera del script*/
+create proc [dbo].[AltaMovimiento] /*podemos controlar lo de la cotizacion fuera del script*/
 @IdSucursal int,
 @Tipo int,
 @Fecha datetime,
 @Moneda nvarchar(3),
 @ViaWeb bit,
 @Monto float,
-@CiUsuario int
+@CiUsuario int,
+@IdCuenta int
 as
 BEGIN
 if not exists(select * from Sucursal where Sucursal.IdSucursal=@IdSucursal and Sucursal.Activa = 1)
@@ -381,18 +382,47 @@ declare @cantidad int
 select @cantidad = COUNT(*) from Movimiento where Movimiento.IdSucursal=@IdSucursal
 set @cantidad = @cantidad+1 /*numero del nuevo movimiento*/
 
-insert into Movimiento(IdSucursal,NumeroMovimiento,Tipo,Fecha,Moneda,ViaWeb,Monto)
+	begin tran
+	--guardamos el movimiento
+	insert into Movimiento(IdSucursal,NumeroMovimiento,Tipo,Fecha,Moneda,ViaWeb,Monto)
 			values(@IdSucursal, @cantidad, @Tipo, @Fecha, @Moneda,@ViaWeb,@Monto)
+			
+	if @@ERROR <> 0
+	begin	
+		rollback tran		
+		return -3
+	end
+	
+	--Distinguimos si sumamos o restamos el saldo de la cuenta
+	declare @saldo float
+	select @saldo = Saldo from Cuenta where Cuenta.IdCuenta = @IdCuenta
+	
+	if @@ERROR <> 0
+	begin	
+		rollback tran		
+		return -3
+	end
+	
+	if (@Tipo = 2)
+	begin
+		set @saldo = @saldo + @monto
+		end
+	else
+	begin
+		set @saldo = @saldo - @monto
+	end
+		
+	update Cuenta set Saldo = @saldo where Cuenta.IdCuenta = @IdCuenta
 			
 	if @@error<>0
 	begin
-		return -3  --Si no se pudo insertar movimiento--
+		rollback tran		
+		return -3  --Si no se actualiza el saldo--
 	end
 
 commit tran
 END
 GO
-
 /*
 create table Cotizacion(
 						Fecha datetime not null,
@@ -772,7 +802,8 @@ if not exists(select * from Usuario where Usuario.Ci = @Ci and Usuario.Activo = 
 	begin
 		return -1   --Usuario no existe en el sistema o está inactiva
 	end
-	select * from Cuenta inner join Cliente on Cuenta.IdCliente = Cliente.IdCliente and Cuenta.IdCliente=@Ci
+	select Cuenta.*, Usuario.*, Cliente.Direccion  from Cuenta inner join Usuario on Usuario.CI = Cuenta.IdCliente
+	inner join Cliente on Cuenta.IdCliente = Cliente.IdCliente and Cuenta.IdCliente=@Ci
 end
 GO
 

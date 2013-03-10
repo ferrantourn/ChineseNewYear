@@ -217,5 +217,49 @@ namespace ExcepcionesPersonalizadas
         }
 
     }
+
+    public class ErrorSucursalNoExiste: Exception
+    {
+        public ErrorSucursalNoExiste()
+        {
+
+        }
+
+        public ErrorSucursalNoExiste(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+
+        }
+
+        private const string Mensaje = "ERROR: No existe la sucursal o se encuentra inactiva.";
+
+        public override string Message
+        {
+            get { return Mensaje; }
+        }
+
+    }
+
+    public class ErrorSaldoInsuficienteParaRetiro : Exception
+    {
+        public ErrorSaldoInsuficienteParaRetiro()
+        {
+
+        }
+
+        public ErrorSaldoInsuficienteParaRetiro(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+
+        }
+
+        private const string Mensaje = "ERROR: El saldo de su cuenta es inferior al monto que desea retirar.";
+
+        public override string Message
+        {
+            get { return Mensaje; }
+        }
+
+    }
 }
 

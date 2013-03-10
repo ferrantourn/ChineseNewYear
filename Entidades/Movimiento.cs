@@ -8,8 +8,8 @@ namespace Entidades
         private int _idMovimiento;
         public int IDMOVIMIENTO { get; set; }
 
-        private string _tipoMovimiento;
-        public string TIPOMOVIMIENTO { get; set; }
+        private int _tipoMovimiento;
+        public int TIPOMOVIMIENTO { get; set; }
 
         private DateTime _fecha;
         public DateTime FECHA { get; set; }

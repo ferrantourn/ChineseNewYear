@@ -31,11 +31,12 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblHeader = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblInfo = new System.Windows.Forms.Label();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.txtMoneda = new System.Windows.Forms.TextBox();
-            this.cmbMonedaRetiro = new System.Windows.Forms.ComboBox();
+            this.cmbMonedaDeposito = new System.Windows.Forms.ComboBox();
             this.txtNumCuenta = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.lblCedula = new System.Windows.Forms.Label();
@@ -44,6 +45,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
+            this.lblCotizacion = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -71,12 +73,21 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblInfo);
             this.panel2.Controls.Add(this.btnAceptar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 313);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(621, 41);
             this.panel2.TabIndex = 1;
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(4, 4);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(0, 13);
+            this.lblInfo.TabIndex = 1;
             // 
             // btnAceptar
             // 
@@ -87,12 +98,14 @@
             this.btnAceptar.TabIndex = 0;
             this.btnAceptar.Text = "Depositar";
             this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.lblCotizacion);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.txtMoneda);
-            this.panel3.Controls.Add(this.cmbMonedaRetiro);
+            this.panel3.Controls.Add(this.cmbMonedaDeposito);
             this.panel3.Controls.Add(this.txtNumCuenta);
             this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.lblCedula);
@@ -118,19 +131,24 @@
             // 
             // txtMoneda
             // 
+            this.txtMoneda.Enabled = false;
             this.txtMoneda.Location = new System.Drawing.Point(425, 63);
             this.txtMoneda.Name = "txtMoneda";
             this.txtMoneda.Size = new System.Drawing.Size(121, 20);
             this.txtMoneda.TabIndex = 23;
-            this.txtMoneda.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // cmbMonedaRetiro
+            // cmbMonedaDeposito
             // 
-            this.cmbMonedaRetiro.FormattingEnabled = true;
-            this.cmbMonedaRetiro.Location = new System.Drawing.Point(425, 99);
-            this.cmbMonedaRetiro.Name = "cmbMonedaRetiro";
-            this.cmbMonedaRetiro.Size = new System.Drawing.Size(121, 21);
-            this.cmbMonedaRetiro.TabIndex = 21;
+            this.cmbMonedaDeposito.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMonedaDeposito.FormattingEnabled = true;
+            this.cmbMonedaDeposito.Items.AddRange(new object[] {
+            "USD",
+            "UYU"});
+            this.cmbMonedaDeposito.Location = new System.Drawing.Point(425, 99);
+            this.cmbMonedaDeposito.Name = "cmbMonedaDeposito";
+            this.cmbMonedaDeposito.Size = new System.Drawing.Size(121, 21);
+            this.cmbMonedaDeposito.TabIndex = 21;
+            this.cmbMonedaDeposito.SelectedIndexChanged += new System.EventHandler(this.cmbMonedaDeposito_SelectedIndexChanged);
             // 
             // txtNumCuenta
             // 
@@ -172,6 +190,7 @@
             this.btnBuscar.TabIndex = 13;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // label3
             // 
@@ -193,10 +212,19 @@
             // 
             // txtNombre
             // 
+            this.txtNombre.Enabled = false;
             this.txtNombre.Location = new System.Drawing.Point(116, 65);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 20);
             this.txtNombre.TabIndex = 15;
+            // 
+            // lblCotizacion
+            // 
+            this.lblCotizacion.AutoSize = true;
+            this.lblCotizacion.Location = new System.Drawing.Point(31, 175);
+            this.lblCotizacion.Name = "lblCotizacion";
+            this.lblCotizacion.Size = new System.Drawing.Size(0, 13);
+            this.lblCotizacion.TabIndex = 24;
             // 
             // DepositoCuenta
             // 
@@ -211,6 +239,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ResumeLayout(false);
@@ -226,7 +255,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtMoneda;
-        private System.Windows.Forms.ComboBox cmbMonedaRetiro;
+        private System.Windows.Forms.ComboBox cmbMonedaDeposito;
         private System.Windows.Forms.TextBox txtNumCuenta;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblCedula;
@@ -235,5 +264,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Label lblCotizacion;
     }
 }

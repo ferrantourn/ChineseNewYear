@@ -15,5 +15,9 @@ namespace Entidades
         public decimal PRECIOVENTA { get; set; }
 
 
+        public override string ToString()
+        {
+            return "Cotizacion del dolar para la fecha: " + FECHA.ToShortDateString()  + "Compra: $" + PRECIOCOMPRA + " " + "Venta: $"  + PRECIOVENTA;
+        }
     }
 }

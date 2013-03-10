@@ -22,5 +22,17 @@ namespace Entidades
         private List<Movimiento> _movimientosCuenta;
         public List<Movimiento> MOVIMIENTOSCUENTA { get; set; }
 
+        public override string ToString() 
+        {
+            return "Numero cuenta:"  + " " + IDCUENTA + " - " + "Moneda: " + MONEDA + " - " + "Saldo: " + SALDO;
+        }
+        public string TOSTRING
+        {
+            get
+            {
+                return ToString();
+            }
+        }
+
     }
 }
