@@ -162,6 +162,67 @@ namespace Persistencia
             }
         }
 
+
+        public Prestamo BuscarPrestamo(Prestamo P)
+        {
+            SqlConnection conexion = new SqlConnection(Conexion.Cnn);
+
+            try
+            {
+                SqlCommand cmd = Conexion.GetCommand("spBuscarCuenta", conexion, CommandType.StoredProcedure);
+                SqlParameter _IdPrestamo = new SqlParameter("@IdCuenta", P.IDPRESTAMO);
+                cmd.Parameters.Add(_IdPrestamo);
+
+                SqlDataReader _Reader;
+                Prestamo PNuevo = null;
+                int _idCuenta, _idSucursal, _idCliente, _Cancelado = 0 ;
+                decimal _saldo;
+                string _moneda;
+
+
+                conexion.Open();
+                _Reader = cmd.ExecuteReader();
+                if (_Reader.Read())
+                {
+                    _idCuenta = (int)_Reader["IdCuenta"];
+                    _idCliente = (int)_Reader["IdCliente"];
+                    _idSucursal = (int)_Reader["IdSucursal"];
+                    _saldo = Convert.ToDecimal(_Reader["Saldo"]);
+                    _moneda = (string)_Reader["Moneda"];
+
+                    PNuevo = new Prestamo
+                    {
+
+                        FECHAEMITIDO = _Fecha,
+                        MONTO = _Monto,
+                        IDPRESTAMO = _IdPrestamo,
+                        TOTALCUOTAS = _Cuotas,
+                        CLIENTE = new Cliente{CI=_idCliente},
+                        MONEDA = _moneda,
+                        SUCURSAL = new Sucursal{IDSUCURSAL = _idSucursal}
+                    };
+                }
+                _Reader.Close();
+
+                if (_Cancelado = 1)
+                {
+                    PNuevo.CANCELADO = true;
+                }
+                return PNuevo;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Problemas con la base de datos:" + ex.Message);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+
+        }
+
+
         
 
 

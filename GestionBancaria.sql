@@ -973,7 +973,24 @@ begin
 end
 GO
 
+create proc spArqueoCaja
+@Fecha datetime,
+@Moneda nvarchar(3)
+as
+begin
+	declare @Pagos as int
+	declare @Depositos as int
+	declare @Retiros as int
+	declare @ArqueoTotal as int
+	
+	set @Pagos = (select SUM(Pagos.Monto) from Pagos inner join Prestamo on Prestamo.IdPrestamo=Pagos.IdPrestamo where Prestamo.Moneda=@Moneda and Pagos.Fecha = @Fecha)
+	set @Depositos = (select SUM(Movimiento.Monto) from Movimiento where Movimiento.Fecha = @Fecha and Movimiento.Tipo=0 and Movimiento.Moneda=@Moneda)
+	set @Retiros = (select SUM(Movimiento.Monto) from Movimiento where Movimiento.Fecha = @Fecha and Movimiento.Tipo = 1 and Movimiento.Moneda=@Moneda)
+	set @ArqueoTotal = @Pagos+@Depositos-@Retiros
+	
+	return @ArqueoTotal 
 
+end
 GO
 
 --INSERTAMOS VALORES PREDETERMINADOS
