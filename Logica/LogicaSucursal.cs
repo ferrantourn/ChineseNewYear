@@ -76,5 +76,18 @@ namespace Logica
             }
         }
 
+        public List<Sucursal> ListadoProductividadComparativo (DateTime fechaInicio, DateTime fechaFin)
+        {
+            try
+            {
+                PersistenciaSucursal ps = new PersistenciaSucursal();
+                return ps.ListadoProductividadComparativo(fechaInicio, fechaFin);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

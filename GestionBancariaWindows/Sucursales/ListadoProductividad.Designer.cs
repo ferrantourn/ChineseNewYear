@@ -39,16 +39,17 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.SucursalbindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.lvSucursales = new System.Windows.Forms.DataGridView();
             this.SucursalCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dIRECCIONDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CantCuentasCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrestamosCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SucursalbindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.lblInfo = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lvSucursales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SucursalbindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -121,6 +122,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.lblInfo);
             this.panel2.Controls.Add(this.btnAceptar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 273);
@@ -141,35 +143,31 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.dataGridView1);
+            this.panel3.Controls.Add(this.lvSucursales);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 92);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(622, 181);
             this.panel3.TabIndex = 2;
             // 
-            // dataGridView1
+            // lvSucursales
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.lvSucursales.AllowUserToAddRows = false;
+            this.lvSucursales.AllowUserToDeleteRows = false;
+            this.lvSucursales.AutoGenerateColumns = false;
+            this.lvSucursales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.lvSucursales.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SucursalCol,
             this.dIRECCIONDataGridViewTextBoxColumn,
             this.CantCuentasCol,
             this.PrestamosCol});
-            this.dataGridView1.DataSource = this.SucursalbindingSource;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(622, 181);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // SucursalbindingSource
-            // 
-            this.SucursalbindingSource.DataSource = typeof(Entidades.Sucursal);
+            this.lvSucursales.DataSource = this.SucursalbindingSource;
+            this.lvSucursales.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvSucursales.Location = new System.Drawing.Point(0, 0);
+            this.lvSucursales.Name = "lvSucursales";
+            this.lvSucursales.ReadOnly = true;
+            this.lvSucursales.Size = new System.Drawing.Size(622, 181);
+            this.lvSucursales.TabIndex = 0;
             // 
             // SucursalCol
             // 
@@ -200,6 +198,18 @@
             this.PrestamosCol.Name = "PrestamosCol";
             this.PrestamosCol.ReadOnly = true;
             // 
+            // SucursalbindingSource
+            // 
+            this.SucursalbindingSource.DataSource = typeof(Entidades.Sucursal);
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(13, 7);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(0, 13);
+            this.lblInfo.TabIndex = 1;
+            // 
             // ListadoProductividad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -213,8 +223,9 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lvSucursales)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SucursalbindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -230,7 +241,7 @@
         private System.Windows.Forms.Label lblDireccion;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblHeader;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView lvSucursales;
         private System.Windows.Forms.Label lblFechaFin;
         private System.Windows.Forms.DateTimePicker dtpFechaFin;
         private System.Windows.Forms.Label lblFechaInicio;
@@ -242,5 +253,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dIRECCIONDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CantCuentasCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrestamosCol;
+        private System.Windows.Forms.Label lblInfo;
     }
 }

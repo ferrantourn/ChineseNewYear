@@ -133,5 +133,58 @@ namespace Persistencia
 
             return _listaSucursales;
         }
+
+        public List<Sucursal> ListadoProductividadComparativo(DateTime fechaInicio, DateTime fechaFin)
+        {
+            List<Sucursal> _listaSucursales = new List<Sucursal>();
+
+            SqlConnection conexion = new SqlConnection(Conexion.Cnn);
+            SqlCommand cmd = Conexion.GetCommand("spListadoProductividadComparativo", conexion, CommandType.StoredProcedure);
+            SqlParameter _fechaInicio = new SqlParameter("@FechaInicio", fechaInicio);
+            SqlParameter _fechaFin = new SqlParameter("@FechaFin", fechaFin);
+            cmd.Parameters.Add(_fechaInicio);
+            cmd.Parameters.Add(_fechaFin);
+
+
+            SqlDataReader _Reader;
+            try
+            {
+                conexion.Open();
+                cmd.ExecuteNonQuery();
+                _Reader = cmd.ExecuteReader();
+                string _nombre, _direccion;
+                int _cantidadCuentas, _cantidadPrestamos;
+
+                while (_Reader.Read())
+                {
+                    _nombre = (string)_Reader["Nombre"];
+                    _direccion = (string)_Reader["Direccion"];
+                    _cantidadCuentas = Convert.ToInt32(_Reader["CantCuentasAbiertas"]);
+                    _cantidadPrestamos = Convert.ToInt32(_Reader["CantPrestamosOtorgados"]);
+
+
+                    Sucursal s = new Sucursal
+                    {
+                        NOMBRE = _nombre,
+                        DIRECCION = _direccion,
+                        CANTIDADCUENTASABIERTAS = _cantidadCuentas,
+                        CANTIDADPRESTAMOS = _cantidadPrestamos
+                    };
+
+                    _listaSucursales.Add(s);
+                }
+                _Reader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Problemas con la base de datos:" + ex.Message);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+            return _listaSucursales;
+        }
     }
 }

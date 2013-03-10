@@ -1000,7 +1000,7 @@ create proc spListadoProductividadComparativo
 @FechaFin as datetime
 as
 begin
-	select Sucursal.Nombre, CantidadCuentas.cantCuentas as CantCuentasAbiertas,
+	select Sucursal.Nombre, Sucursal.Direccion, CantidadCuentas.cantCuentas as CantCuentasAbiertas,
 CantidadPrestamos.cantPrestamos as CantPrestamosOtorgados from Sucursal 
 left outer join (
 select Count(Cuenta.IdCuenta) as cantCuentas, Cuenta.IdSucursal from Cuenta
@@ -1010,6 +1010,8 @@ left outer join (
 select Count(Prestamo.IdPrestamo) as cantPrestamos, Prestamo.NumeroSucursal from Prestamo
 where @FechaInicio <= Prestamo.Fecha and Prestamo.Fecha <= @FechaFin
 group by Prestamo.NumeroSucursal) as CantidadPrestamos on Sucursal.IdSucursal = CantidadPrestamos.NumeroSucursal
+
+where Sucursal.Activa = 1
 end
 
 GO
