@@ -28,24 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.lblFechaFin = new System.Windows.Forms.Label();
             this.lblHeader = new System.Windows.Forms.Label();
+            this.dtpFechaFin = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaInicio = new System.Windows.Forms.DateTimePicker();
+            this.lblFechaInicio = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.lblFechaFin = new System.Windows.Forms.Label();
-            this.dtpFechaFin = new System.Windows.Forms.DateTimePicker();
-            this.lblFechaInicio = new System.Windows.Forms.Label();
-            this.dtpFechaInicio = new System.Windows.Forms.DateTimePicker();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.SucursalbindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.SucursalCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dIRECCIONDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CantCuentasCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrestamosCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SucursalbindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -63,6 +67,25 @@
             this.panel1.Size = new System.Drawing.Size(622, 92);
             this.panel1.TabIndex = 0;
             // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(449, 54);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.TabIndex = 5;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // lblFechaFin
+            // 
+            this.lblFechaFin.AutoSize = true;
+            this.lblFechaFin.Location = new System.Drawing.Point(239, 62);
+            this.lblFechaFin.Name = "lblFechaFin";
+            this.lblFechaFin.Size = new System.Drawing.Size(54, 13);
+            this.lblFechaFin.TabIndex = 4;
+            this.lblFechaFin.Text = "Fecha Fin";
+            // 
             // lblHeader
             // 
             this.lblHeader.AutoSize = true;
@@ -72,6 +95,29 @@
             this.lblHeader.Size = new System.Drawing.Size(311, 20);
             this.lblHeader.TabIndex = 0;
             this.lblHeader.Text = "Listado de Productividad Comparativo";
+            // 
+            // dtpFechaFin
+            // 
+            this.dtpFechaFin.Location = new System.Drawing.Point(299, 56);
+            this.dtpFechaFin.Name = "dtpFechaFin";
+            this.dtpFechaFin.Size = new System.Drawing.Size(140, 20);
+            this.dtpFechaFin.TabIndex = 3;
+            // 
+            // dtpFechaInicio
+            // 
+            this.dtpFechaInicio.Location = new System.Drawing.Point(84, 56);
+            this.dtpFechaInicio.Name = "dtpFechaInicio";
+            this.dtpFechaInicio.Size = new System.Drawing.Size(140, 20);
+            this.dtpFechaInicio.TabIndex = 1;
+            // 
+            // lblFechaInicio
+            // 
+            this.lblFechaInicio.AutoSize = true;
+            this.lblFechaInicio.Location = new System.Drawing.Point(13, 62);
+            this.lblFechaInicio.Name = "lblFechaInicio";
+            this.lblFechaInicio.Size = new System.Drawing.Size(65, 13);
+            this.lblFechaInicio.TabIndex = 2;
+            this.lblFechaInicio.Text = "Fecha Inicio";
             // 
             // panel2
             // 
@@ -91,6 +137,7 @@
             this.btnAceptar.TabIndex = 0;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // panel3
             // 
@@ -101,74 +148,57 @@
             this.panel3.Size = new System.Drawing.Size(622, 181);
             this.panel3.TabIndex = 2;
             // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Location = new System.Drawing.Point(449, 52);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscar.TabIndex = 5;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            // 
-            // lblFechaFin
-            // 
-            this.lblFechaFin.AutoSize = true;
-            this.lblFechaFin.Location = new System.Drawing.Point(239, 62);
-            this.lblFechaFin.Name = "lblFechaFin";
-            this.lblFechaFin.Size = new System.Drawing.Size(54, 13);
-            this.lblFechaFin.TabIndex = 4;
-            this.lblFechaFin.Text = "Fecha Fin";
-            // 
-            // dtpFechaFin
-            // 
-            this.dtpFechaFin.Location = new System.Drawing.Point(299, 56);
-            this.dtpFechaFin.Name = "dtpFechaFin";
-            this.dtpFechaFin.Size = new System.Drawing.Size(140, 20);
-            this.dtpFechaFin.TabIndex = 3;
-            // 
-            // lblFechaInicio
-            // 
-            this.lblFechaInicio.AutoSize = true;
-            this.lblFechaInicio.Location = new System.Drawing.Point(13, 62);
-            this.lblFechaInicio.Name = "lblFechaInicio";
-            this.lblFechaInicio.Size = new System.Drawing.Size(65, 13);
-            this.lblFechaInicio.TabIndex = 2;
-            this.lblFechaInicio.Text = "Fecha Inicio";
-            // 
-            // dtpFechaInicio
-            // 
-            this.dtpFechaInicio.Location = new System.Drawing.Point(84, 56);
-            this.dtpFechaInicio.Name = "dtpFechaInicio";
-            this.dtpFechaInicio.Size = new System.Drawing.Size(140, 20);
-            this.dtpFechaInicio.TabIndex = 1;
-            // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SucursalCol,
+            this.dIRECCIONDataGridViewTextBoxColumn,
             this.CantCuentasCol,
             this.PrestamosCol});
+            this.dataGridView1.DataSource = this.SucursalbindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(622, 181);
             this.dataGridView1.TabIndex = 0;
             // 
+            // SucursalbindingSource
+            // 
+            this.SucursalbindingSource.DataSource = typeof(Entidades.Sucursal);
+            // 
             // SucursalCol
             // 
+            this.SucursalCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SucursalCol.DataPropertyName = "NOMBRE";
             this.SucursalCol.HeaderText = "Sucursal";
             this.SucursalCol.Name = "SucursalCol";
+            this.SucursalCol.ReadOnly = true;
+            // 
+            // dIRECCIONDataGridViewTextBoxColumn
+            // 
+            this.dIRECCIONDataGridViewTextBoxColumn.DataPropertyName = "DIRECCION";
+            this.dIRECCIONDataGridViewTextBoxColumn.HeaderText = "Direccion";
+            this.dIRECCIONDataGridViewTextBoxColumn.Name = "dIRECCIONDataGridViewTextBoxColumn";
+            this.dIRECCIONDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // CantCuentasCol
             // 
+            this.CantCuentasCol.DataPropertyName = "CANTIDADCUENTASABIERTAS";
             this.CantCuentasCol.HeaderText = "Cuentas Abiertas";
             this.CantCuentasCol.Name = "CantCuentasCol";
+            this.CantCuentasCol.ReadOnly = true;
             // 
             // PrestamosCol
             // 
+            this.PrestamosCol.DataPropertyName = "CANTIDADPRESTAMOS";
             this.PrestamosCol.HeaderText = "Prestamos";
             this.PrestamosCol.Name = "PrestamosCol";
+            this.PrestamosCol.ReadOnly = true;
             // 
             // ListadoProductividad
             // 
@@ -185,6 +215,7 @@
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SucursalbindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -204,10 +235,12 @@
         private System.Windows.Forms.DateTimePicker dtpFechaFin;
         private System.Windows.Forms.Label lblFechaInicio;
         private System.Windows.Forms.DateTimePicker dtpFechaInicio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SucursalCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CantCuentasCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PrestamosCol;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.BindingSource SucursalbindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SucursalCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dIRECCIONDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CantCuentasCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrestamosCol;
     }
 }

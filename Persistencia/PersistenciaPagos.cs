@@ -92,17 +92,17 @@ namespace Persistencia
             }
         }
 
-        public void PagarCuota(Cuota C)
-        {
-            try
-            {
+        //public void PagarCuota(Cuota C)
+        //{
+        //    try
+        //    {
 
-            }
-            catch (Exception ex)
-            {
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
     }
 }

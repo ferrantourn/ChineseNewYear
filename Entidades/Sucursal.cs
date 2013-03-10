@@ -29,5 +29,9 @@ namespace Entidades
        private List<Prestamo> _prestamosSucursal;
        public List<Prestamo> PRESTAMOSSUCURSAL { get; set; }
 
+       private int _cantidadPrestamos;
+       private int _cantidadCuentasAbiertas;
+       public int CANTIDADPRESTAMOS { get; set; }
+       public int CANTIDADCUENTASABIERTAS { get; set; }
    }
 }
