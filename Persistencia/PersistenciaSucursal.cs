@@ -47,6 +47,43 @@ namespace Persistencia
             }
         }
 
+        public decimal ArqueoCaja(DateTime Fecha, string Moneda, Empleado E)
+        {
+            SqlConnection conexion = new SqlConnection(Conexion.Cnn);
+            SqlCommand cmd = Conexion.GetCommand("spArqueoCaja", conexion, CommandType.StoredProcedure);
+
+
+            SqlParameter _Empleado = new SqlParameter("@IdEmpleado", E.CI);
+            SqlParameter _Fecha = new SqlParameter("@Fecha", Fecha);
+            SqlParameter _Moneda = new SqlParameter("@Moneda", Moneda);
+            SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int) { Direction = ParameterDirection.ReturnValue };
+
+
+            cmd.Parameters.Add(_Fecha);
+            cmd.Parameters.Add(_Moneda);
+            cmd.Parameters.Add(_Empleado);
+            cmd.Parameters.Add(_retorno);
+
+
+            try
+            {
+                conexion.Open();
+                cmd.ExecuteNonQuery();
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+            return Convert.ToInt32(_retorno.Value);
+        }
+
         public void ModificarSucursal(Sucursal L)
         {
             SqlConnection conexion = new SqlConnection(Conexion.Cnn);
