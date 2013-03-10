@@ -959,7 +959,7 @@ if not exists(select * from Cotizacion where Cotizacion.Fecha=@Fecha)
 end
 GO
 	
-create proc spPagoPrestamo
+create proc spPagoPrestamo --ver sp alta pago
 @IdEmpleado as int,
 @IdPrestamo as int,
 @NumeroSucursal as int,
@@ -974,6 +974,20 @@ begin
 	return @@error
 end
 GO
+
+create proc spBuscarPrestamo
+@IdPrestamo int
+as
+begin
+	--if not exists(select * from prestamo where prestamo.IdPrestamo = @IdPrestamo)
+	--begin
+		--return -1 --no existe prestamo con ese id
+	--end
+	
+	select * from prestamo where prestamo.IdPrestamo=@IdPrestamo
+
+end
+
 
 create proc spArqueoCaja
 @Fecha datetime,

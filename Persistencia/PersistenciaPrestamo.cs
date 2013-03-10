@@ -170,7 +170,7 @@ namespace Persistencia
             try
             {
                 SqlCommand cmd = Conexion.GetCommand("spBuscarPrestamo", conexion, CommandType.StoredProcedure);
-                SqlParameter _IdPrestamo = new SqlParameter("@IdCuenta", P.IDPRESTAMO);
+                SqlParameter _IdPrestamo = new SqlParameter("@IdPrestamo", P.IDPRESTAMO);
                 cmd.Parameters.Add(_IdPrestamo);
 
                 SqlDataReader _Reader;
@@ -197,7 +197,7 @@ namespace Persistencia
 
                         FECHAEMITIDO = _Fecha,
                         MONTO = _Monto,
-                        //IDPRESTAMO = _IdPrestamo,
+                        IDPRESTAMO = P.IDPRESTAMO,
                         TOTALCUOTAS = _Cuotas,
                         CLIENTE = new Cliente{CI=_idCliente},
                         MONEDA = _moneda,
@@ -205,6 +205,7 @@ namespace Persistencia
                     };
                 }
                 _Reader.Close();
+
 
                 if (_Cancelado == 1)
                 {
