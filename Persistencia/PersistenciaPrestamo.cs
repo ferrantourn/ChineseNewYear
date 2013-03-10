@@ -169,15 +169,16 @@ namespace Persistencia
 
             try
             {
-                SqlCommand cmd = Conexion.GetCommand("spBuscarCuenta", conexion, CommandType.StoredProcedure);
+                SqlCommand cmd = Conexion.GetCommand("spBuscarPrestamo", conexion, CommandType.StoredProcedure);
                 SqlParameter _IdPrestamo = new SqlParameter("@IdCuenta", P.IDPRESTAMO);
                 cmd.Parameters.Add(_IdPrestamo);
 
                 SqlDataReader _Reader;
                 Prestamo PNuevo = null;
-                int _idCuenta, _idSucursal, _idCliente, _Cancelado = 0 ;
-                decimal _saldo;
+                int _idCuenta, _idSucursal, _idCliente,  _Cuotas, _Cancelado = 0;
+                decimal _Monto;
                 string _moneda;
+                DateTime _Fecha;
 
 
                 conexion.Open();
@@ -187,15 +188,16 @@ namespace Persistencia
                     _idCuenta = (int)_Reader["IdCuenta"];
                     _idCliente = (int)_Reader["IdCliente"];
                     _idSucursal = (int)_Reader["IdSucursal"];
-                    _saldo = Convert.ToDecimal(_Reader["Saldo"]);
+                    _Monto = Convert.ToDecimal(_Reader["Monto"]);
                     _moneda = (string)_Reader["Moneda"];
-
+                    _Fecha = Convert.ToDateTime(_Reader["Fecha"]);
+                    _Cuotas = (int)_Reader["Cuotas"];
                     PNuevo = new Prestamo
                     {
 
                         FECHAEMITIDO = _Fecha,
                         MONTO = _Monto,
-                        IDPRESTAMO = _IdPrestamo,
+                        //IDPRESTAMO = _IdPrestamo,
                         TOTALCUOTAS = _Cuotas,
                         CLIENTE = new Cliente{CI=_idCliente},
                         MONEDA = _moneda,
@@ -204,7 +206,7 @@ namespace Persistencia
                 }
                 _Reader.Close();
 
-                if (_Cancelado = 1)
+                if (_Cancelado == 1)
                 {
                     PNuevo.CANCELADO = true;
                 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace Entidades
 {
@@ -22,9 +23,13 @@ namespace Entidades
         private List<Movimiento> _movimientosCuenta;
         public List<Movimiento> MOVIMIENTOSCUENTA { get; set; }
 
-        public override string ToString() 
+        private DateTime _fechaApertura;
+        public DateTime FECHAAPERTURA { get; set; }
+
+
+        public override string ToString()
         {
-            return "Numero cuenta:"  + " " + IDCUENTA + " - " + "Moneda: " + MONEDA + " - " + "Saldo: " + SALDO;
+            return "Numero cuenta:" + " " + IDCUENTA + " - " + "Moneda: " + MONEDA + " - " + "Saldo: " + SALDO;
         }
         public string TOSTRING
         {

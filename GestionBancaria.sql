@@ -84,7 +84,8 @@ create table Cuenta(IdCuenta int primary key identity (1,1) not null,
 					IdSucursal int not null foreign key references Sucursal(IdSucursal),
 					Moneda nvarchar(3) not null,
 					IdCliente int foreign key references Cliente(IdCliente),
-					Saldo float not null)
+					Saldo float not null,
+					FechaApertura datetime not null)
 					
 					
 GO					
@@ -816,7 +817,8 @@ create proc spAltaCuenta
 @IdSucursal int,
 @Moneda nvarchar(3),
 @IdCliente int,
-@Saldo float
+@Saldo float,
+@FechaApertura datetime
 as
 begin
 if not exists(select * from Sucursal where Sucursal.IdSucursal=@IdSucursal and Sucursal.Activa = 1)
@@ -829,8 +831,8 @@ if not exists(select * from Usuario where Usuario.Ci=@IdCliente and Usuario.Acti
 		return -2   --Usuario no existe en el sistema o está inactivo
 	end
 	
-	insert into Cuenta(IdCliente,IdSucursal,Moneda,Saldo) 
-				values(@IdCliente,@IdSucursal,@Moneda,@Saldo)
+	insert into Cuenta(IdCliente,IdSucursal,Moneda,Saldo,FechaApertura) 
+				values(@IdCliente,@IdSucursal,@Moneda,@Saldo,@FechaApertura)
 	
 end
 GO
@@ -991,6 +993,25 @@ begin
 	return @ArqueoTotal 
 
 end
+GO
+
+create proc spListadoProductividadComparativo
+@FechaInicio as datetime,
+@FechaFin as datetime
+as
+begin
+	select Sucursal.Nombre, CantidadCuentas.cantCuentas as CantCuentasAbiertas,
+CantidadPrestamos.cantPrestamos as CantPrestamosOtorgados from Sucursal 
+left outer join (
+select Count(Cuenta.IdCuenta) as cantCuentas, Cuenta.IdSucursal from Cuenta
+where @FechaInicio <= Cuenta.FechaApertura and Cuenta.FechaApertura <= @FechaFin
+group by Cuenta.IdSucursal) as CantidadCuentas on Sucursal.IdSucursal = CantidadCuentas.IdSucursal
+left outer join (
+select Count(Prestamo.IdPrestamo) as cantPrestamos, Prestamo.NumeroSucursal from Prestamo
+where @FechaInicio <= Prestamo.Fecha and Prestamo.Fecha <= @FechaFin
+group by Prestamo.NumeroSucursal) as CantidadPrestamos on Sucursal.IdSucursal = CantidadPrestamos.NumeroSucursal
+end
+
 GO
 
 --INSERTAMOS VALORES PREDETERMINADOS

@@ -29,6 +29,8 @@ namespace Persistencia
                 SqlParameter _moneda = new SqlParameter("@Moneda", c.MONEDA);
                 SqlParameter _idSucursal = new SqlParameter("@IdSucursal", c.SUCURSAL.IDSUCURSAL);
                 SqlParameter _saldo = new SqlParameter("@Saldo", c.SALDO);
+                SqlParameter _fechaApertura = new SqlParameter("@FechaApertura", DateTime.Now);
+
                 SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int);
                 _retorno.Direction = ParameterDirection.ReturnValue;
 
@@ -36,6 +38,7 @@ namespace Persistencia
                 cmd.Parameters.Add(_moneda);
                 cmd.Parameters.Add(_idSucursal);
                 cmd.Parameters.Add(_saldo);
+                cmd.Parameters.Add(_fechaApertura);
                 cmd.Parameters.Add(_retorno);
 
                 cmd.ExecuteNonQuery();
