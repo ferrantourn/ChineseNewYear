@@ -58,19 +58,15 @@ namespace Persistencia
             SqlParameter _Moneda = new SqlParameter("@Moneda", Moneda);
             SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int) { Direction = ParameterDirection.ReturnValue };
 
-
             cmd.Parameters.Add(_Fecha);
             cmd.Parameters.Add(_Moneda);
             cmd.Parameters.Add(_Empleado);
             cmd.Parameters.Add(_retorno);
 
-
             try
             {
                 conexion.Open();
                 cmd.ExecuteNonQuery();
-
-
             }
             catch (Exception ex)
             {

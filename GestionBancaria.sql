@@ -1034,6 +1034,39 @@ end
 
 GO
 
+CREATE FUNCTION DateTimeToString (@DateTimeValue DateTime) RETURNS nvarchar(10)
+AS
+BEGIN
+ return LTRIM(STR(MONTH(@DateTimeValue))) + '/' + LTRIM(STR(DAY(@DateTimeValue))) + '/' + LTRIM(STR(YEAR(@DateTimeValue))) 
+END
+
+GO
+
+create proc spTotalesArqueoCaja
+@IdEmpleado as int,
+@IdSucursal as int,
+@CantTotalDepositos as int output,
+@CantTotalRetiros as int output,
+@CantTotalPagos as int output
+as
+begin
+ 
+	--suponiendo el server de base de datos se encuentra en el mismo uso horario que el empleado que ejecuta el arqueo
+	select @CantTotalPagos = COUNT(*) from Pagos 
+	where dbo.DateTimeToString(Pagos.Fecha) = dbo.DateTimeToString(GETDATE()) and Pagos.IdEmpleado = @IdEmpleado
+	
+	
+	select @CantTotalRetiros = COUNT(*) from Movimiento 
+	where dbo.DateTimeToString(Movimiento.Fecha) = dbo.DateTimeToString(GETDATE()) and Movimiento.CiUsuario = @IdEmpleado
+	and Movimiento.Tipo = 1
+	
+	
+	select @CantTotalDepositos = COUNT(*) from Movimiento
+	where dbo.DateTimeToString(Movimiento.Fecha) = dbo.DateTimeToString(GETDATE()) and Movimiento.CiUsuario = @IdEmpleado
+	and Movimiento.Tipo = 2
+	
+end
+
 --INSERTAMOS VALORES PREDETERMINADOS
 ------------------------------------
 

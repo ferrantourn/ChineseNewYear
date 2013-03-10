@@ -91,7 +91,8 @@ namespace Logica
 
 
         
-        public void ArqueoCaja (Empleado e)
+        public void ArqueoCaja (Empleado e, ref decimal saldoCajaDolares, ref decimal saldoCajaPesos, ref int cantTotalPrestamos,
+            ref int cantTotalDepositos, ref int cantTotalRetiros, ref int cantTotalPagos)
         {
             try
             {
