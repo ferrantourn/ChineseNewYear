@@ -95,12 +95,12 @@ namespace Logica
             }
         }
 
-        public void EliminarPrestamo(Prestamo s)
+        public void CancelarPrestamo(Prestamo s) //Cancelar prestamo, no elimina solo lo marca como cancelado en la base de datos.
         {
             try
             {
-                PersistenciaPrestamo pc = new PersistenciaPrestamo();
-                //pc.EliminarPrestamo(s);
+                PersistenciaPrestamo pp = new PersistenciaPrestamo();
+                pp.CancelarPrestamo(s);
             }
             catch (Exception ex)
             {
@@ -112,9 +112,8 @@ namespace Logica
         {
             try
             {
-                PersistenciaPrestamo pc = new PersistenciaPrestamo();
-                //return pc.BuscaPrestamo();
-                return null;
+                PersistenciaPrestamo pp = new PersistenciaPrestamo();
+                return pp.BuscarPrestamo(s);
             }
             catch (Exception ex)
             {
@@ -122,7 +121,7 @@ namespace Logica
             }
         }
 
-        public void ActualizarPrestamo(Prestamo c)
+        public void ActualizarPrestamo(Prestamo c) //en teoría no se debería poder modificar un presamo, solo buscarlo, o pagar cuotas y cancelar
         {
             try
             {
