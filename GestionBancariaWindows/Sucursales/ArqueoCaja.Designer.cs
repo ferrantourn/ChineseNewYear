@@ -31,6 +31,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblArqueoHeader = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblInfo = new System.Windows.Forms.Label();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.txtCantidadCuotasPrestamos = new System.Windows.Forms.TextBox();
@@ -43,7 +44,6 @@
             this.lblCantidadDepositos = new System.Windows.Forms.Label();
             this.txtSaldoDolares = new System.Windows.Forms.TextBox();
             this.lblSaldoDolares = new System.Windows.Forms.Label();
-            this.lblInfo = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -70,13 +70,20 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.lblInfo);
             this.panel2.Controls.Add(this.btnAceptar);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 235);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(398, 38);
             this.panel2.TabIndex = 1;
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(10, 156);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(0, 13);
+            this.lblInfo.TabIndex = 1;
             // 
             // btnAceptar
             // 
@@ -91,6 +98,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.lblInfo);
             this.panel3.Controls.Add(this.txtCantidadCuotasPrestamos);
             this.panel3.Controls.Add(this.lblCantidadTotalPrestamos);
             this.panel3.Controls.Add(this.txtCantidadRetiros);
@@ -106,7 +114,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(398, 182);
             this.panel3.TabIndex = 2;
-            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // txtCantidadCuotasPrestamos
             // 
@@ -123,7 +130,6 @@
             this.lblCantidadTotalPrestamos.Size = new System.Drawing.Size(119, 13);
             this.lblCantidadTotalPrestamos.TabIndex = 8;
             this.lblCantidadTotalPrestamos.Text = "Total Cuotas Prestamos";
-            this.lblCantidadTotalPrestamos.Click += new System.EventHandler(this.lblCantidadTotalPrestamos_Click);
             // 
             // txtCantidadRetiros
             // 
@@ -163,7 +169,6 @@
             this.txtCantidadDepositos.Name = "txtCantidadDepositos";
             this.txtCantidadDepositos.Size = new System.Drawing.Size(42, 20);
             this.txtCantidadDepositos.TabIndex = 3;
-            this.txtCantidadDepositos.TextChanged += new System.EventHandler(this.txtDireccion_TextChanged);
             // 
             // lblCantidadDepositos
             // 
@@ -173,7 +178,6 @@
             this.lblCantidadDepositos.Size = new System.Drawing.Size(99, 13);
             this.lblCantidadDepositos.TabIndex = 2;
             this.lblCantidadDepositos.Text = "Cantidad Depositos";
-            this.lblCantidadDepositos.Click += new System.EventHandler(this.lblDireccion_Click);
             // 
             // txtSaldoDolares
             // 
@@ -191,14 +195,6 @@
             this.lblSaldoDolares.TabIndex = 0;
             this.lblSaldoDolares.Text = "Saldo Dolares";
             // 
-            // lblInfo
-            // 
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(4, 4);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(0, 13);
-            this.lblInfo.TabIndex = 1;
-            // 
             // ArqueoCaja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -213,7 +209,6 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ResumeLayout(false);

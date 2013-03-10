@@ -89,9 +89,8 @@ namespace Logica
             }
         }
 
-
         
-        public void ArqueoCaja (Empleado e, ref decimal saldoCajaDolares, ref decimal saldoCajaPesos, ref int cantTotalPrestamos,
+        public void ArqueoCaja (Empleado e, ref decimal saldoCajaDolares, ref decimal saldoCajaPesos,
             ref int cantTotalDepositos, ref int cantTotalRetiros, ref int cantTotalPagos)
         {
             try
@@ -100,6 +99,7 @@ namespace Logica
                 // ps.ArqueoCaja(DateTime.Now,"USD",e);
                 // ps.ArqueoCaja(DateTime.Now,"UYU",e);
 
+                ps.TotalesArqueoCaja(e, ref cantTotalDepositos, ref cantTotalRetiros, ref cantTotalPagos);
             }
             catch (Exception ex)
             {

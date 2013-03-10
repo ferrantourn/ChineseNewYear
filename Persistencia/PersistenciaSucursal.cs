@@ -219,5 +219,47 @@ namespace Persistencia
 
             return _listaSucursales;
         }
+
+
+        public decimal TotalesArqueoCaja(Empleado E, ref int cantTotalDepositos, ref int cantTotalRetiros, ref int cantTotalPagos)
+        {
+            SqlConnection conexion = new SqlConnection(Conexion.Cnn);
+            SqlCommand cmd = Conexion.GetCommand("spTotalesArqueoCaja", conexion, CommandType.StoredProcedure);
+
+            SqlParameter _Empleado = new SqlParameter("@IdEmpleado", E.CI);
+            SqlParameter _IdSucursal = new SqlParameter("@IdSucursal", E.SUCURSAL.IDSUCURSAL);
+            SqlParameter _CantTotalDepositos = new SqlParameter("@CantTotalDepositos",ParameterDirection.Output);
+            SqlParameter _CantTotalRetiros = new SqlParameter("@CantTotalRetiros", ParameterDirection.Output);
+            SqlParameter _CantTotalPagos = new SqlParameter("@CantTotalPagos", ParameterDirection.Output);
+
+            SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int) { Direction = ParameterDirection.ReturnValue };
+            cmd.Parameters.Add(_IdSucursal);
+            cmd.Parameters.Add(_CantTotalDepositos);
+            cmd.Parameters.Add(_CantTotalRetiros);
+            cmd.Parameters.Add(_CantTotalPagos);
+
+            cmd.Parameters.Add(_retorno);
+
+            try
+            {
+                conexion.Open();
+                cmd.ExecuteNonQuery();
+
+                cantTotalDepositos = Convert.ToInt32(_CantTotalDepositos.Value);
+                cantTotalPagos = Convert.ToInt32(_CantTotalPagos.Value);
+                cantTotalRetiros = Convert.ToInt32(_CantTotalRetiros.Value);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+            return Convert.ToInt32(_retorno.Value);
+        }
+
     }
 }

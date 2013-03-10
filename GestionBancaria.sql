@@ -1067,6 +1067,7 @@ begin
 	
 end
 
+GO
 --INSERTAMOS VALORES PREDETERMINADOS
 ------------------------------------
 

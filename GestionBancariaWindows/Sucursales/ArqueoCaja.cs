@@ -19,49 +19,26 @@ namespace GestionBancariaWindows
             InitializeComponent();
         }
 
+        public Empleado EMPLEADO { get; set; }
+
+
 
 
         private void NuevaSucursal_Load(object sender, EventArgs e)
         {
-
-        }
-
-
-
-        private void lblDireccion_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-        private void txtDireccion_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-
-
-        private void lblCantidadTotalPrestamos_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-        private void btnAceptar_Click(object sender, EventArgs e)
-        {
             try
             {
                 LogicaSucursal ls = new LogicaSucursal();
-                
+                decimal saldoCajaDolares = Decimal.Zero, saldoCajaPesos = Decimal.Zero;
+                int cantTotalDepositos = 0, cantTotalPagos = 0, cantTotalRetiros = 0;
+                ls.ArqueoCaja(EMPLEADO, ref saldoCajaDolares, ref saldoCajaPesos, ref cantTotalDepositos, ref cantTotalRetiros, ref cantTotalPagos);
+
+                txtCantidadCuotasPrestamos.Text = Convert.ToString(cantTotalPagos);
+                txtCantidadDepositos.Text = Convert.ToString(cantTotalDepositos);
+                txtCantidadRetiros.Text = Convert.ToString(cantTotalRetiros);
+                txtSaldoDolares.Text = Convert.ToString(saldoCajaDolares);
+                txtSaldoPesos.Text = Convert.ToString(saldoCajaPesos);
+
             }
             catch (Exception ex)
             {
@@ -69,6 +46,24 @@ namespace GestionBancariaWindows
             }
         }
 
-
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            Close();
+            Dispose();
+        }
     }
+
 }
+
+
+
+       
+
+
+
+
+       
+
+
+    
+

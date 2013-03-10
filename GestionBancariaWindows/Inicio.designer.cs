@@ -42,7 +42,7 @@
             this.btnLoguearse.Location = new System.Drawing.Point(273, 105);
             this.btnLoguearse.Name = "btnLoguearse";
             this.btnLoguearse.Size = new System.Drawing.Size(75, 23);
-            this.btnLoguearse.TabIndex = 0;
+            this.btnLoguearse.TabIndex = 2;
             this.btnLoguearse.Text = "Loguearse";
             this.btnLoguearse.UseVisualStyleBackColor = true;
             this.btnLoguearse.Click += new System.EventHandler(this.btnLoguearse_Click);
@@ -52,7 +52,7 @@
             this.txtNombreUsuario.Location = new System.Drawing.Point(203, 53);
             this.txtNombreUsuario.Name = "txtNombreUsuario";
             this.txtNombreUsuario.Size = new System.Drawing.Size(145, 20);
-            this.txtNombreUsuario.TabIndex = 2;
+            this.txtNombreUsuario.TabIndex = 0;
             // 
             // txtPassword
             // 
@@ -60,7 +60,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(145, 20);
-            this.txtPassword.TabIndex = 3;
+            this.txtPassword.TabIndex = 1;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
             // lblNombreUsuario

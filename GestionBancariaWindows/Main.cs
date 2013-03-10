@@ -14,6 +14,7 @@ namespace GestionBancariaWindows
         private void arqueoDeCajaToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             ArqueoCaja arqueoCajaForm = new ArqueoCaja();
+            arqueoCajaForm.EMPLEADO = EMPLEADO;
             arqueoCajaForm.Show();
         }
 
