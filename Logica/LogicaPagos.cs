@@ -15,7 +15,7 @@ namespace Logica
             try
             {
                 PersistenciaPrestamo persPrestamo = new PersistenciaPrestamo();
-                persPrestamo.
+                //persPrestamo.
             }
             catch (Exception ex)
             {
