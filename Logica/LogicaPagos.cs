@@ -7,9 +7,8 @@ using Persistencia;
 
 namespace Logica
 {
-    public class LogicaPagos
+    public class LogicaPagos : ILogicaPagos
     {
-
         public void PagarCuota(Prestamo p)
         {
             try
@@ -37,7 +36,6 @@ namespace Logica
             }
         }
 
-       
         public void EliminarPago(Pago p)
         {
             try
@@ -64,8 +62,6 @@ namespace Logica
                 throw ex;
             }
         }
-
-      
 
     }
 }

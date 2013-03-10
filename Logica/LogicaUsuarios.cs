@@ -5,7 +5,7 @@ using Persistencia;
 
 namespace Logica
 {
-    public class LogicaUsuarios
+    public class LogicaUsuarios :ILogicaUsuarios
     {
 
         public void AltaUsuario(Usuario u)

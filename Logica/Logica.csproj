@@ -39,12 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILogicaCuentas.cs" />
+    <Compile Include="ILogicaCotizacion.cs" />
+    <Compile Include="ILogicaUsuarios.cs" />
     <Compile Include="LogicaPagos.cs" />
     <Compile Include="LogicaPrestamo.cs" />
     <Compile Include="LogicaCotizacion.cs" />
     <Compile Include="LogicaCuentas.cs" />
     <Compile Include="FabricaLogica.cs" />
-    <Compile Include="ILogicaUsuario.cs" />
     <Compile Include="LogicaSucursal.cs" />
     <Compile Include="LogicaUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

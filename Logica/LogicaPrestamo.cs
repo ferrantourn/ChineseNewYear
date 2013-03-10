@@ -7,7 +7,7 @@ using Persistencia;
 
 namespace Logica
 {
-    public class LogicaPrestamo
+    public class LogicaPrestamo : ILogicaPrestamo
     {
 
         public decimal CalcularMontoCuotaPrestamo(Prestamo p)

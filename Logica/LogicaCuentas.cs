@@ -8,7 +8,7 @@ using ExcepcionesPersonalizadas;
 
 namespace Logica
 {
-    public class LogicaCuentas
+    public class LogicaCuentas : ILogicaCuentas
     {
 
 

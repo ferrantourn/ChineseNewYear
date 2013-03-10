@@ -7,7 +7,7 @@ using Persistencia;
 
 namespace Logica
 {
-    public class LogicaSucursal
+    public class LogicaSucursal : ILogicaSucursal
     {
 
         public List<Sucursal> ListarSucursales()

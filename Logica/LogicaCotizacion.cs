@@ -7,7 +7,7 @@ using Persistencia;
 using ExcepcionesPersonalizadas;
 namespace Logica
 {
-    public class LogicaCotizacion
+    public class LogicaCotizacion : ILogicaCotizacion
     {
 
         public List<Cotizacion> ListarCotizaciones()
