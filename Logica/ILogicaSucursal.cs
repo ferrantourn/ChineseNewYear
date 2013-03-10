@@ -8,13 +8,13 @@ namespace Logica
 {
     interface ILogicaSucursal
     {
-        public List<Sucursal> ListarSucursales();
-        public void AltaSucursal(Sucursal s);
-        public void EliminarSucursal(Sucursal s);
-        public Sucursal BuscarSucursal(Sucursal s);
-        public void ActualizarSucursal(Sucursal c);
-        public List<Sucursal> ListadoProductividadComparativo(DateTime fechaInicio, DateTime fechaFin);
-        public void ArqueoCaja(Empleado e, ref decimal saldoCajaDolares, ref decimal saldoCajaPesos,
+         List<Sucursal> ListarSucursales();
+         void AltaSucursal(Sucursal s);
+         void EliminarSucursal(Sucursal s);
+         Sucursal BuscarSucursal(Sucursal s);
+         void ActualizarSucursal(Sucursal c);
+         List<Sucursal> ListadoProductividadComparativo(DateTime fechaInicio, DateTime fechaFin);
+         void ArqueoCaja(Empleado e, ref decimal saldoCajaDolares, ref decimal saldoCajaPesos,
             ref int cantTotalDepositos, ref int cantTotalRetiros, ref int cantTotalPagos);
     }
 }

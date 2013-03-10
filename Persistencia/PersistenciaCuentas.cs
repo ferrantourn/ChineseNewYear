@@ -10,7 +10,7 @@ using System.Transactions;
 
 namespace Persistencia
 {
-    public class PersistenciaCuentas
+    public class PersistenciaCuentas: IPersistenciaCuentas
     {
         /// <summary>
         /// Ingresa un nuevo Cuenta en el sistema

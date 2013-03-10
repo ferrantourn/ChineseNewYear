@@ -8,13 +8,13 @@ namespace Logica
 {
     interface ILogicaCuentas
     {
-        public void AltaCuenta(Cuenta c);
-        public List<Cuenta> ListarCuentas();
-        public List<Cuenta> ListarCuentasCliente(Cliente c);
-        public void EliminarCuenta(Cuenta c);
-        public Cuenta BuscarCuenta(Cuenta c);
-        public void ActualizarCuenta(Cuenta c);
-        public void RealizarMovimiento(Movimiento m);
+         void AltaCuenta(Cuenta c);
+         List<Cuenta> ListarCuentas();
+         List<Cuenta> ListarCuentasCliente(Cliente c);
+         void EliminarCuenta(Cuenta c);
+         Cuenta BuscarCuenta(Cuenta c);
+         void ActualizarCuenta(Cuenta c);
+         void RealizarMovimiento(Movimiento m);
 
     }
 }

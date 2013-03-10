@@ -6,9 +6,12 @@ using Entidades;
 using ExcepcionesPersonalizadas;
 using System.Data.SqlClient;
 using System.Data;
+
+
 namespace Persistencia
 {
-    public class PersistenciaMovimientos
+
+    public class PersistenciaMovimientos: IPersistenciaMovimientos
     {
         public void RealizarMovimiento (Movimiento m)
         {
@@ -63,4 +66,5 @@ namespace Persistencia
             }
         }
     }
+
 }

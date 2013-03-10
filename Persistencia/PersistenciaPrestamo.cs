@@ -10,7 +10,7 @@ using System.Transactions;
 
 namespace Persistencia
 {
-    public class PersistenciaPrestamo
+    public class PersistenciaPrestamo : IPersistenciaPrestamo
     {
         public void AltaPrestamo(Prestamo P)
         {

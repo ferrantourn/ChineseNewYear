@@ -8,13 +8,13 @@ namespace Logica
 {
     interface ILogicaPrestamo
     {
-        public decimal CalcularMontoCuotaPrestamo(Prestamo p);
-        public List<Prestamo> ListarPrestamosAtrasados(Sucursal s);
-        public List<Prestamo> ListarPrestamo();
-        public void AltaPrestamo(Prestamo s);
-        public void CancelarPrestamo(Prestamo s);
-        public Prestamo BuscarPrestamo(Prestamo s);
-        public void ActualizarPrestamo(Prestamo c);
-        public List<Pago> IsPrestamoCancelado(ref Prestamo p);
+         decimal CalcularMontoCuotaPrestamo(Prestamo p);
+         List<Prestamo> ListarPrestamosAtrasados(Sucursal s);
+         List<Prestamo> ListarPrestamo();
+         void AltaPrestamo(Prestamo s);
+         void CancelarPrestamo(Prestamo s);
+         Prestamo BuscarPrestamo(Prestamo s);
+         void ActualizarPrestamo(Prestamo c);
+         List<Pago> IsPrestamoCancelado(ref Prestamo p);
     }
 }

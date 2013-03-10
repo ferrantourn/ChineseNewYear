@@ -8,7 +8,7 @@ using System.Transactions;
 
 namespace Persistencia
 {
-    public class PersistenciaEmpleados
+    public class PersistenciaEmpleados: IPersistenciaEmpleados
     {
         public Empleado LoginEmpleado(string NombreUsuario, string Pass)
         {

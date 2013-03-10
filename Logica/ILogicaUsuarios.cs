@@ -8,12 +8,12 @@ namespace Logica
 {
     interface ILogicaUsuarios
     {
-        public void AltaUsuario(Usuario u);
-        public void ActualizarUsuario(Usuario u);
-        public void EliminarUsuario(Usuario u);
-        public List<Cliente> ListarClientes();
-        public List<Empleado> ListarEmpleados();
-        public Usuario BuscarUsuarioPorCi(Usuario u);
-        public Usuario getLoginUsuario(string NombreUsuario, string Pass);
+         void AltaUsuario(Usuario u);
+         void ActualizarUsuario(Usuario u);
+         void EliminarUsuario(Usuario u);
+         List<Cliente> ListarClientes();
+         List<Empleado> ListarEmpleados();
+         Usuario BuscarUsuarioPorCi(Usuario u);
+         Usuario getLoginUsuario(string NombreUsuario, string Pass);
     }
 }

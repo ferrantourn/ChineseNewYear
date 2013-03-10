@@ -8,7 +8,7 @@ using System.Transactions;
 
 namespace Persistencia
 {
-    public class PersistenciaClientes
+    public class PersistenciaClientes : IPersistenciaClientes
     {
 
 

@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILogicaSucursal.cs" />
+    <Compile Include="ILogicaPrestamo.cs" />
+    <Compile Include="ILogicaPagos.cs" />
     <Compile Include="ILogicaCuentas.cs" />
     <Compile Include="ILogicaCotizacion.cs" />
     <Compile Include="ILogicaUsuarios.cs" />

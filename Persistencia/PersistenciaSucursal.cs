@@ -9,7 +9,7 @@ using ExcepcionesPersonalizadas;
 
 namespace Persistencia
 {
-    public class PersistenciaSucursal
+    public class PersistenciaSucursal: IPersistenciaSucursal
     {
 
 

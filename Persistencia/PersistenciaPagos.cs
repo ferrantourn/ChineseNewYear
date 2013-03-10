@@ -9,7 +9,7 @@ using System.Data;
 
 namespace Persistencia
 {
-    public class PersistenciaPagos
+    public class PersistenciaPagos : IPersistenciaPagos
     {
         public Pago ObtenerUltimoPagoPrestamo(Prestamo p)
         {
