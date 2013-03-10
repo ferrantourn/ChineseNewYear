@@ -10,7 +10,7 @@ namespace Logica
     public class LogicaPagos
     {
 
-              public void PagarCuota(Prestamo p)
+        public void PagarCuota(Prestamo p)
         {
             try
             {

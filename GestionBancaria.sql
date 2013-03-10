@@ -991,7 +991,8 @@ GO
 
 create proc spArqueoCaja
 @Fecha datetime,
-@Moneda nvarchar(3)
+@Moneda nvarchar(3),
+@Sucursal int
 as
 begin
 	declare @Pagos as int
@@ -999,9 +1000,9 @@ begin
 	declare @Retiros as int
 	declare @ArqueoTotal as int
 	
-	set @Pagos = (select SUM(Pagos.Monto) from Pagos inner join Prestamo on Prestamo.IdPrestamo=Pagos.IdPrestamo where Prestamo.Moneda=@Moneda and Pagos.Fecha = @Fecha)
-	set @Depositos = (select SUM(Movimiento.Monto) from Movimiento where Movimiento.Fecha = @Fecha and Movimiento.Tipo=0 and Movimiento.Moneda=@Moneda)
-	set @Retiros = (select SUM(Movimiento.Monto) from Movimiento where Movimiento.Fecha = @Fecha and Movimiento.Tipo = 1 and Movimiento.Moneda=@Moneda)
+	set @Pagos = (select SUM(Pagos.Monto) from Pagos inner join Prestamo on Prestamo.IdPrestamo=Pagos.IdPrestamo where Prestamo.Moneda=@Moneda and Pagos.Fecha = @Fecha and Pagos.NumeroSucursal=@Sucursal)
+	set @Depositos = (select SUM(Movimiento.Monto) from Movimiento where Movimiento.Fecha = @Fecha and Movimiento.Tipo=0 and Movimiento.Moneda=@Moneda and Movimiento.IdSucursal=@Sucursal)
+	set @Retiros = (select SUM(Movimiento.Monto) from Movimiento where Movimiento.Fecha = @Fecha and Movimiento.Tipo = 1 and Movimiento.Moneda=@Moneda and Movimiento.IdSucursal=@Sucursal)
 	set @ArqueoTotal = @Pagos+@Depositos-@Retiros
 	
 	return @ArqueoTotal 
