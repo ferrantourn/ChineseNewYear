@@ -92,7 +92,7 @@ namespace Persistencia
             }
         }
 
-        public void PagarCuota()
+        public void PagarCuota(Cuota C)
         {
             try
             {

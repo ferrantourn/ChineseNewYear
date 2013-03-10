@@ -12,6 +12,98 @@ namespace Persistencia
 {
     public class PersistenciaPrestamo
     {
+        public void AltaPrestamo(Prestamo P)
+        {
+            SqlConnection conexion = new SqlConnection(Conexion.Cnn);
+            conexion.Open();
+            try
+            {
+
+                SqlCommand cmd = Conexion.GetCommand("AltaPrestamo", conexion, CommandType.StoredProcedure);
+
+                SqlParameter _IdCliente = new SqlParameter("@IdCliente", P.CLIENTE);
+                SqlParameter _Fecha = new SqlParameter("@Fecha", P.FECHAEMITIDO);
+                SqlParameter _Cuotas = new SqlParameter("@Cuotas", P.TOTALCUOTAS);
+                SqlParameter _Moneda = new SqlParameter("@Moneda", P.MONEDA);
+                SqlParameter _Monto = new SqlParameter("@Moneda", P.MONTO);
+                SqlParameter _retorno = new SqlParameter("@Mont", SqlDbType.Int);
+                _retorno.Direction = ParameterDirection.ReturnValue;
+
+                cmd.Parameters.Add(_IdCliente);
+                cmd.Parameters.Add(_Fecha);
+                cmd.Parameters.Add(_Cuotas);
+                cmd.Parameters.Add(_Moneda);
+                cmd.Parameters.Add(_Monto);
+                cmd.Parameters.Add(_retorno);
+
+                cmd.ExecuteNonQuery();
+
+                if (Convert.ToInt32(_retorno.Value) == -1)
+                {
+                    throw new ErrorSucursalNoExiste();
+                }
+                else if (Convert.ToInt32(_retorno.Value) == -2)
+                    throw new ErrorUsuarioNoExiste();
+                else if (Convert.ToInt32(_retorno.Value) == -3)
+                    throw new ErrorUsuarioNoExiste();
+                else if (Convert.ToInt32(_retorno.Value) <= -4)
+                    throw new ErrorBaseDeDatos();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+
+        /*CancelarPrestamo*/
+        public void CancelarPrestamo(Prestamo P)
+        {
+            SqlConnection conexion = new SqlConnection(Conexion.Cnn);
+            conexion.Open();
+            try
+            {
+
+                SqlCommand cmd = Conexion.GetCommand("CancelarPrestamo", conexion, CommandType.StoredProcedure);
+
+                SqlParameter _IdSucursal = new SqlParameter("@IdSucursal", P.SUCURSAL);
+                SqlParameter _IdPrestamo = new SqlParameter("@NumeroPrestamo", P.IDPRESTAMO);
+                SqlParameter _retorno = new SqlParameter("@Mont", SqlDbType.Int);
+                _retorno.Direction = ParameterDirection.ReturnValue;
+
+                cmd.Parameters.Add(_IdSucursal);
+                cmd.Parameters.Add(_IdPrestamo);
+
+                cmd.Parameters.Add(_retorno);
+
+                cmd.ExecuteNonQuery();
+
+                if (Convert.ToInt32(_retorno.Value) == -1)
+                {
+                    throw new ErrorSucursalNoExiste();
+                }
+                else if (Convert.ToInt32(_retorno.Value) == -2)
+                    throw new ErrorUsuarioNoExiste();
+                else if (Convert.ToInt32(_retorno.Value) == -3)
+                    throw new ErrorUsuarioNoExiste();
+                else if (Convert.ToInt32(_retorno.Value) <= -4)
+                    throw new ErrorBaseDeDatos();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+       
         public List<Prestamo> ListarPrestamos(Sucursal s, bool cancelado)
         {
 
