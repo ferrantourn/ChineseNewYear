@@ -11,6 +11,29 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcepcionesPersonalizadas",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logica", "Logica\Logica.csproj", "{A9672D4B-2190-4037-B4DC-7AC5D8B3627A}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "GestionBancariaWebForms", "GestionBancariaWebForms\", "{ED85A645-D9E7-4C15-9156-01D62036A5B3}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv3.5"
+		ProjectReferences = "{6EEEC05F-5EBA-4E83-8B5A-83A334CD4886}|Controles.dll;{A9672D4B-2190-4037-B4DC-7AC5D8B3627A}|Logica.dll;{ADCDD125-1B3A-4F63-AA9D-936983889A1B}|Entidades.dll;{B188EAE8-5882-4E0D-BD33-C22332E164BF}|ExcepcionesPersonalizadas.dll;{28675E2C-8EE4-431D-ADD9-70B31FF3C6A2}|Persistencia.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/GestionBancariaWebForms"
+		Debug.AspNetCompiler.PhysicalPath = "GestionBancariaWebForms\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\GestionBancariaWebForms\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/GestionBancariaWebForms"
+		Release.AspNetCompiler.PhysicalPath = "GestionBancariaWebForms\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\GestionBancariaWebForms\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "16943"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controles", "..\..\..\BiosWebMailLab2\BiosWebMailLab2\Controles\Controles.csproj", "{6EEEC05F-5EBA-4E83-8B5A-83A334CD4886}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +94,26 @@ Global
 		{A9672D4B-2190-4037-B4DC-7AC5D8B3627A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A9672D4B-2190-4037-B4DC-7AC5D8B3627A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A9672D4B-2190-4037-B4DC-7AC5D8B3627A}.Release|x86.ActiveCfg = Release|Any CPU
+		{ED85A645-D9E7-4C15-9156-01D62036A5B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED85A645-D9E7-4C15-9156-01D62036A5B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED85A645-D9E7-4C15-9156-01D62036A5B3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{ED85A645-D9E7-4C15-9156-01D62036A5B3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{ED85A645-D9E7-4C15-9156-01D62036A5B3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ED85A645-D9E7-4C15-9156-01D62036A5B3}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED85A645-D9E7-4C15-9156-01D62036A5B3}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{ED85A645-D9E7-4C15-9156-01D62036A5B3}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{ED85A645-D9E7-4C15-9156-01D62036A5B3}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
+		{ED85A645-D9E7-4C15-9156-01D62036A5B3}.Release|x86.ActiveCfg = Debug|Any CPU
+		{6EEEC05F-5EBA-4E83-8B5A-83A334CD4886}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EEEC05F-5EBA-4E83-8B5A-83A334CD4886}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EEEC05F-5EBA-4E83-8B5A-83A334CD4886}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6EEEC05F-5EBA-4E83-8B5A-83A334CD4886}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6EEEC05F-5EBA-4E83-8B5A-83A334CD4886}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6EEEC05F-5EBA-4E83-8B5A-83A334CD4886}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EEEC05F-5EBA-4E83-8B5A-83A334CD4886}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EEEC05F-5EBA-4E83-8B5A-83A334CD4886}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6EEEC05F-5EBA-4E83-8B5A-83A334CD4886}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6EEEC05F-5EBA-4E83-8B5A-83A334CD4886}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

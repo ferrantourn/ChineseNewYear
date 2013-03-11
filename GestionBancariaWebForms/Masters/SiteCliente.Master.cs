@@ -1,74 +1,72 @@
 ﻿using System;
-using System.Configuration;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.UI;
-//using Logica;
+using System.Web.UI.WebControls;
 using Entidades;
-//using ExcepcionesPersonalizadas;
-using GestionBancariaWebForms.refServiceGestionBancaria;
+using ExcepcionesPersonalizadas;
+using Logica;
 
-namespace GestionBancariaWebForms
+public partial class Masters_SiteCliente : System.Web.UI.MasterPage
 {
-    public partial class SiteAlumno : MasterPage
+
+    public Cliente USUARIO_LOGUEADO
     {
-
-        public Cliente USUARIO_LOGUEADO
+        get
         {
-            get
-            {
-                if (Session["Usuario"] == null)
-                    return null;
-                return (Cliente)Session["Usuario"];
-            }
-            set
-            {
-                if (Session["Usuario"] == null)
-                    Session.Add("Usuario", value);
-                else
-                    Session["Usuario"] = value;
-            }
+            if (Session["Usuario"] == null)
+                return null;
+            return (Cliente)Session["Usuario"];
         }
-
-        public void SessionEnded()
+        set
         {
-           
-            Session.Abandon();
-            Response.Redirect("~/index.aspx");
-        }
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                lblError.Text = "";
-                if (!IsPostBack)
-                {
-                    if (Session["Usuario"] == null) //si no existe el session["Login"], 
-                    {
-                      SessionEnded();
-                    }
-                    else
-                    {
-
-                      
-                        lblLogueadoComo.Text = ((Cliente)Session["Usuario"]).NOMBREUSUARIO;
-                    }
-                }
-
-            }
-
-            catch (Exception ex)
-            {
-                lblError.Text = ex.ToString();
-            }
-
-
-        }
-
-
-        protected void btnLogout_Click(object sender, EventArgs e)
-        {
-          SessionEnded();
-            Response.Redirect("~/index.aspx");
+            if (Session["Usuario"] == null)
+                Session.Add("Usuario", value);
+            else
+                Session["Usuario"] = value;
         }
     }
+
+    public void SessionEnded()
+    {
+
+        Session.Abandon();
+        Response.Redirect("~/index.aspx");
+    }
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        try
+        {
+            lblError.Text = "";
+            if (!IsPostBack)
+            {
+                if (Session["Usuario"] == null) //si no existe el session["Login"], 
+                {
+                    SessionEnded();
+                }
+                else
+                {
+                    lblLogueadoComo.Text = ((Cliente)Session["Usuario"]).NOMBREUSUARIO;
+                }
+            }
+
+        }
+
+        catch (Exception ex)
+        {
+            lblError.Text = ex.ToString();
+        }
+
+
+    }
+
+
+    protected void btnLogout_Click(object sender, EventArgs e)
+    {
+        SessionEnded();
+        Response.Redirect("~/index.aspx");
+    }
+
 }
