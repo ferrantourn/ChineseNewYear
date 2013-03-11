@@ -29,7 +29,7 @@ namespace Entidades
 
         public override string ToString()
         {
-            return "Numero cuenta:" + " " + IDCUENTA + " - " + "Moneda: " + MONEDA + " - " + "Saldo: " + SALDO;
+            return "Cuenta:" + " " + IDCUENTA + " - " + "Moneda: " + MONEDA + " - " + "Saldo: " + SALDO;
         }
         public string TOSTRING
         {

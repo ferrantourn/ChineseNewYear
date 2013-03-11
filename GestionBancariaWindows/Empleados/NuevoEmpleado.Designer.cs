@@ -37,6 +37,7 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.ddlSucursales = new System.Windows.Forms.ComboBox();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.lblSucursal = new System.Windows.Forms.Label();
             this.lblApellido = new System.Windows.Forms.Label();
             this.txtApellido = new System.Windows.Forms.TextBox();
@@ -52,12 +53,11 @@
             this.txtCedula = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -150,8 +150,12 @@
             this.ddlSucursales.Location = new System.Drawing.Point(124, 100);
             this.ddlSucursales.Name = "ddlSucursales";
             this.ddlSucursales.Size = new System.Drawing.Size(192, 21);
-            this.ddlSucursales.TabIndex = 32;
+            this.ddlSucursales.TabIndex = 3;
             this.ddlSucursales.ValueMember = "IDSUCURSAL";
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = typeof(Entidades.Sucursal);
             // 
             // lblSucursal
             // 
@@ -176,7 +180,7 @@
             this.txtApellido.Location = new System.Drawing.Point(124, 73);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(192, 20);
-            this.txtApellido.TabIndex = 29;
+            this.txtApellido.TabIndex = 2;
             // 
             // label4
             // 
@@ -193,7 +197,7 @@
             this.txtReiterarPass.Name = "txtReiterarPass";
             this.txtReiterarPass.PasswordChar = '*';
             this.txtReiterarPass.Size = new System.Drawing.Size(192, 20);
-            this.txtReiterarPass.TabIndex = 27;
+            this.txtReiterarPass.TabIndex = 5;
             // 
             // lblPassword
             // 
@@ -210,7 +214,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(192, 20);
-            this.txtPassword.TabIndex = 25;
+            this.txtPassword.TabIndex = 4;
             // 
             // lblUsuario
             // 
@@ -226,7 +230,7 @@
             this.txtUsuario.Location = new System.Drawing.Point(465, 73);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(192, 20);
-            this.txtUsuario.TabIndex = 23;
+            this.txtUsuario.TabIndex = 6;
             // 
             // lblNombreCompleto
             // 
@@ -242,7 +246,7 @@
             this.txtNombre.Location = new System.Drawing.Point(124, 46);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(192, 20);
-            this.txtNombre.TabIndex = 21;
+            this.txtNombre.TabIndex = 1;
             // 
             // lblCi
             // 
@@ -258,15 +262,11 @@
             this.txtCedula.Location = new System.Drawing.Point(124, 20);
             this.txtCedula.Name = "txtCedula";
             this.txtCedula.Size = new System.Drawing.Size(192, 20);
-            this.txtCedula.TabIndex = 19;
+            this.txtCedula.TabIndex = 0;
             // 
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = typeof(Entidades.Sucursal);
             // 
             // NuevoEmpleado
             // 
@@ -285,8 +285,8 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }

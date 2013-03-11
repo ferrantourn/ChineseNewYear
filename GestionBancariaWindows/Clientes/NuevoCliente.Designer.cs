@@ -33,9 +33,9 @@
             this.lblHeader = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnEliminar = new System.Windows.Forms.Button();
-            this.lblInfo = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
+            this.lblInfo = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblApellido = new System.Windows.Forms.Label();
             this.txtApellido = new System.Windows.Forms.TextBox();
@@ -96,18 +96,10 @@
             this.btnEliminar.Location = new System.Drawing.Point(286, 0);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(110, 47);
-            this.btnEliminar.TabIndex = 3;
+            this.btnEliminar.TabIndex = 1;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
-            // lblInfo
-            // 
-            this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(14, 243);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(0, 13);
-            this.lblInfo.TabIndex = 2;
             // 
             // btnCancelar
             // 
@@ -116,7 +108,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(0, 0);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(104, 47);
-            this.btnCancelar.TabIndex = 1;
+            this.btnCancelar.TabIndex = 2;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -131,6 +123,14 @@
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(14, 243);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(0, 13);
+            this.lblInfo.TabIndex = 2;
             // 
             // panel3
             // 
@@ -171,7 +171,7 @@
             this.txtApellido.Location = new System.Drawing.Point(131, 74);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(192, 20);
-            this.txtApellido.TabIndex = 19;
+            this.txtApellido.TabIndex = 2;
             this.txtApellido.Validating += new System.ComponentModel.CancelEventHandler(this.txtApellido_Validating);
             this.txtApellido.Validated += new System.EventHandler(this.txtApellido_Validated);
             // 
@@ -189,7 +189,7 @@
             this.txtTelefonos.Location = new System.Drawing.Point(472, 100);
             this.txtTelefonos.Name = "txtTelefonos";
             this.txtTelefonos.Size = new System.Drawing.Size(192, 20);
-            this.txtTelefonos.TabIndex = 17;
+            this.txtTelefonos.TabIndex = 7;
             // 
             // label2
             // 
@@ -205,7 +205,7 @@
             this.txtDireccion.Location = new System.Drawing.Point(472, 74);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(192, 20);
-            this.txtDireccion.TabIndex = 15;
+            this.txtDireccion.TabIndex = 6;
             // 
             // label4
             // 
@@ -222,7 +222,7 @@
             this.txtReiterarPass.Name = "txtReiterarPass";
             this.txtReiterarPass.PasswordChar = '*';
             this.txtReiterarPass.Size = new System.Drawing.Size(192, 20);
-            this.txtReiterarPass.TabIndex = 13;
+            this.txtReiterarPass.TabIndex = 5;
             this.txtReiterarPass.UseSystemPasswordChar = true;
             this.txtReiterarPass.Validating += new System.ComponentModel.CancelEventHandler(this.txtReiterarPass_Validating);
             this.txtReiterarPass.Validated += new System.EventHandler(this.txtReiterarPass_Validated);
@@ -242,7 +242,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(192, 20);
-            this.txtPassword.TabIndex = 11;
+            this.txtPassword.TabIndex = 4;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
             // lblUsuario
@@ -259,7 +259,7 @@
             this.txtUsuario.Location = new System.Drawing.Point(131, 100);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(192, 20);
-            this.txtUsuario.TabIndex = 9;
+            this.txtUsuario.TabIndex = 3;
             this.txtUsuario.Validating += new System.ComponentModel.CancelEventHandler(this.txtUsuario_Validating);
             this.txtUsuario.Validated += new System.EventHandler(this.txtUsuario_Validated);
             // 
@@ -277,7 +277,7 @@
             this.txtNombre.Location = new System.Drawing.Point(131, 48);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(192, 20);
-            this.txtNombre.TabIndex = 7;
+            this.txtNombre.TabIndex = 1;
             this.txtNombre.Validating += new System.ComponentModel.CancelEventHandler(this.txtNombre_Validating);
             this.txtNombre.Validated += new System.EventHandler(this.txtNombre_Validated);
             // 
@@ -295,7 +295,7 @@
             this.txtCedula.Location = new System.Drawing.Point(131, 22);
             this.txtCedula.Name = "txtCedula";
             this.txtCedula.Size = new System.Drawing.Size(192, 20);
-            this.txtCedula.TabIndex = 5;
+            this.txtCedula.TabIndex = 0;
             this.txtCedula.Validating += new System.ComponentModel.CancelEventHandler(this.txtCedula_Validating);
             this.txtCedula.Validated += new System.EventHandler(this.txtCedula_Validated);
             // 

@@ -14,6 +14,15 @@ namespace GestionBancariaWindows
             InitializeComponent();
         }
 
+        private void Inicio_Load(object sender, EventArgs e)
+        {
+            //******************************************************
+            //SOLO A EFECTOS DE TESTING. ELIMINAR ESTAS LINEAS LUEGO
+            //------------------------------------------------------
+            txtNombreUsuario.Text = "ElGaucho";
+            txtPassword.Text = "1234";
+        }
+
         private void btnLoguearse_Click(object sender, EventArgs e)
         {
             try
@@ -21,6 +30,10 @@ namespace GestionBancariaWindows
                 //ILogicaUsuario LogicaUsuario = FabricaLogica.getLogicaUsuario();
                 //ServiceWebMail sm = new ServiceWebMail();
                 //Usuario NuevoUsuario = LogicaUsuario.getLoginUsuario(txtUsuario.Text, txtPass.Text);
+
+               
+
+
                 LogicaUsuarios lu = new LogicaUsuarios();
                 Usuario employee = lu.getLoginUsuario(txtNombreUsuario.Text, txtPassword.Text);
 
@@ -61,5 +74,7 @@ namespace GestionBancariaWindows
                 lblInfo.Text = ex.Message;
             }
         }
+
+    
     }
 }

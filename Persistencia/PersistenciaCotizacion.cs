@@ -162,8 +162,8 @@ namespace Persistencia
                 if (_Reader.Read())
                 {
                     fecha = (DateTime)_Reader["Fecha"];
-                    _precioCompra = Convert.ToInt32(_Reader["PrecioVenta"]);
-                    _precioVenta = Convert.ToInt32(_Reader["PrecioCompra"]);
+                    _precioCompra = Convert.ToInt32(_Reader["PrecioCompra"]);
+                    _precioVenta = Convert.ToInt32(_Reader["PrecioVenta"]);
 
 
                     sNueva = new Cotizacion

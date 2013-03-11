@@ -186,13 +186,18 @@ namespace Persistencia
                 cmd.ExecuteNonQuery();
                 _Reader = cmd.ExecuteReader();
                 string _nombre, _direccion;
-                int _cantidadCuentas, _cantidadPrestamos;
+                int _cantidadCuentas = 0, _cantidadPrestamos = 0;
 
                 while (_Reader.Read())
                 {
+                    _cantidadCuentas = 0;
+                    _cantidadPrestamos = 0;
+
                     _nombre = (string)_Reader["Nombre"];
                     _direccion = (string)_Reader["Direccion"];
+                    if (_Reader["CantCuentasAbiertas"] != DBNull.Value)
                     _cantidadCuentas = Convert.ToInt32(_Reader["CantCuentasAbiertas"]);
+                    if (_Reader["CantPrestamosOtorgados"] != DBNull.Value)
                     _cantidadPrestamos = Convert.ToInt32(_Reader["CantPrestamosOtorgados"]);
 
 
@@ -234,6 +239,7 @@ namespace Persistencia
 
             SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int) { Direction = ParameterDirection.ReturnValue };
             cmd.Parameters.Add(_IdSucursal);
+            cmd.Parameters.Add(_Empleado);
             cmd.Parameters.Add(_CantTotalDepositos);
             cmd.Parameters.Add(_CantTotalRetiros);
             cmd.Parameters.Add(_CantTotalPagos);
@@ -259,6 +265,51 @@ namespace Persistencia
             }
 
             return Convert.ToInt32(_retorno.Value);
+        }
+
+        public Sucursal BuscarSucursal(Sucursal sucursal)
+        {
+            SqlConnection conexion = new SqlConnection(Conexion.Cnn);
+
+            try
+            {
+                SqlCommand cmd = Conexion.GetCommand("spBuscarSucursal", conexion, CommandType.StoredProcedure);
+                SqlParameter _idsucursalParam = new SqlParameter("@IdSucursal", sucursal.IDSUCURSAL);
+                cmd.Parameters.Add(_idsucursalParam);
+
+                SqlDataReader _Reader;
+                Sucursal s = null;
+                int _idSucursal;
+                string _direccion;
+
+
+                conexion.Open();
+                _Reader = cmd.ExecuteReader();
+                if (_Reader.Read())
+                {
+                    _idSucursal = (int)_Reader["IdSucursal"];
+                    _direccion = (string)_Reader["Direccion"];
+
+                    s = new Sucursal
+                    {
+                        IDSUCURSAL = _idSucursal,
+                        DIRECCION = _direccion
+                    };
+                }
+                _Reader.Close();
+
+                return s;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Problemas con la base de datos:" + ex.Message);
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+
         }
 
     }

@@ -143,7 +143,7 @@ namespace GestionBancariaWindows
                 txtReiterarPass.Text = "";
                 txtTelefonos.Text = "";
                 txtUsuario.Text = "";
-
+                CLIENTE = null;
             }
             catch (Exception ex)
             {

@@ -134,7 +134,7 @@ namespace Logica
                         }
                     }
 
-                    if (m.MONTO > cuenta.SALDO)
+                    if ( m.TIPOMOVIMIENTO == 1 && m.MONTO > cuenta.SALDO)
                     {
                         throw new ErrorSaldoInsuficienteParaRetiro(); 
                     }

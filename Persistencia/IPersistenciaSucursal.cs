@@ -14,5 +14,6 @@ namespace Persistencia
         List<Sucursal> ListarSucursales();
         List<Sucursal> ListadoProductividadComparativo(DateTime fechaInicio, DateTime fechaFin);
         decimal TotalesArqueoCaja(Empleado E, ref int cantTotalDepositos, ref int cantTotalRetiros, ref int cantTotalPagos);
+        Sucursal BuscarSucursal(Sucursal sucursal);
     }
 }

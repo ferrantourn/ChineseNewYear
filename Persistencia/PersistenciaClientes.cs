@@ -57,18 +57,21 @@ namespace Persistencia
 
                 //ingresamos nuevos telefonos
                 //---------------------------
-                foreach (string tel in c.TELEFONOS)
+                if (c.TELEFONOS != null)
                 {
-                    //Ingresamos telefonos de nuevo
-                    //-----------------------------
-                    SqlCommand cmdAltaTel = Conexion.GetCommand("spAltaTelefono", conexion, CommandType.StoredProcedure);
-                    cmdAltaTel.Transaction = transaction;
+                    foreach (string tel in c.TELEFONOS)
+                    {
+                        //Ingresamos telefonos de nuevo
+                        //-----------------------------
+                        SqlCommand cmdAltaTel = Conexion.GetCommand("spAltaTelefono", conexion, CommandType.StoredProcedure);
+                        cmdAltaTel.Transaction = transaction;
 
-                    SqlParameter _CiCliente = new SqlParameter("@IdCliente", c.CI);
-                    SqlParameter _telefono = new SqlParameter("@Tel ", tel);
-                    cmdAltaTel.Parameters.Add(_CiCliente);
-                    cmdAltaTel.Parameters.Add(_telefono);
-                    cmdAltaTel.ExecuteNonQuery();
+                        SqlParameter _CiCliente = new SqlParameter("@IdCliente", c.CI);
+                        SqlParameter _telefono = new SqlParameter("@Tel ", tel);
+                        cmdAltaTel.Parameters.Add(_CiCliente);
+                        cmdAltaTel.Parameters.Add(_telefono);
+                        cmdAltaTel.ExecuteNonQuery();
+                    }
                 }
 
 

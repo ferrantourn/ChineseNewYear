@@ -37,6 +37,8 @@ namespace GestionBancariaWindows
 
                 if (CUENTA != null)
                 {
+                    lblHeader.Text = "Editar Cuenta";
+
                     txtNumeroCuenta.Text = Convert.ToString(CUENTA.IDCUENTA);
                     txtSaldo.Text = Convert.ToString(CUENTA.SALDO);
                     cmbClientes.SelectedValue = CUENTA.CLIENTE.CI;
@@ -146,10 +148,10 @@ namespace GestionBancariaWindows
             try
             {
                 txtNumeroCuenta.Text = "";
-                txtSaldo.Text = "";
+                txtSaldo.Text = "0.00";
                 cmbClientes.SelectedValue = "";
-                cmbMoneda.Text = "";
-
+                cmbMoneda.SelectedIndex = 0;
+                CUENTA = null;
             }
             catch (Exception ex)
             {

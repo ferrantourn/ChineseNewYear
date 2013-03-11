@@ -28,7 +28,7 @@ namespace Logica
             try
             {
                 PersistenciaSucursal pc = new PersistenciaSucursal();
-                //pc.AltaSucursal(c);
+                pc.AltaSucursal(s);
             }
             catch (Exception ex)
             {
@@ -54,8 +54,7 @@ namespace Logica
             try
             {
                 PersistenciaSucursal pc = new PersistenciaSucursal();
-                //return pc.BuscaSucursal();
-                return null;
+                return pc.BuscarSucursal(s);
             }
             catch (Exception ex)
             {
@@ -68,7 +67,7 @@ namespace Logica
             try
             {
                 PersistenciaSucursal pc = new PersistenciaSucursal();
-                //pc.ModificarSucursal(c);
+                pc.ModificarSucursal(c);
             }
             catch (Exception ex)
             {

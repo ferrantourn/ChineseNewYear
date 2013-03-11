@@ -82,7 +82,7 @@ namespace GestionBancariaWindows
             txtMonto.Text = "";
             txtNombre.Text = "";
             cmbMonedaRetiro.Text = "";
-            cmbCuentas.Items.Clear();
+            cmbCuentas.DataSource = null ;
         }
 
 

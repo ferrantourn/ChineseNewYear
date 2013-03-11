@@ -127,8 +127,8 @@ namespace Persistencia
             try
             {
                 SqlCommand cmd = Conexion.GetCommand("spBuscarCuenta", conexion, CommandType.StoredProcedure);
-                SqlParameter _Ci = new SqlParameter("@IdCuenta", Cuenta.IDCUENTA);
-                cmd.Parameters.Add(_Ci);
+                SqlParameter _idCuentaParam = new SqlParameter("@IdCuenta", Cuenta.IDCUENTA);
+                cmd.Parameters.Add(_idCuentaParam);
 
                 SqlDataReader _Reader;
                 Cuenta c = null;

@@ -34,6 +34,7 @@
             this.lblInfo = new System.Windows.Forms.Label();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.lblCotizacion = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtMoneda = new System.Windows.Forms.TextBox();
             this.cmbMonedaDeposito = new System.Windows.Forms.ComboBox();
@@ -45,7 +46,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.lblCotizacion = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -58,7 +58,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(621, 54);
+            this.panel1.Size = new System.Drawing.Size(589, 54);
             this.panel1.TabIndex = 0;
             // 
             // lblHeader
@@ -78,7 +78,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 313);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(621, 41);
+            this.panel2.Size = new System.Drawing.Size(589, 41);
             this.panel2.TabIndex = 1;
             // 
             // lblInfo
@@ -92,7 +92,7 @@
             // btnAceptar
             // 
             this.btnAceptar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnAceptar.Location = new System.Drawing.Point(511, 0);
+            this.btnAceptar.Location = new System.Drawing.Point(479, 0);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(110, 41);
             this.btnAceptar.TabIndex = 0;
@@ -117,8 +117,16 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 54);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(621, 259);
+            this.panel3.Size = new System.Drawing.Size(589, 259);
             this.panel3.TabIndex = 2;
+            // 
+            // lblCotizacion
+            // 
+            this.lblCotizacion.AutoSize = true;
+            this.lblCotizacion.Location = new System.Drawing.Point(31, 175);
+            this.lblCotizacion.Name = "lblCotizacion";
+            this.lblCotizacion.Size = new System.Drawing.Size(0, 13);
+            this.lblCotizacion.TabIndex = 24;
             // 
             // label2
             // 
@@ -152,7 +160,7 @@
             // 
             // txtNumCuenta
             // 
-            this.txtNumCuenta.Location = new System.Drawing.Point(116, 23);
+            this.txtNumCuenta.Location = new System.Drawing.Point(101, 23);
             this.txtNumCuenta.Name = "txtNumCuenta";
             this.txtNumCuenta.Size = new System.Drawing.Size(100, 20);
             this.txtNumCuenta.TabIndex = 12;
@@ -169,7 +177,7 @@
             // lblCedula
             // 
             this.lblCedula.AutoSize = true;
-            this.lblCedula.Location = new System.Drawing.Point(25, 31);
+            this.lblCedula.Location = new System.Drawing.Point(10, 31);
             this.lblCedula.Name = "lblCedula";
             this.lblCedula.Size = new System.Drawing.Size(81, 13);
             this.lblCedula.TabIndex = 11;
@@ -177,14 +185,14 @@
             // 
             // txtMonto
             // 
-            this.txtMonto.Location = new System.Drawing.Point(116, 99);
+            this.txtMonto.Location = new System.Drawing.Point(101, 99);
             this.txtMonto.Name = "txtMonto";
             this.txtMonto.Size = new System.Drawing.Size(100, 20);
             this.txtMonto.TabIndex = 19;
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(222, 21);
+            this.btnBuscar.Location = new System.Drawing.Point(207, 21);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 13;
@@ -195,7 +203,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 107);
+            this.label3.Location = new System.Drawing.Point(13, 107);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 18;
@@ -204,7 +212,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 73);
+            this.label1.Location = new System.Drawing.Point(13, 73);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 14;
@@ -213,24 +221,16 @@
             // txtNombre
             // 
             this.txtNombre.Enabled = false;
-            this.txtNombre.Location = new System.Drawing.Point(116, 65);
+            this.txtNombre.Location = new System.Drawing.Point(101, 65);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(100, 20);
+            this.txtNombre.Size = new System.Drawing.Size(181, 20);
             this.txtNombre.TabIndex = 15;
-            // 
-            // lblCotizacion
-            // 
-            this.lblCotizacion.AutoSize = true;
-            this.lblCotizacion.Location = new System.Drawing.Point(31, 175);
-            this.lblCotizacion.Name = "lblCotizacion";
-            this.lblCotizacion.Size = new System.Drawing.Size(0, 13);
-            this.lblCotizacion.TabIndex = 24;
             // 
             // DepositoCuenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(621, 354);
+            this.ClientSize = new System.Drawing.Size(589, 354);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);

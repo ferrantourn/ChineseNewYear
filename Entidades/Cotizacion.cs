@@ -17,7 +17,7 @@ namespace Entidades
 
         public override string ToString()
         {
-            return "Cotizacion del dolar para la fecha: " + FECHA.ToShortDateString()  + "Compra: $" + PRECIOCOMPRA + " " + "Venta: $"  + PRECIOVENTA;
+            return "Cotizacion del dolar para la fecha: " + FECHA.ToShortDateString()  + " Compra: $" + PRECIOCOMPRA + " " + " Venta: $"  + PRECIOVENTA;
         }
     }
 }

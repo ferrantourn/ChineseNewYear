@@ -28,7 +28,7 @@ namespace Persistencia
                 SqlParameter _moneda = new SqlParameter("@Moneda", m.MONEDA);
                 SqlParameter _viaWeb = new SqlParameter("@ViaWeb", m.VIAWEB);
                 SqlParameter _monto = new SqlParameter("@Monto", m.MONTO);
-                SqlParameter _ciUsuario = new SqlParameter("@Monto", m.USUARIO.CI);
+                SqlParameter _ciUsuario = new SqlParameter("@CiUsuario", m.USUARIO.CI);
                 SqlParameter _idCuenta = new SqlParameter("@IdCuenta", m.CUENTA.IDCUENTA);
 
                 SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int);

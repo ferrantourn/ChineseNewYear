@@ -23,34 +23,34 @@ namespace GestionBancariaWindows
 
         public Empleado EMPLEADO { get; set; }
 
-      
+
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             try
             {
                 lblInfo.Text = "";
-                
-                    int idCuenta;
-                    if (Int32.TryParse(Convert.ToString(txtNumCuenta.Text), out idCuenta))
-                    {
-                        LogicaCuentas lC = new LogicaCuentas();
-                        Cuenta c = new Cuenta { IDCUENTA = idCuenta };
 
-                        c = (Cuenta)lC.BuscarCuenta(c);
+                int idCuenta;
+                if (Int32.TryParse(Convert.ToString(txtNumCuenta.Text), out idCuenta))
+                {
+                    LogicaCuentas lC = new LogicaCuentas();
+                    Cuenta c = new Cuenta { IDCUENTA = idCuenta };
 
-                        if (c != null)
-                        {
-                            CUENTA = c;
-                            txtNombre.Text = c.CLIENTE.ToString();
-                            txtMoneda.Text = c.MONEDA;
-                           
-                        }
-                    }
-                    else
+                    c = (Cuenta)lC.BuscarCuenta(c);
+
+                    if (c != null)
                     {
-                        lblInfo.Text = "Formato de numero de prestamo incorrecto";
+                        CUENTA = c;
+                        txtNombre.Text = c.CLIENTE.ToString();
+                        txtMoneda.Text = c.MONEDA;
+
                     }
+                }
+                else
+                {
+                    lblInfo.Text = "Formato de numero de prestamo incorrecto";
+                }
             }
             catch (Exception ex)
             {
@@ -74,7 +74,7 @@ namespace GestionBancariaWindows
             try
             {
                 decimal monto;
-                if (Decimal.TryParse(txtMonto.Text,out monto))
+                if (Decimal.TryParse(txtMonto.Text, out monto))
                 {
                     Movimiento m = new Movimiento();
                     m.CUENTA = CUENTA;
@@ -116,22 +116,31 @@ namespace GestionBancariaWindows
             try
             {
                 lblCotizacion.Text = "";
-   
+
                 //VERIFICAMOS QUE SI LA MONEDA DEL MOVIMIENTO ES DISTINTO A LA MONEDA DE DEPOSITO SE MUESTRA LA COTIZCION DEL DIA
                 //------------------------------------------------------------------
                 string monedaDeposito = cmbMonedaDeposito.Text;
                 if (!String.IsNullOrEmpty(monedaDeposito))
                 {
-                    if (CUENTA.MONEDA != monedaDeposito)
+                    if (CUENTA != null && CUENTA.MONEDA != monedaDeposito)
                     {
                         //DESPLIEGA COTIZACION DEL DIA
                         //----------------------------
                         LogicaCotizacion lc = new LogicaCotizacion();
                         Cotizacion c = new Cotizacion();
-                        c.FECHA = DateTime.Now;
-                        c = lc.BuscarCotizacion(c);
 
-                        lblCotizacion.Text = lblCotizacion.Text + " " + c.ToString(); 
+                        c.FECHA = DateTime.Now;
+
+                        c = lc.BuscarCotizacion(c);//BUSCAMOS LA COTIZACION DEL DIA
+
+                        if (c != null)
+                        {
+                            lblCotizacion.Text = lblCotizacion.Text + " " + c.ToString();
+                        }
+                        else
+                        {
+                            lblInfo.Text = "No existe una cotizacion ingresada para el dia de hoy.";
+                        }
                     }
                 }
             }

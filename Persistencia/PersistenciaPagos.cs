@@ -30,7 +30,7 @@ namespace Persistencia
                 {
                     _fechaPago = Convert.ToDateTime(_Reader["Fecha"]);
                     _idPrestamo = Convert.ToInt32(_Reader["IdPrestamo"]);
-                    _numCuota = Convert.ToInt32(_Reader["Cuotas"]);
+                    _numCuota = Convert.ToInt32(_Reader["NumeroCuota"]);
                     _montoPago = Convert.ToDecimal(_Reader["Monto"]);
                     _idEmpleado = Convert.ToInt32(_Reader["IdEmpleado"]);
                     _idRecibo = Convert.ToInt32(_Reader["IdRecibo"]);

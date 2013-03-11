@@ -385,8 +385,8 @@ set @cantidad = @cantidad+1 /*numero del nuevo movimiento*/
 
 	begin tran
 	--guardamos el movimiento
-	insert into Movimiento(IdSucursal,NumeroMovimiento,Tipo,Fecha,Moneda,ViaWeb,Monto)
-			values(@IdSucursal, @cantidad, @Tipo, @Fecha, @Moneda,@ViaWeb,@Monto)
+	insert into Movimiento(IdSucursal,NumeroMovimiento,Tipo,Fecha,Moneda,ViaWeb,Monto,IdCuenta,CiUsuario)
+			values(@IdSucursal, @cantidad, @Tipo, @Fecha, @Moneda,@ViaWeb,@Monto,@IdCuenta,@CiUsuario)
 			
 	if @@ERROR <> 0
 	begin	
@@ -904,7 +904,7 @@ create proc spBuscarCotizacion
 @Fecha datetime
 as
 begin
-	select * from Cotizacion where cotizacion.Fecha=@Fecha
+	select * from Cotizacion where dbo.DateTimeToString(cotizacion.Fecha) = dbo.DateTimeToString(@Fecha)
 end
 GO
 
@@ -979,12 +979,10 @@ create proc spBuscarPrestamo
 @IdPrestamo int
 as
 begin
-	--if not exists(select * from prestamo where prestamo.IdPrestamo = @IdPrestamo)
-	--begin
-		--return -1 --no existe prestamo con ese id
-	--end
 	
-	select * from prestamo where prestamo.IdPrestamo=@IdPrestamo
+	select Prestamo.*, Usuario.Nombre, Usuario.Apellido from prestamo
+	inner join Usuario on Prestamo.IdCliente = Usuario.Ci
+	 where prestamo.IdPrestamo=@IdPrestamo
 
 end
 GO

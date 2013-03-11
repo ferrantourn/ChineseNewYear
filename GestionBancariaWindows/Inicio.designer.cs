@@ -113,6 +113,7 @@
             this.Controls.Add(this.btnLoguearse);
             this.Name = "Inicio";
             this.Text = "Bienvenido a Gestion Bancaria";
+            this.Load += new System.EventHandler(this.Inicio_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -41,6 +41,7 @@ namespace GestionBancariaWindows
 
                 if (EMPLEADO != null)
                 {
+                    lblHeader.Text = "Editar Empleado";
                     txtApellido.Text = EMPLEADO.APELLIDO;
                     txtCedula.Text = Convert.ToString(EMPLEADO.CI);
                     txtNombre.Text = EMPLEADO.NOMBRE;

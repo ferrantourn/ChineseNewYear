@@ -132,7 +132,7 @@ namespace Persistencia
                     _idCliente = Convert.ToInt32(_Reader["IdCliente"]);
                     _moneda = Convert.ToString(_Reader["Moneda"]);
                     _montoTotalPrestamo = Convert.ToDecimal(_Reader["Monto"]);
-                    _idEmpleado = Convert.ToInt32(_Reader["IdEmpleado"]);
+                    ///_idEmpleado = Convert.ToInt32(_Reader["IdEmpleado"]);
 
                     Prestamo p = new Prestamo
                     {
@@ -177,7 +177,7 @@ namespace Persistencia
                 Prestamo PNuevo = null;
                 int _idCuenta, _idSucursal, _idCliente,  _Cuotas, _Cancelado = 0;
                 decimal _Monto;
-                string _moneda;
+                string _moneda, _nombreCliente, _apellidoCliente;
                 DateTime _Fecha;
 
 
@@ -185,13 +185,16 @@ namespace Persistencia
                 _Reader = cmd.ExecuteReader();
                 if (_Reader.Read())
                 {
-                    _idCuenta = (int)_Reader["IdCuenta"];
+                    //_idCuenta = (int)_Reader["IdCuenta"];
                     _idCliente = (int)_Reader["IdCliente"];
-                    _idSucursal = (int)_Reader["IdSucursal"];
+                    _idSucursal = (int)_Reader["NumeroSucursal"];
                     _Monto = Convert.ToDecimal(_Reader["Monto"]);
                     _moneda = (string)_Reader["Moneda"];
                     _Fecha = Convert.ToDateTime(_Reader["Fecha"]);
                     _Cuotas = (int)_Reader["Cuotas"];
+                    _nombreCliente = (string)_Reader["Nombre"];
+                    _apellidoCliente = (string)_Reader["Apellido"];
+
                     PNuevo = new Prestamo
                     {
 
@@ -199,7 +202,7 @@ namespace Persistencia
                         MONTO = _Monto,
                         IDPRESTAMO = P.IDPRESTAMO,
                         TOTALCUOTAS = _Cuotas,
-                        CLIENTE = new Cliente{CI=_idCliente},
+                        CLIENTE = new Cliente{CI=_idCliente, NOMBRE = _nombreCliente, APELLIDO = _apellidoCliente},
                         MONEDA = _moneda,
                         SUCURSAL = new Sucursal{IDSUCURSAL = _idSucursal}
                     };
