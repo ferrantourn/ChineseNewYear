@@ -4,8 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
  <h1>
-        <cc1:Header ID="Header" HEADER_TEXT="Acceso Denegado" IMAGE_URL="~/Images/accessdenied.png"
-            runat="server" />
+
     </h1>
     <div>
         NO TIENE ACCESO A ESTA PAGINA<br />

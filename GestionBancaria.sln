@@ -34,6 +34,27 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "GestionBancariaWebForms", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controles", "..\..\..\BiosWebMailLab2\BiosWebMailLab2\Controles\Controles.csproj", "{6EEEC05F-5EBA-4E83-8B5A-83A334CD4886}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "GestionBancariaWS", "GestionBancariaWS\", "{951588CB-EFC6-4E2E-A95B-571D9C9E50EA}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv3.5"
+		ProjectReferences = "{ADCDD125-1B3A-4F63-AA9D-936983889A1B}|Entidades.dll;{B188EAE8-5882-4E0D-BD33-C22332E164BF}|ExcepcionesPersonalizadas.dll;{A9672D4B-2190-4037-B4DC-7AC5D8B3627A}|Logica.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/GestionBancariaWS"
+		Debug.AspNetCompiler.PhysicalPath = "GestionBancariaWS\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\GestionBancariaWS\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/GestionBancariaWS"
+		Release.AspNetCompiler.PhysicalPath = "GestionBancariaWS\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\GestionBancariaWS\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "43285"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -114,6 +135,16 @@ Global
 		{6EEEC05F-5EBA-4E83-8B5A-83A334CD4886}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6EEEC05F-5EBA-4E83-8B5A-83A334CD4886}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6EEEC05F-5EBA-4E83-8B5A-83A334CD4886}.Release|x86.ActiveCfg = Release|Any CPU
+		{951588CB-EFC6-4E2E-A95B-571D9C9E50EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{951588CB-EFC6-4E2E-A95B-571D9C9E50EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{951588CB-EFC6-4E2E-A95B-571D9C9E50EA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{951588CB-EFC6-4E2E-A95B-571D9C9E50EA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{951588CB-EFC6-4E2E-A95B-571D9C9E50EA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{951588CB-EFC6-4E2E-A95B-571D9C9E50EA}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{951588CB-EFC6-4E2E-A95B-571D9C9E50EA}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{951588CB-EFC6-4E2E-A95B-571D9C9E50EA}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{951588CB-EFC6-4E2E-A95B-571D9C9E50EA}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
+		{951588CB-EFC6-4E2E-A95B-571D9C9E50EA}.Release|x86.ActiveCfg = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
