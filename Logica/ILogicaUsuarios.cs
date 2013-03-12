@@ -15,5 +15,6 @@ namespace Logica
          List<Empleado> ListarEmpleados();
          Usuario BuscarUsuarioPorCi(Usuario u);
          Usuario getLoginUsuario(string NombreUsuario, string Pass);
+         void ModificarPassword(Cliente c, string newPass);
     }
 }

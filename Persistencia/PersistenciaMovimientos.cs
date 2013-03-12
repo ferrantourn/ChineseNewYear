@@ -54,6 +54,60 @@ namespace Persistencia
                 if (Convert.ToInt32(_retorno.Value) == -3)
                     throw new ErrorBaseDeDatos();
 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+
+
+        public void RealizarTransferencia(Movimiento morigen, Movimiento mdestino)
+        {
+            SqlConnection conexion = new SqlConnection(Conexion.Cnn);
+            conexion.Open();
+            try
+            {
+
+                SqlCommand cmd = Conexion.GetCommand("spRealizarTransferencia", conexion, CommandType.StoredProcedure);
+
+                SqlParameter _idSucursalOrigen = new SqlParameter("@IdSucursalOrigen", morigen.SUCURSAL.IDSUCURSAL);
+                SqlParameter _idSucursalDestino = new SqlParameter("@IdSucursalDestino", mdestino.SUCURSAL.IDSUCURSAL);
+
+                SqlParameter _moneda = new SqlParameter("@Moneda", morigen.MONEDA);
+                SqlParameter _monto = new SqlParameter("@Monto", morigen.MONTO);
+                SqlParameter _ciUsuario = new SqlParameter("@CiUsuario", morigen.USUARIO.CI);
+                SqlParameter _idCuentaOrigen = new SqlParameter("@IdCuentaOrigen", morigen.CUENTA.IDCUENTA);
+                SqlParameter _idCuentaDestino = new SqlParameter("@IdCuentaDestino", mdestino.CUENTA.IDCUENTA);
+
+
+                SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int);
+                _retorno.Direction = ParameterDirection.ReturnValue;
+
+                cmd.Parameters.Add(_idSucursalOrigen);
+                cmd.Parameters.Add(_idSucursalDestino);
+
+                cmd.Parameters.Add(_moneda);
+                cmd.Parameters.Add(_monto);
+                cmd.Parameters.Add(_ciUsuario);
+                cmd.Parameters.Add(_idCuentaOrigen);
+                cmd.Parameters.Add(_idCuentaDestino);
+
+
+                cmd.Parameters.Add(_retorno);
+
+                cmd.ExecuteNonQuery();
+
+                if (Convert.ToInt32(_retorno.Value) == -1)
+                    throw new ErrorSucursalNoExiste();
+                if (Convert.ToInt32(_retorno.Value) == -2)
+                    throw new ErrorUsuarioNoExiste();
+                if (Convert.ToInt32(_retorno.Value) == -3)
+                    throw new ErrorBaseDeDatos();
 
             }
             catch (Exception ex)

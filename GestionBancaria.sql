@@ -1066,6 +1066,51 @@ begin
 end
 
 GO
+
+create proc spModificarContraseña
+@CiUsuario as int,
+@PasswordActual as nvarchar(20),
+@PasswordNuevo as nvarchar(20)
+as
+begin
+	if exists (select * from Usuario where Usuario.Ci = @CiUsuario and Pass = @PasswordActual)
+	begin
+		update Usuario set Pass = @PasswordNuevo where Pass = @PasswordActual
+	end
+	else
+	begin
+		return -1
+	end
+end
+
+GO
+
+create proc spRealizarTransferencia
+@IdSucursalOrigen int,
+@IdSucursalDestino int,
+@Fecha datetime,
+@Moneda nvarchar(3),
+@Monto float,
+@CiUsuario int,
+@IdCuentaOrigen int,
+@IdCuentaDestino int
+as
+BEGIN
+ begin tran
+ --Retiro
+ exec AltaMovimiento @IdSucursalOrigen,1,GetDate,@Moneda,1,@Monto,@CiUsuario,@IdCuentaOrigen
+	if @@ERROR <> 0
+		rollback tran
+ 
+ --DEPOSITO
+  exec AltaMovimiento @IdSucursalDestino,2,GetDate,@Moneda,1,@Monto,@CiUsuario,@IdCuentaDestino
+	if @@ERROR <> 0
+		rollback tran
+ 
+ commit tran
+end
+
+GO
 --INSERTAMOS VALORES PREDETERMINADOS
 ------------------------------------
 

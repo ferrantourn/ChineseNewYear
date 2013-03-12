@@ -261,5 +261,27 @@ namespace ExcepcionesPersonalizadas
         }
 
     }
+
+    public class ErrorPasswordActualNoValido : Exception
+    {
+        public ErrorPasswordActualNoValido()
+        {
+
+        }
+
+        public ErrorPasswordActualNoValido(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+
+        }
+
+        private const string Mensaje = "ERROR: La contraseña actual ingresada no es correcta.";
+
+        public override string Message
+        {
+            get { return Mensaje; }
+        }
+
+    }
 }
 

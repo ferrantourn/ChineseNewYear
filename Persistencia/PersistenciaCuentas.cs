@@ -258,7 +258,7 @@ namespace Persistencia
                 _Reader = cmd.ExecuteReader();
                 int _idCuenta, _idSucursal, _idCliente;
                 decimal _saldo;
-                string _moneda, _nombreUsuario, _nombre, _apellido;
+                string _moneda, _nombreUsuario, _nombre, _apellido, _nombreSucursal;
                 bool _activo;
 
                 while (_Reader.Read())
@@ -272,12 +272,13 @@ namespace Persistencia
                     _nombreUsuario = (string)_Reader["NombreUsuario"];
                     _nombre = (string)_Reader["Nombre"];
                     _apellido = (string)_Reader["Apellido"];
+                    _nombreSucursal = (string)_Reader["Nombre"];
 
                     Cuenta c = new Cuenta
                     {
                         IDCUENTA = _idCuenta,
                         CLIENTE = new Cliente { CI = _idCliente, ACTIVO = _activo, APELLIDO = _apellido, NOMBRE = _nombre, NOMBREUSUARIO = _nombreUsuario },
-                        SUCURSAL = new Sucursal { IDSUCURSAL = _idSucursal },
+                        SUCURSAL = new Sucursal { IDSUCURSAL = _idSucursal, NOMBRE= _nombreSucursal },
                         SALDO = _saldo,
                         MONEDA = _moneda,
                     };

@@ -14,5 +14,6 @@ namespace Persistencia
         void ModificarCliente(Cliente u);
         void EliminarCliente(Cliente u);
         Cliente LoginCliente(string NombreUsuario, string Pass);
+        void ModificarPassword(Cliente u, string newPassword);
     }
 }

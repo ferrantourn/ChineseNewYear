@@ -355,7 +355,7 @@ namespace Persistencia
                         PASS = _password,
                         TELEFONOS = null,
                         ACTIVO = _activo,
-                        
+
                     };
                 }
                 reader.Close();
@@ -371,5 +371,45 @@ namespace Persistencia
 
             return c;
         }
+
+
+        public void ModificarPassword(Cliente u, string newPassword)
+        {
+
+            using (SqlConnection conexion = new SqlConnection(Conexion.Cnn))
+            {
+                try
+                {
+                    SqlCommand cmd = Conexion.GetCommand("spModificarContraseña", conexion, CommandType.StoredProcedure);
+                    SqlParameter _ci = new SqlParameter("@CiUsuario", u.CI);
+                    SqlParameter _passActual = new SqlParameter("@PasswordActual", u.PASS);
+                    SqlParameter _passNuevo = new SqlParameter("@PasswordNuevo", newPassword);
+
+                    SqlParameter _retorno = new SqlParameter("@Retorno", SqlDbType.Int);
+
+                    _retorno.Direction = ParameterDirection.ReturnValue;
+                    cmd.Parameters.Add(_ci);
+                    cmd.Parameters.Add(_passActual);
+                    cmd.Parameters.Add(_passNuevo);
+
+                    cmd.Parameters.Add(_retorno);
+
+                    if (Convert.ToInt32(_retorno.Value) == -1)
+                        throw new ErrorPasswordActualNoValido();
+                    
+                    //ACTUALIZAMOS EL CLIENTE
+                    //-----------------------
+                    conexion.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+        }
+
+
     }
 }

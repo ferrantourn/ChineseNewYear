@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using Entidades;
 using Persistencia;
+using ExcepcionesPersonalizadas;
 
 namespace Logica
 {
-    public class LogicaUsuarios :ILogicaUsuarios
+    public class LogicaUsuarios : ILogicaUsuarios
     {
 
         public void AltaUsuario(Usuario u)
@@ -73,7 +74,7 @@ namespace Logica
             }
         }
 
-        public List<Cliente> ListarClientes ()
+        public List<Cliente> ListarClientes()
         {
             try
             {
@@ -139,14 +140,32 @@ namespace Logica
                     PersistenciaEmpleados pe = new PersistenciaEmpleados();
 
                     //ServicioRemoting.ServicioDocente _objServicioD = new ServicioRemoting.ServicioDocente();
-                    pe.LoginEmpleado(NombreUsuario,Pass);
+                    pe.LoginEmpleado(NombreUsuario, Pass);
                     Empleado e = pe.LoginEmpleado(NombreUsuario, Pass);
-                    
+
                     return e;
                 }
             }
             catch (Exception ex)
             {
+                throw ex;
+            }
+        }
+
+        public void ModificarPassword(Cliente c, string newPass)
+        {
+            try
+            {
+                PersistenciaClientes pc = new PersistenciaClientes();
+                pc.ModificarPassword(c, newPass);
+            }
+            catch (ErrorPasswordActualNoValido ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+
                 throw ex;
             }
         }

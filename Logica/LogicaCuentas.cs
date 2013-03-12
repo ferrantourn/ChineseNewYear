@@ -134,9 +134,9 @@ namespace Logica
                         }
                     }
 
-                    if ( m.TIPOMOVIMIENTO == 1 && m.MONTO > cuenta.SALDO)
+                    if (m.TIPOMOVIMIENTO == 1 && m.MONTO > cuenta.SALDO)
                     {
-                        throw new ErrorSaldoInsuficienteParaRetiro(); 
+                        throw new ErrorSaldoInsuficienteParaRetiro();
                     }
 
                     pc.RealizarMovimiento(m);
@@ -160,5 +160,115 @@ namespace Logica
             }
         }
 
+
+        public void RealizarTransferencia(Movimiento movOrigen, Movimiento movDestino)
+        {
+            try
+            {
+                LogicaCuentas lcuentas = new LogicaCuentas();
+                Cuenta cuentaOrigen = lcuentas.BuscarCuenta(movOrigen.CUENTA);
+                PersistenciaMovimientos pc = new PersistenciaMovimientos();
+
+                //MOVIMIENTO ORIGEN
+                if (cuentaOrigen != null)
+                {
+
+                    if (movOrigen.CUENTA.MONEDA != movOrigen.MONEDA)
+                    {
+                        //OBTENEMOS COTIZACION
+                        //--------------------
+                        LogicaCotizacion lc = new LogicaCotizacion();
+                        Cotizacion c = new Cotizacion();
+                        c.FECHA = DateTime.Now;
+                        c = lc.BuscarCotizacion(c);
+
+                        if (c != null)
+                        {
+                            decimal montoMovimiento;
+                            if (movOrigen.CUENTA.MONEDA == "USD")
+                            {
+                                //la cuenta esta en dolares y el deposito se esta haciendo en pesos
+                                montoMovimiento = movOrigen.MONTO / c.PRECIOVENTA;
+                            }
+                            else
+                            {
+                                //la cuenta esta en pesos y el deposito se esta haciendo en dolares
+                                montoMovimiento = movOrigen.MONTO * c.PRECIOCOMPRA;
+                            }
+
+                            //actualizamos el nuevo monto del movimiento;
+                            //-------------------------------------------
+                            movOrigen.MONTO = montoMovimiento;
+                        }
+                    }
+
+                    if (movOrigen.TIPOMOVIMIENTO == 1 && movOrigen.MONTO > cuentaOrigen.SALDO)
+                    {
+                        throw new ErrorSaldoInsuficienteParaRetiro();
+                    }
+                }
+
+
+                //MOVIMIENTO DEPOSITO
+                Cuenta cuentaDestino = lcuentas.BuscarCuenta(movDestino.CUENTA);
+                if (cuentaDestino != null)
+                {
+
+                    if (movOrigen.CUENTA.MONEDA != movOrigen.MONEDA)
+                    {
+                        //OBTENEMOS COTIZACION
+                        //--------------------
+                        LogicaCotizacion lc = new LogicaCotizacion();
+                        Cotizacion c = new Cotizacion();
+                        c.FECHA = DateTime.Now;
+                        c = lc.BuscarCotizacion(c);
+
+                        if (c != null)
+                        {
+                            decimal montoMovimiento;
+                            if (movDestino.CUENTA.MONEDA == "USD")
+                            {
+                                //la cuenta esta en dolares y el deposito se esta haciendo en pesos
+                                montoMovimiento = movDestino.MONTO / c.PRECIOVENTA;
+                            }
+                            else
+                            {
+                                //la cuenta esta en pesos y el deposito se esta haciendo en dolares
+                                montoMovimiento = movDestino.MONTO * c.PRECIOCOMPRA;
+                            }
+
+                            //actualizamos el nuevo monto del movimiento;
+                            //-------------------------------------------
+                            movDestino.MONTO = montoMovimiento;
+                        }
+                    }
+
+                    //if (movOrigen.TIPOMOVIMIENTO == 1 && movOrigen.MONTO > cuentaDestino.SALDO)
+                    //{
+                    //    throw new ErrorSaldoInsuficienteParaRetiro();
+                    //}
+
+                    //REALIZO LA TRANSFERENCIA
+                    //------------------------
+                    pc.RealizarTransferencia(movOrigen, movDestino);
+                }
+            }
+            catch (ErrorSaldoInsuficienteParaRetiro ex)
+            {
+                throw ex;
+            }
+            catch (ErrorSucursalNoExiste ex)
+            {
+                throw ex;
+            }
+            catch (ErrorUsuarioNoExiste ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
