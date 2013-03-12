@@ -37,7 +37,7 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "GestionBancariaWS", "GestionBancariaWS\", "{951588CB-EFC6-4E2E-A95B-571D9C9E50EA}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv3.5"
-		ProjectReferences = "{ADCDD125-1B3A-4F63-AA9D-936983889A1B}|Entidades.dll;{B188EAE8-5882-4E0D-BD33-C22332E164BF}|ExcepcionesPersonalizadas.dll;{A9672D4B-2190-4037-B4DC-7AC5D8B3627A}|Logica.dll;"
+		ProjectReferences = "{ADCDD125-1B3A-4F63-AA9D-936983889A1B}|Entidades.dll;{B188EAE8-5882-4E0D-BD33-C22332E164BF}|ExcepcionesPersonalizadas.dll;{A9672D4B-2190-4037-B4DC-7AC5D8B3627A}|Logica.dll;{28675E2C-8EE4-431D-ADD9-70B31FF3C6A2}|Persistencia.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/GestionBancariaWS"
 		Debug.AspNetCompiler.PhysicalPath = "GestionBancariaWS\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\GestionBancariaWS\"
