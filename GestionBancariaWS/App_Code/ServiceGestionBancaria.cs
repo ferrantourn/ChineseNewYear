@@ -25,22 +25,22 @@ public class ServiceGestionBancaria : System.Web.Services.WebService
     public string HelloWorld() {
         return "Hello World";
     }
-    [WebMethod]
-    public Usuario getLoginUsuario(string userName, string pass)
-    {
-        try
-        {
-            LogicaUsuarios ls = new LogicaUsuarios();
-            return ls.getLoginUsuario(userName,pass);
-        }
-        catch (ErrorUsuarioNoExiste exal)
-        {
-            throw new SoapException(exal.Message, SoapException.ClientFaultCode, exal.Message);
-        }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
-    }
+    //[WebMethod]
+    //public Usuario getLoginUsuario(string userName, string pass)
+    //{
+    //    try
+    //    {
+    //        //ILogicaUsuario le = FabricaLogica.getLogicaUsuario();//
+    //        //return le.getLoginUsuario(userName, pass);
+    //    }
+    //    /*catch (ErrorAlumnoBloqueado exal)
+    //    {
+    //        throw new SoapException(exal.Message, SoapException.ClientFaultCode, exal.Message);
+    //    }*/
+    //    catch (Exception ex)
+    //    {
+    //        throw ex;
+    //    }
+    //}
     
 }
