@@ -114,7 +114,7 @@ namespace Logica
                     PersistenciaEmpleados pempleados = new PersistenciaEmpleados();
                     return pempleados.BuscarEmpleadoPorCi((Empleado)u);
                 }
-                return null;
+                
             }
             catch (Exception ex)
             {
